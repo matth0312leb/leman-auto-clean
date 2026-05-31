@@ -44,7 +44,7 @@ export default function FAQAssistant() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
+      className="relative overflow-x-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
       <div className="absolute right-0 top-20 h-[280px] w-[280px] translate-x-1/3 rounded-full bg-blue-500/10 blur-3xl md:h-[420px] md:w-[420px]" />
 

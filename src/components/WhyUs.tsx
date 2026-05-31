@@ -23,7 +23,7 @@ const items = [
 
 export default function WhyUs() {
   return (
-    <section className="relative overflow-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
+    <section className="relative overflow-x-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
 
       {/* Glow */}
       <div className="absolute right-[-140px] top-1/2 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:right-0 md:h-[400px] md:w-[400px]" />

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
+    <section className="relative overflow-x-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
 
       {/* Glow */}
       <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:h-[500px] md:w-[500px]" />

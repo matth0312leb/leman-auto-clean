@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJNdFQjRvsSIwR-15U4siiNfo";
@@ -23,7 +25,57 @@ const reviews = [
   },
 ];
 
+function ReviewCard({
+  review,
+  index,
+}: {
+  review: (typeof reviews)[number];
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, delay: index * 0.1 }}
+      viewport={{ once: true, amount: 0.25 }}
+      className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:p-7 lg:p-8"
+    >
+
+      <div className="mb-5 flex gap-1 text-blue-400 sm:mb-6">
+        ★★★★★
+      </div>
+
+      <p className="mb-7 text-sm leading-relaxed text-zinc-300 sm:text-base lg:mb-8">
+        &ldquo;{review.text}&rdquo;
+      </p>
+
+      <h3 className="font-semibold text-white">
+        {review.name}
+      </h3>
+
+      <p className="mt-2 text-sm text-zinc-500">
+        {review.date}
+      </p>
+
+    </motion.div>
+  );
+}
+
 export default function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const previousReview = () => {
+    setActiveIndex((current) =>
+      current === 0 ? reviews.length - 1 : current - 1,
+    );
+  };
+
+  const nextReview = () => {
+    setActiveIndex((current) =>
+      current === reviews.length - 1 ? 0 : current + 1,
+    );
+  };
+
   return (
     <section className="bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32">
 
@@ -50,35 +102,52 @@ export default function Testimonials() {
 
         </div>
 
-        <div className="grid gap-5 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+        {/* Mobile carousel */}
+        <div className="lg:hidden">
+          <div className="relative">
+            <ReviewCard review={reviews[activeIndex]} index={activeIndex} />
+
+            <button
+              type="button"
+              onClick={previousReview}
+              aria-label="Avis précédent"
+              className="absolute -left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+            >
+              <FiChevronLeft aria-hidden="true" />
+            </button>
+
+            <button
+              type="button"
+              onClick={nextReview}
+              aria-label="Avis suivant"
+              className="absolute -right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+            >
+              <FiChevronRight aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {reviews.map((review, index) => (
+              <button
+                key={review.name}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Afficher l'avis ${index + 1}`}
+                className={`h-2.5 rounded-full transition ${
+                  activeIndex === index
+                    ? "w-8 bg-blue-400"
+                    : "w-2.5 bg-white/25 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop grid */}
+        <div className="hidden gap-5 sm:gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
 
           {reviews.map((review, index) => (
-            <motion.div
-              key={review.name}
-              initial={{ opacity: 0, y: 36 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.25 }}
-              className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:p-7 lg:p-8"
-            >
-
-              <div className="mb-5 flex gap-1 text-blue-400 sm:mb-6">
-                ★★★★★
-              </div>
-
-              <p className="mb-7 text-sm leading-relaxed text-zinc-300 sm:text-base lg:mb-8">
-                &ldquo;{review.text}&rdquo;
-              </p>
-
-              <h3 className="font-semibold text-white">
-                {review.name}
-              </h3>
-
-              <p className="mt-2 text-sm text-zinc-500">
-                {review.date}
-              </p>
-
-            </motion.div>
+            <ReviewCard key={review.name} review={review} index={index} />
           ))}
 
         </div>

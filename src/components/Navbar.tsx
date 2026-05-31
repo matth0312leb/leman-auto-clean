@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/#prestations", label: "Prestations" },
@@ -15,6 +15,14 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/60 text-white backdrop-blur-2xl">
@@ -67,6 +75,7 @@ export default function Navbar() {
             onClick={() => setOpen((current) => !current)}
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-xl backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400 sm:h-11 sm:w-11 sm:text-2xl"
           >
             {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
@@ -88,6 +97,7 @@ export default function Navbar() {
             />
 
             <motion.div
+              id="mobile-menu"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}

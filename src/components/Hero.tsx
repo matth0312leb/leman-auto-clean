@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { siteImages } from "@/data/siteImages";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-black text-white md:h-screen">
+    <section className="relative min-h-[92svh] overflow-x-hidden bg-black text-white md:h-screen md:min-h-[100svh]">
 
       {/* Background image */}
       <div
-        className="absolute inset-0 scale-105 bg-cover bg-[62%_center] md:bg-center"
+        className="absolute inset-0 scale-105 bg-cover bg-[58%_center] sm:bg-[55%_center] md:bg-center"
         style={{
-          backgroundImage: "url('/hero.jpg')",
+          backgroundImage: `url('${siteImages.hero.src}')`,
         }}
       />
 
@@ -22,7 +23,7 @@ export default function Hero() {
       <div className="absolute left-[-140px] top-24 h-[260px] w-[260px] rounded-full bg-blue-400/20 blur-3xl md:left-[20%] md:top-1/2 md:h-[400px] md:w-[400px] md:-translate-y-1/2" />
 
       {/* Content */}
-      <div className="relative z-10 flex min-h-[100svh] items-center pb-12 pt-28 md:h-full md:pb-0 md:pt-0">
+      <div className="relative z-10 flex min-h-[92svh] items-center pb-10 pt-24 sm:pt-28 md:h-full md:min-h-[100svh] md:pb-0 md:pt-0">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-5 sm:px-6 lg:grid-cols-2 lg:gap-12">
 
           {/* Left side */}
@@ -37,7 +38,7 @@ export default function Hero() {
               NETTOYAGE AUTOMOBILE PREMIUM
             </p>
 
-            <h1 className="mb-5 max-w-full text-[clamp(2.6rem,13vw,4.5rem)] font-black uppercase leading-[0.92] md:mb-6 lg:text-8xl">
+            <h1 className="mb-5 max-w-full text-[clamp(2.4rem,12vw,4.5rem)] font-black uppercase leading-[0.92] md:mb-6 lg:text-8xl">
               LÉMAN
               <br />
               AUTO CLEAN
@@ -57,7 +58,7 @@ export default function Hero() {
             </Link>
 
             {/* Stats */}
-            <div className="mt-10 grid max-w-sm grid-cols-2 gap-5 md:mt-16 md:flex md:max-w-none md:gap-10">
+            <div className="mt-8 grid max-w-sm grid-cols-2 gap-5 md:mt-16 md:flex md:max-w-none md:gap-10">
 
               <div className="min-w-0">
                 <h3 className="text-2xl font-bold text-blue-400 md:text-3xl">

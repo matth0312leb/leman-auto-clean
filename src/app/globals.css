@@ -47,3 +47,29 @@ video,
 canvas {
   max-width: 100%;
 }
+
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+section[id],
+footer[id] {
+  scroll-margin-top: 88px;
+}
+
+@media (min-width: 768px) {
+  section[id],
+  footer[id] {
+    scroll-margin-top: 112px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

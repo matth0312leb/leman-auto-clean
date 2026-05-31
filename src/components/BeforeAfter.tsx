@@ -2,12 +2,13 @@
 
 import ReactCompareImage from "react-compare-image";
 import { motion } from "framer-motion";
+import { siteImages } from "@/data/siteImages";
 
 export default function BeforeAfter() {
   return (
     <section
       id="avantapres"
-      className="relative overflow-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
+      className="relative overflow-x-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-6xl">
 
@@ -36,13 +37,21 @@ export default function BeforeAfter() {
         >
           <div className="aspect-[16/10] overflow-hidden bg-black md:aspect-[16/9]">
             <ReactCompareImage
-              leftImage="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop"
-              rightImage="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1200&auto=format&fit=crop"
+              leftImage={siteImages.beforeAfter.before.src}
+              rightImage={siteImages.beforeAfter.after.src}
               handleSize={34}
-              leftImageAlt="Avant nettoyage Léman Auto Clean"
-              rightImageAlt="Après nettoyage Léman Auto Clean"
-              leftImageCss={{ objectFit: "contain", backgroundColor: "black" }}
-              rightImageCss={{ objectFit: "contain", backgroundColor: "black" }}
+              leftImageAlt={siteImages.beforeAfter.before.alt}
+              rightImageAlt={siteImages.beforeAfter.after.alt}
+              leftImageCss={{
+                objectFit: "contain",
+                objectPosition: "center 38%",
+                backgroundColor: "black",
+              }}
+              rightImageCss={{
+                objectFit: "contain",
+                objectPosition: "center 38%",
+                backgroundColor: "black",
+              }}
             />
           </div>
         </motion.div>

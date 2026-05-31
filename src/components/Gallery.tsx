@@ -4,20 +4,19 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { siteImages } from "@/data/siteImages";
 
-const images = [
-  "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=95&w=1800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=95&w=1800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=95&w=1800&auto=format&fit=crop",
-];
-
-function GalleryImage({ image, index }: { image: string; index: number }) {
+function GalleryImage({
+  image,
+}: {
+  image: { src: string; alt: string };
+}) {
   return (
     <div className="group min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-zinc-950">
       <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10] lg:h-[500px] lg:aspect-auto">
         <Image
-          src={image}
-          alt={`Réalisation Léman Auto Clean ${index + 1}`}
+          src={image.src}
+          alt={image.alt}
           fill
           quality={95}
           sizes="(min-width: 1280px) 420px, (min-width: 1024px) 33vw, 100vw"
@@ -29,6 +28,7 @@ function GalleryImage({ image, index }: { image: string; index: number }) {
 }
 
 export default function Gallery() {
+  const images = siteImages.gallery;
   const [activeIndex, setActiveIndex] = useState(0);
 
   const previousImage = () => {
@@ -46,7 +46,7 @@ export default function Gallery() {
   return (
     <section
       id="realisations"
-      className="relative overflow-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
+      className="relative overflow-x-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
 
       {/* Glow */}
@@ -76,7 +76,7 @@ export default function Gallery() {
           className="lg:hidden"
         >
           <div className="relative">
-            <GalleryImage image={images[activeIndex]} index={activeIndex} />
+            <GalleryImage image={images[activeIndex]} />
 
             <button
               type="button"
@@ -100,7 +100,7 @@ export default function Gallery() {
           <div className="mt-5 flex items-center justify-center gap-2">
             {images.map((image, index) => (
               <button
-                key={image}
+                key={image.src}
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 aria-label={`Afficher l'image ${index + 1}`}
@@ -119,13 +119,13 @@ export default function Gallery() {
 
           {images.map((image, index) => (
             <motion.div
-              key={image}
+              key={image.src}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: index * 0.12 }}
               viewport={{ once: true, amount: 0.25 }}
             >
-              <GalleryImage image={image} index={index} />
+              <GalleryImage image={image} />
             </motion.div>
           ))}
 

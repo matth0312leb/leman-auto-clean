@@ -12,7 +12,7 @@ import FAQAssistant from "@/components/FAQAssistant";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white overflow-hidden">
+    <main className="overflow-x-hidden bg-black text-white">
       <Navbar />
       <Hero />
       <Prestations />

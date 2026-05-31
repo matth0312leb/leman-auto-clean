@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative overflow-hidden border-t border-white/10 bg-black px-5 py-14 text-white sm:px-6 md:py-20"
+      className="relative overflow-x-hidden border-t border-white/10 bg-black px-5 py-14 text-white sm:px-6 md:py-20"
     >
 
       {/* Glow */}

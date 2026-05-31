@@ -90,7 +90,7 @@ export default function Prestations() {
   return (
     <section
       id="prestations"
-      className="relative overflow-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
+      className="relative overflow-x-hidden bg-black px-5 py-16 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
 
       {/* Glow */}
@@ -99,7 +99,7 @@ export default function Prestations() {
       <div className="relative mx-auto max-w-7xl">
 
         {/* Header */}
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16 lg:mb-20">
+        <div className="mx-auto mb-9 max-w-3xl text-center md:mb-16 lg:mb-20">
 
           <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             PRESTATIONS PREMIUM
@@ -112,7 +112,7 @@ export default function Prestations() {
         </div>
 
         {/* Cards */}
-        <div className="grid gap-5 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">
 
           {prestations.map((item, index) => {
             const isActive = active === index;
@@ -126,7 +126,7 @@ export default function Prestations() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true, amount: 0.25 }}
                 whileHover={{ y: -6 }}
-                className={`group relative flex min-w-0 flex-col overflow-visible rounded-3xl p-5 backdrop-blur-xl transition duration-500 sm:p-7 lg:p-8 ${
+                className={`group relative flex min-w-0 flex-col overflow-visible rounded-3xl p-4 backdrop-blur-xl transition duration-500 sm:p-7 lg:p-8 ${
                   isHighlighted
                     ? "border border-blue-400/70 bg-blue-500/[0.12] shadow-2xl shadow-blue-500/20 ring-1 ring-blue-400/30"
                     : "border border-white/10 bg-white/[0.06] hover:border-blue-500/40"
@@ -150,7 +150,7 @@ export default function Prestations() {
                 <div className="relative flex min-h-full min-w-0 flex-col">
                   {/* Badge */}
                   <div
-                    className={`mb-5 inline-block max-w-fit rounded-full border px-3 py-2 text-[10px] font-semibold tracking-[0.22em] sm:px-4 sm:text-[11px] md:mb-7 md:text-xs md:tracking-[0.3em] ${
+                    className={`mb-4 inline-block max-w-fit rounded-full border px-3 py-2 text-[10px] font-semibold tracking-[0.22em] sm:mb-5 sm:px-4 sm:text-[11px] md:mb-7 md:text-xs md:tracking-[0.3em] ${
                       isHighlighted
                         ? "border-blue-300/50 bg-blue-400/15 text-blue-200"
                         : "border-blue-500/30 bg-blue-500/10 text-blue-400"
@@ -160,17 +160,17 @@ export default function Prestations() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="mb-4 break-words text-2xl font-black uppercase sm:text-3xl md:text-[2rem]">
+                  <h3 className="mb-3 break-words text-2xl font-black uppercase sm:mb-4 sm:text-3xl md:text-[2rem]">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mb-7 min-h-0 text-sm leading-relaxed text-zinc-400 sm:text-base lg:mb-10 lg:min-h-[84px]">
+                  <p className="mb-6 min-h-0 text-sm leading-relaxed text-zinc-400 sm:mb-7 sm:text-base lg:mb-10 lg:min-h-[84px]">
                     {item.description}
                   </p>
 
                   {/* Bottom */}
-                  <div className="mt-auto flex flex-col items-start gap-5 min-[380px]:flex-row min-[380px]:items-end min-[380px]:justify-between">
+                  <div className="mt-auto flex flex-col items-start gap-4 min-[380px]:flex-row min-[380px]:items-end min-[380px]:justify-between sm:gap-5">
 
                     <div className="min-w-0">
                       <p className="text-xs uppercase tracking-widest text-zinc-500 sm:text-sm">
@@ -218,17 +218,17 @@ export default function Prestations() {
                               Tarifs selon véhicule
                             </p>
 
-                            <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+                            <div className="grid grid-cols-4 gap-1 sm:gap-2">
                               {item.vehiclePrices.map((vehicle) => (
                                 <div
                                   key={vehicle.type}
-                                  className="flex min-h-[68px] flex-col items-center justify-center rounded-xl border border-white/10 bg-black/40 px-1.5 py-2 text-center sm:min-h-[76px] sm:rounded-2xl sm:px-2 sm:py-3"
+                                  className="flex min-h-[70px] flex-col items-center justify-center rounded-xl border border-white/10 bg-black/40 px-1 py-2 text-center sm:min-h-[76px] sm:rounded-2xl sm:px-2 sm:py-3"
                                 >
-                                  <p className="text-[10px] font-medium leading-tight text-zinc-400 sm:text-xs">
+                                  <p className="text-[9px] font-medium leading-tight text-zinc-400 min-[390px]:text-[10px] sm:text-xs">
                                     {vehicle.type}
                                   </p>
 
-                                  <p className="mt-1.5 text-base font-black leading-none text-blue-400 sm:text-lg">
+                                  <p className="mt-1.5 text-sm font-black leading-none text-blue-400 min-[390px]:text-base sm:text-lg">
                                     {vehicle.price}
                                   </p>
                                 </div>
