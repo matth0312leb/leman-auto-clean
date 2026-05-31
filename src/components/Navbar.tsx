@@ -1,95 +1,123 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+const links = [
+  { href: "/#prestations", label: "Prestations" },
+  { href: "/#realisations", label: "Nos réalisations" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/50 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/60 text-white backdrop-blur-2xl">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:h-[84px] sm:px-6 md:h-[96px]">
 
         {/* Logo */}
-        <img
-  src="/logo.png"
-  alt="Léman Auto Clean"
-  className="h-16 w-auto object-contain"
-/>
+        <Link href="/" aria-label="Accueil Léman Auto Clean" onClick={() => setOpen(false)}>
+          <Image
+            src="/logo.png"
+            alt="Léman Auto Clean"
+            width={160}
+            height={80}
+            className="h-11 w-auto object-contain sm:h-14 md:h-16"
+            priority
+          />
+        </Link>
 
         {/* Desktop menu */}
-        <nav className="hidden items-center gap-10 md:flex">
-          <a
-            href="#prestations"
-            className="transition hover:text-blue-400"
-          >
-            Prestations
-          </a>
+        <nav className="hidden items-center gap-4 text-sm lg:flex xl:gap-7 xl:text-base">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="transition hover:text-blue-400"
+            >
+              {link.label}
+            </a>
+          ))}
 
-          <a
-            href="#avantapres"
-            className="transition hover:text-blue-400"
+          <Link
+            href="/contact"
+            className="rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 lg:px-5"
           >
-            Avant / Après
-          </a>
-
-          <a
-            href="#contact"
-            className="transition hover:text-blue-400"
-          >
-            Contact
-          </a>
+            Réserver
+          </Link>
         </nav>
 
-        {/* Burger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex flex-col gap-1 md:hidden"
-        >
-          <span className="h-[2px] w-6 bg-white" />
-          <span className="h-[2px] w-6 bg-white" />
-          <span className="h-[2px] w-6 bg-white" />
-        </button>
+        <div className="flex items-center gap-3 lg:hidden">
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="rounded-full bg-blue-500 px-3.5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 min-[380px]:px-4 min-[380px]:text-sm"
+          >
+            Réserver
+          </Link>
+
+          {/* Burger */}
+          <button
+            type="button"
+            onClick={() => setOpen((current) => !current)}
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-xl backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400 sm:h-11 sm:w-11 sm:text-2xl"
+          >
+            {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.3 }}
-            className="border-t border-white/10 bg-black/95 md:hidden"
-          >
-            <nav className="flex flex-col px-6 py-6 text-lg">
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-x-0 bottom-0 top-[72px] z-0 bg-black/45 backdrop-blur-2xl sm:top-[84px] lg:hidden"
+              onClick={() => setOpen(false)}
+            />
 
-              <a
-                href="#prestations"
-                onClick={() => setOpen(false)}
-                className="border-b border-white/10 py-4 transition hover:text-blue-400"
-              >
-                Prestations
-              </a>
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22 }}
+              className="absolute left-0 right-0 top-full z-10 border-t border-white/10 bg-black/90 shadow-2xl shadow-black backdrop-blur-xl lg:hidden"
+            >
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/92 via-black/78 to-black/88" />
 
-              <a
-                href="#avantapres"
-                onClick={() => setOpen(false)}
-                className="border-b border-white/10 py-4 transition hover:text-blue-400"
-              >
-                Avant / Après
-              </a>
+              <nav className="relative mx-auto flex max-w-xl flex-col px-5 py-7 text-base sm:py-8 sm:text-lg">
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="border-b border-white/10 py-4 font-semibold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] transition hover:text-blue-400 sm:py-5"
+                  >
+                    {link.label}
+                  </a>
+                ))}
 
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="py-4 transition hover:text-blue-400"
-              >
-                Contact
-              </a>
-
-            </nav>
-          </motion.div>
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="mt-7 rounded-full bg-blue-500 px-6 py-4 text-center font-semibold transition hover:bg-blue-400 sm:mt-8"
+                >
+                  Réserver
+                </Link>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

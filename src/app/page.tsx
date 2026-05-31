@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import WhatsappButton from "@/components/WhatsappButton";
 import WhyUs from "@/components/WhyUs";
-import Stats from "@/components/Stats";
 import Gallery from "@/components/Gallery";
 import FinalCTA from "@/components/FinalCTA";
+import FAQAssistant from "@/components/FAQAssistant";
 
 export default function Home() {
   return (
@@ -17,10 +17,10 @@ export default function Home() {
       <Hero />
       <Prestations />
       <WhyUs />
-      <Stats />
       <BeforeAfter />
       <Gallery />
       <Testimonials />
+      <FAQAssistant />
       <FinalCTA />
       <Footer />
       <WhatsappButton />

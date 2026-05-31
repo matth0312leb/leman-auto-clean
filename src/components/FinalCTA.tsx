@@ -1,47 +1,42 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaWhatsapp } from "react-icons/fa";
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-black px-6 py-32 text-white">
+    <section className="relative overflow-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
 
       {/* Glow */}
-      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:h-[500px] md:w-[500px]" />
 
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="relative mx-auto max-w-6xl overflow-hidden rounded-[40px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-2xl md:p-20"
+        transition={{ duration: 0.65 }}
+        viewport={{ once: true, amount: 0.25 }}
+        className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl sm:p-7 md:p-10 lg:p-12"
       >
 
-        <p className="mb-6 text-sm uppercase tracking-[0.5em] text-blue-400">
+        <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:mb-6 md:text-sm md:tracking-[0.45em]">
           PRENEZ RENDEZ-VOUS
         </p>
 
-        <h2 className="mx-auto mb-8 max-w-4xl text-5xl font-black uppercase leading-tight md:text-7xl">
-          Offrez une finition premium à votre véhicule
+        <h2 className="mx-auto mb-5 max-w-3xl text-3xl font-black uppercase leading-tight sm:text-4xl md:mb-6 md:text-5xl">
+          Votre voiture mérite le meilleur
         </h2>
 
-        <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-zinc-400">
-          Contactez Léman Auto Clean dès maintenant pour un nettoyage
-          automobile haut de gamme à domicile.
+        <p className="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base md:mb-8">
+          Contactez-nous pour un devis gratuit et personnalisé. Réponse rapide
+          garantie.
         </p>
 
-        <a
-          href="https://wa.me/33604475205"
-          target="_blank"
-          className="inline-flex items-center gap-4 rounded-full bg-blue-500 px-10 py-5 text-lg font-semibold text-white transition hover:bg-blue-400"
+        <Link
+          href="/contact"
+          className="inline-flex max-w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-400 sm:gap-4 sm:px-8 sm:py-4 sm:text-base md:px-10 md:py-5 md:text-lg"
         >
-
-          <FaWhatsapp className="text-2xl" />
-
-          Réserver sur WhatsApp
-
-        </a>
+          Réserver
+        </Link>
 
       </motion.div>
     </section>

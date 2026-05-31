@@ -1,58 +1,131 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const images = [
-  "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=95&w=1800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=95&w=1800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=95&w=1800&auto=format&fit=crop",
 ];
 
-export default function Gallery() {
+function GalleryImage({ image, index }: { image: string; index: number }) {
   return (
-    <section className="relative overflow-hidden bg-black px-6 py-32 text-white">
+    <div className="group min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-zinc-950">
+      <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10] lg:h-[500px] lg:aspect-auto">
+        <Image
+          src={image}
+          alt={`Réalisation Léman Auto Clean ${index + 1}`}
+          fill
+          quality={95}
+          sizes="(min-width: 1280px) 420px, (min-width: 1024px) 33vw, 100vw"
+          className="object-cover object-center transition duration-700 group-hover:scale-105 lg:group-hover:scale-110"
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function Gallery() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const previousImage = () => {
+    setActiveIndex((current) =>
+      current === 0 ? images.length - 1 : current - 1,
+    );
+  };
+
+  const nextImage = () => {
+    setActiveIndex((current) =>
+      current === images.length - 1 ? 0 : current + 1,
+    );
+  };
+
+  return (
+    <section
+      id="realisations"
+      className="relative overflow-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
+    >
 
       {/* Glow */}
-      <div className="absolute right-0 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="absolute right-[-120px] top-1/2 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:right-0 md:h-[400px] md:w-[400px]" />
 
       <div className="relative mx-auto max-w-7xl">
 
         {/* Header */}
-        <div className="mb-20 text-center">
+        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16 lg:mb-20">
 
-          <p className="mb-4 text-sm uppercase tracking-[0.5em] text-blue-400">
+          <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             GALERIE
           </p>
 
-          <h2 className="text-5xl font-black uppercase md:text-6xl">
+          <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Nos réalisations
           </h2>
 
         </div>
 
-        {/* Images */}
-        <div className="grid gap-8 md:grid-cols-3">
+        {/* Mobile carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+          viewport={{ once: true, amount: 0.25 }}
+          className="lg:hidden"
+        >
+          <div className="relative">
+            <GalleryImage image={images[activeIndex]} index={activeIndex} />
+
+            <button
+              type="button"
+              onClick={previousImage}
+              aria-label="Image précédente"
+              className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+            >
+              <FiChevronLeft aria-hidden="true" />
+            </button>
+
+            <button
+              type="button"
+              onClick={nextImage}
+              aria-label="Image suivante"
+              className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+            >
+              <FiChevronRight aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Afficher l'image ${index + 1}`}
+                className={`h-2.5 rounded-full transition ${
+                  activeIndex === index
+                    ? "w-8 bg-blue-400"
+                    : "w-2.5 bg-white/25 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Desktop grid */}
+        <div className="hidden gap-5 sm:gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
 
           {images.map((image, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 60 }}
+              key={image}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              viewport={{ once: true }}
-              className="group overflow-hidden rounded-[30px] border border-white/10"
+              transition={{ duration: 0.55, delay: index * 0.12 }}
+              viewport={{ once: true, amount: 0.25 }}
             >
-
-              <div className="overflow-hidden">
-
-                <img
-                  src={image}
-                  alt="Léman Auto Clean"
-                  className="h-[500px] w-full object-cover transition duration-700 group-hover:scale-110"
-                />
-
-              </div>
-
+              <GalleryImage image={image} index={index} />
             </motion.div>
           ))}
 
