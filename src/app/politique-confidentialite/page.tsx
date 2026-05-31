@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Politique de confidentialité",
+  description:
+    "Politique de confidentialité Léman Auto Clean pour les demandes de nettoyage automobile premium à domicile et de detailing à domicile.",
+  alternates: {
+    canonical: "/politique-confidentialite",
+  },
+};
 
 export default function PolitiqueConfidentialitePage() {
   return (

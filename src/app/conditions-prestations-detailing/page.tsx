@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Conditions prestations detailing",
+  description:
+    "Conditions des prestations de nettoyage auto à domicile, lavage voiture à domicile et detailing à domicile proposées par Léman Auto Clean.",
+  alternates: {
+    canonical: "/conditions-prestations-detailing",
+  },
+};
 
 export default function ConditionsPrestationsPage() {
   return (

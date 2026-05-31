@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import OptionsMultiSelect from "@/components/OptionsMultiSelect";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
@@ -8,6 +9,21 @@ type ContactPageProps = {
   searchParams?: Promise<{
     formule?: string;
   }>;
+};
+
+export const metadata: Metadata = {
+  title: "Réserver un nettoyage auto à domicile",
+  description:
+    "Contactez Léman Auto Clean pour réserver un nettoyage automobile premium, un lavage voiture à domicile ou un detailing à domicile dans le Chablais, Douvaine, Thonon-les-Bains, Genève et Haute-Savoie.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Réserver Léman Auto Clean | Nettoyage auto à domicile",
+    description:
+      "Demande de devis pour nettoyage automobile premium à domicile dans le Chablais, Genève et Haute-Savoie.",
+    url: "/contact",
+  },
 };
 
 const contacts = [
@@ -22,6 +38,7 @@ const contacts = [
     value: "Envoyer un message",
     href: "https://wa.me/33604475205",
     icon: FaWhatsapp,
+    highlight: "Réponse rapide",
   },
   {
     label: "Email",
@@ -74,21 +91,33 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
             <p className="mt-6 max-w-2xl leading-relaxed text-zinc-400">
               Contactez Léman Auto Clean par le canal qui vous convient le mieux.
-              Réponse rapide pour organiser votre nettoyage automobile à domicile.
+              Réponse rapide pour organiser votre prestation à domicile, selon
+              votre véhicule, vos besoins et vos disponibilités.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {contacts.map((contact) => {
               const Icon = contact.icon;
+              const isHighlighted = "highlight" in contact;
 
               return (
                 <a
                   key={contact.label}
                   href={contact.href}
                   target={contact.href.startsWith("http") ? "_blank" : undefined}
-                  className="group flex min-w-0 items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl transition hover:border-blue-400/50"
+                  className={`group relative flex min-w-0 items-center gap-4 rounded-3xl border p-5 backdrop-blur-xl transition ${
+                    isHighlighted
+                      ? "border-green-400/45 bg-green-500/[0.08] shadow-lg shadow-green-500/10 hover:border-green-400/70"
+                      : "border-white/10 bg-white/[0.06] hover:border-blue-400/50"
+                  }`}
                 >
+                  {isHighlighted && (
+                    <span className="absolute right-4 top-4 rounded-full border border-green-400/30 bg-green-500/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-green-300">
+                      {contact.highlight}
+                    </span>
+                  )}
+
                   <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-blue-500/15 text-2xl text-blue-400 transition group-hover:bg-blue-500 group-hover:text-white">
                     <Icon />
                   </div>

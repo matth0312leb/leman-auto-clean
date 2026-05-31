@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "CGV",
+  description:
+    "Conditions générales de vente Léman Auto Clean pour les prestations de nettoyage automobile premium à domicile, lavage voiture à domicile et detailing à domicile.",
+  alternates: {
+    canonical: "/cgv",
+  },
+};
 
 export default function CGVPage() {
   return (

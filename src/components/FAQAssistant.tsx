@@ -7,14 +7,19 @@ import { useState } from "react";
 
 const faqs = [
   {
+    question: "Faites-vous du nettoyage à domicile ?",
+    answer:
+      "Oui. Nous intervenons directement chez vous ou sur votre lieu de travail, uniquement sur rendez-vous, selon les conditions d'accès au véhicule.",
+  },
+  {
+    question: "Intervenez-vous à Thonon-les-Bains ?",
+    answer:
+      "Oui. Nous intervenons à Thonon-les-Bains, dans le Chablais, à Genève et plus largement en Haute-Savoie.",
+  },
+  {
     question: "Quelle formule choisir ?",
     answer:
       "Essentiel est idéal pour l'intérieur, Équilibre pour l'extérieur, et Élégance pour une prestation complète intérieur + extérieur.",
-  },
-  {
-    question: "Intervenez-vous à Genève ?",
-    answer:
-      "Oui. Déplacement dans le Chablais, Genève et Haute-Savoie. Selon la distance, un supplément de déplacement peut être appliqué.",
   },
   {
     question: "Combien de temps dure une prestation ?",

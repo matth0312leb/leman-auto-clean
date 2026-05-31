@@ -10,6 +10,8 @@ export default function Hero() {
 
       {/* Background image */}
       <div
+        role="img"
+        aria-label={siteImages.hero.alt}
         className="absolute inset-0 scale-105 bg-cover bg-[58%_center] sm:bg-[55%_center] md:bg-center"
         style={{
           backgroundImage: `url('${siteImages.hero.src}')`,

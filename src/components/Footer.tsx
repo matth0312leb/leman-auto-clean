@@ -35,12 +35,13 @@ export default function Footer() {
 
             <p>
               J&apos;ai créé Léman Auto Clean pour offrir un service de nettoyage
-              haut de gamme, directement chez vous.
+              automobile premium à domicile, directement chez vous.
             </p>
 
             <p>
               Mon objectif ? Redonner à votre véhicule l&apos;éclat qu&apos;il mérite,
-              avec soin et professionnalisme.
+              avec soin et professionnalisme, de Douvaine à Thonon-les-Bains,
+              dans le Chablais, Genève et la Haute-Savoie.
             </p>
 
             <p className="pt-2 text-right font-semibold text-white">

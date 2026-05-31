@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Cookies",
+  description:
+    "Informations cookies du site Léman Auto Clean, nettoyage auto à domicile et detailing à domicile dans le Chablais et la Haute-Savoie.",
+  alternates: {
+    canonical: "/cookies",
+  },
+};
 
 export default function CookiesPage() {
   return (

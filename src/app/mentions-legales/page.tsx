@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Mentions légales",
+  description:
+    "Mentions légales de Léman Auto Clean, service de nettoyage automobile premium à domicile dans le Chablais, Genève et Haute-Savoie.",
+  alternates: {
+    canonical: "/mentions-legales",
+  },
+};
 
 export default function MentionsLegalesPage() {
   return (
