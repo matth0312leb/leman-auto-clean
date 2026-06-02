@@ -63,8 +63,16 @@ export default function Footer() {
               Prestations
             </Link>
 
+            <Link href="/abonnements" className="transition hover:text-blue-400">
+              Abonnements
+            </Link>
+
             <Link href="/#realisations" className="transition hover:text-blue-400">
               Nos réalisations
+            </Link>
+
+            <Link href="/professionnels" className="transition hover:text-blue-400">
+              Professionnels
             </Link>
 
             <Link href="/#faq" className="transition hover:text-blue-400">

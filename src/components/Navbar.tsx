@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/#prestations", label: "Prestations" },
+  { href: "/abonnements", label: "Abonnements" },
   { href: "/#realisations", label: "Nos réalisations" },
+  { href: "/professionnels", label: "Professionnels" },
   { href: "/#faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -41,7 +43,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop menu */}
-        <nav className="hidden items-center gap-4 text-sm lg:flex xl:gap-7 xl:text-base">
+        <nav className="hidden items-center gap-3 text-[13px] lg:flex xl:gap-6 xl:text-base">
           {links.map((link) => (
             <a
               key={link.href}
@@ -54,7 +56,7 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            className="rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 lg:px-5"
+            className="rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 xl:px-5"
           >
             Réserver
           </Link>

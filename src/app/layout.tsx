@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/hero.jpg",
+        url: "/hero.png",
         width: 1200,
         height: 630,
         alt: "Léman Auto Clean - nettoyage automobile premium à domicile",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Léman Auto Clean | Nettoyage automobile premium",
     description:
       "Nettoyage auto à domicile, lavage voiture à domicile et detailing à domicile dans le Chablais, Genève et Haute-Savoie.",
-    images: ["/hero.jpg"],
+    images: ["/hero.png"],
   },
   icons: {
     icon: "/logo.png",
@@ -88,7 +88,7 @@ const localBusinessSchema = {
   name: "Léman Auto Clean",
   alternateName: "L.A.C",
   url: siteUrl,
-  image: `${siteUrl}/hero.jpg`,
+  image: `${siteUrl}/hero.png`,
   logo: `${siteUrl}/logo.png`,
   description:
     "Nettoyage automobile premium à domicile, lavage voiture à domicile et detailing à domicile dans le Chablais, Douvaine, Thonon-les-Bains, Genève et Haute-Savoie.",

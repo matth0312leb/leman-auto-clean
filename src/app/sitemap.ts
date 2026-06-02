@@ -6,6 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/contact",
+    "/abonnements",
+    "/professionnels",
     "/mentions-legales",
     "/politique-confidentialite",
     "/cgv",
@@ -16,7 +18,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" || route === "/contact" ? "weekly" : "yearly",
-    priority: route === "" ? 1 : route === "/contact" ? 0.9 : 0.4,
+    changeFrequency:
+      route === "" ||
+      route === "/contact" ||
+      route === "/abonnements" ||
+      route === "/professionnels"
+        ? "weekly"
+        : "yearly",
+    priority:
+      route === ""
+        ? 1
+        : route === "/contact" ||
+            route === "/abonnements" ||
+            route === "/professionnels"
+          ? 0.9
+          : 0.4,
   }));
 }

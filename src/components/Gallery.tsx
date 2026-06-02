@@ -13,7 +13,7 @@ function GalleryImage({
 }) {
   return (
     <div className="group min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-zinc-950">
-      <div className="relative aspect-[4/3] overflow-hidden md:aspect-[16/10] lg:h-[500px] lg:aspect-auto">
+      <div className="relative aspect-[4/5] overflow-hidden md:aspect-[3/4] lg:h-[460px] lg:aspect-auto">
         <Image
           src={image.src}
           alt={image.alt}
@@ -62,7 +62,7 @@ export default function Gallery() {
           </p>
 
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
-            Nos réalisations
+            Aperçu de nos réalisations
           </h2>
 
         </div>

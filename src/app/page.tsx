@@ -26,8 +26,8 @@ export default function Home() {
       <Prestations />
       <WhyUs />
       <BeforeAfter />
-      <Gallery />
       <Testimonials />
+      <Gallery />
       <FAQAssistant />
       <FinalCTA />
       <Footer />

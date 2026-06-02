@@ -32,16 +32,28 @@ export const siteImages = {
   ],
   gallery: [
     {
-      src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=95&w=1800&auto=format&fit=crop",
-      alt: "Réalisation de nettoyage automobile premium à domicile Léman Auto Clean",
+      src: "/images/realisations/jaguar-interieur.jpg",
+      alt: "Nettoyage intérieur d'une Jaguar par Léman Auto Clean",
     },
     {
-      src: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=95&w=1800&auto=format&fit=crop",
-      alt: "Lavage voiture à domicile dans le Chablais par Léman Auto Clean",
+      src: "/images/realisations/stelvio-exterieur.jpg",
+      alt: "Lavage extérieur d'une Alfa Romeo Stelvio par Léman Auto Clean",
     },
     {
-      src: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?q=95&w=1800&auto=format&fit=crop",
-      alt: "Detailing à domicile en Haute-Savoie par Léman Auto Clean",
+      src: "/images/realisations/skoda-interieur.jpg",
+      alt: "Nettoyage intérieur d'une Skoda par Léman Auto Clean",
+    },
+    {
+      src: "/images/realisations/tesla-exterieur.jpg",
+      alt: "Lavage extérieur d'une Tesla par Léman Auto Clean",
+    },
+    {
+      src: "/images/realisations/rs6-interieur.jpg",
+      alt: "Nettoyage intérieur premium d'une Audi RS6 par Léman Auto Clean",
+    },
+    {
+      src: "/images/realisations/classe-g-exterieur.jpg",
+      alt: "Lavage extérieur d'un Mercedes Classe G par Léman Auto Clean",
     },
   ],
 };

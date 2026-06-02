@@ -255,6 +255,10 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <option value="Essentiel">Essentiel</option>
                   <option value="Équilibre">Équilibre</option>
                   <option value="Élégance">Élégance</option>
+                  <option value="Abonnement intérieur">Abonnement intérieur</option>
+                  <option value="Abonnement intérieur + extérieur">
+                    Abonnement intérieur + extérieur
+                  </option>
                 </select>
               </label>
 
