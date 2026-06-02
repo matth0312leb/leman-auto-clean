@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Prestations from "@/components/Prestations";
 import BeforeAfter from "@/components/BeforeAfter";
@@ -23,7 +22,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="overflow-x-hidden bg-black text-white">
-      <Navbar />
       <Hero />
       <Prestations />
       <WhyUs />

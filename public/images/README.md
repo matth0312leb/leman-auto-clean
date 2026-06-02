@@ -3,7 +3,7 @@
 Ce dossier est prêt pour recevoir les vraies photos Léman Auto Clean.
 
 Formats conseillés :
-- Hero : `public/images/hero/hero.jpg`
+- Hero : `public/hero.png`
 - Avant / Après : `public/images/avant-apres/avant-1.jpg` et `public/images/avant-apres/apres-1.jpg`
 - Réalisations : `public/images/realisations/realisation-1.jpg`, `realisation-2.jpg`, etc.
 - Avis / clients : `public/images/avis/`

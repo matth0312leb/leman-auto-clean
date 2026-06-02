@@ -15,7 +15,7 @@ type LegalPageProps = {
 export default function LegalPage({ title, description, sections }: LegalPageProps) {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white">
-      <section className="relative mx-auto max-w-4xl px-5 py-10 sm:px-6 md:py-14">
+      <section className="relative mx-auto max-w-4xl px-5 pb-10 pt-28 sm:px-6 sm:pt-32 md:pb-14 md:pt-36">
         <div className="absolute left-1/2 top-40 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
 
         <div className="relative">

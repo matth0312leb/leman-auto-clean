@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const siteUrl = "https://www.leman-autoclean.com";
@@ -201,6 +202,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
+        <Navbar />
         {children}
         <script
           type="application/ld+json"
