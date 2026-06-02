@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
@@ -204,6 +205,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <Navbar />
         {children}
+        <SpeedInsights />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
