@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiCheck, FiMinus, FiPlus } from "react-icons/fi";
+import { FiArrowRight, FiCheck, FiMinus, FiPlus } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const prestations = [
@@ -131,7 +131,17 @@ export default function Prestations() {
                 }}
                 viewport={{ once: true, amount: 0.25 }}
                 whileHover={isDesktop ? { y: -6 } : undefined}
-                className={`group relative flex min-w-0 flex-col overflow-visible rounded-3xl p-4 backdrop-blur-sm transition duration-500 sm:p-7 md:backdrop-blur-xl lg:p-8 ${
+                role="button"
+                tabIndex={0}
+                aria-expanded={isActive}
+                onClick={() => setActive(isActive ? null : index)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setActive(isActive ? null : index);
+                  }
+                }}
+                className={`group relative flex min-w-0 cursor-pointer flex-col overflow-visible rounded-3xl p-4 backdrop-blur-sm transition duration-500 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:p-7 md:backdrop-blur-xl lg:p-8 ${
                   isHighlighted
                     ? "border border-blue-400/70 bg-blue-500/[0.12] shadow-2xl shadow-blue-500/20 ring-1 ring-blue-400/30"
                     : "border border-white/10 bg-white/[0.06] hover:border-blue-500/40"
@@ -187,23 +197,19 @@ export default function Prestations() {
                       </h4>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => setActive(isActive ? null : index)}
-                      aria-expanded={isActive}
+                    <Link
+                      href={`/contact?formule=${encodeURIComponent(item.title)}`}
+                      onClick={(event) => event.stopPropagation()}
+                      onKeyDown={(event) => event.stopPropagation()}
                       className={`inline-flex h-11 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition sm:h-12 sm:px-5 ${
                         isHighlighted
                           ? "border-blue-300/40 bg-blue-500/20 text-white hover:bg-blue-500/35"
                           : "border-white/10 hover:border-blue-400 hover:text-blue-400"
                       }`}
                     >
-                      {isActive ? (
-                        <FiMinus aria-hidden="true" />
-                      ) : (
-                        <FiPlus aria-hidden="true" />
-                      )}
-                      <span>{isActive ? "Fermer" : "Voir"}</span>
-                    </button>
+                      <span>Réserver</span>
+                      <FiArrowRight aria-hidden="true" />
+                    </Link>
 
                   </div>
 
@@ -252,16 +258,6 @@ export default function Prestations() {
                               </li>
                             ))}
                           </ul>
-
-                          <div className="mt-6 flex justify-end">
-                            <Link
-                              href={`/contact?formule=${encodeURIComponent(item.title)}`}
-                              className="inline-flex w-full justify-center rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-400 sm:w-auto"
-                            >
-                              Réserver
-                            </Link>
-                          </div>
-
                         </div>
                       </motion.div>
                     )}
