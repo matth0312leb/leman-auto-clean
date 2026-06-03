@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
