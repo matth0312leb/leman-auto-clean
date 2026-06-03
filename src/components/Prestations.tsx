@@ -270,13 +270,50 @@ export default function Prestations() {
 
         </div>
 
+        <motion.div
+          initial={{ opacity: 0, y: isDesktop ? 18 : 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: isDesktop ? 0.45 : 0.2 }}
+          viewport={{ once: true, amount: 0.4 }}
+          className="mt-8 rounded-2xl border border-blue-400/20 bg-blue-500/[0.06] px-4 py-4 shadow-lg shadow-blue-500/5 sm:mt-10 sm:px-5"
+        >
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <p className="max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+              <span className="font-semibold text-white">Des options sont disponibles en complément</span>{" "}
+              pour adapter la prestation à votre véhicule : sièges, coffre,
+              jantes, pneus et finitions ciblées.
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              {["Shampoing sièges", "Coffre", "Jantes", "Brillance pneus"].map((label) => (
+                <span
+                  key={label}
+                  className="rounded-full border border-white/10 bg-black/30 px-3 py-1.5 text-xs font-semibold text-blue-200"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Options */}
         <motion.div
           initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: isDesktop ? 0.55 : 0.25 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm sm:mt-16 sm:p-7 md:backdrop-blur-xl lg:mt-20 lg:p-8"
+          role="button"
+          tabIndex={0}
+          aria-expanded={optionsOpen}
+          onClick={() => setOptionsOpen((current) => !current)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setOptionsOpen((current) => !current);
+            }
+          }}
+          className="mt-14 cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:mt-16 sm:p-7 md:backdrop-blur-xl lg:mt-20 lg:p-8"
         >
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div className="min-w-0">
@@ -289,26 +326,17 @@ export default function Prestations() {
               </h3>
             </div>
 
-            <p className="max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base md:text-right">
-              Des compléments ciblés pour affiner votre demande en plus des
-              formules standards.
-            </p>
           </div>
 
-          <div className="mt-6 flex justify-end">
-            <button
-              type="button"
-              onClick={() => setOptionsOpen((current) => !current)}
-              aria-expanded={optionsOpen}
-              className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-white/10 px-5 text-sm font-semibold transition hover:border-blue-400 hover:text-blue-400 sm:w-auto sm:h-12"
-            >
+          <div className="mt-6 flex justify-start md:justify-end">
+            <div className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-white/10 px-5 text-sm font-semibold text-zinc-100 sm:h-12 sm:w-auto">
               {optionsOpen ? (
                 <FiMinus aria-hidden="true" />
               ) : (
                 <FiPlus aria-hidden="true" />
               )}
               <span>{optionsOpen ? "Fermer" : "Voir les options"}</span>
-            </button>
+            </div>
           </div>
 
           <AnimatePresence initial={false}>
@@ -324,7 +352,7 @@ export default function Prestations() {
                   {options.map((option) => (
                     <div
                       key={`${option.category}-${option.label}`}
-                      className="min-w-0 rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-blue-500/30"
+                      className="min-w-0 rounded-2xl border border-white/10 bg-black/30 p-4"
                     >
                       <div className="mb-4 flex items-start justify-between gap-3">
                         <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-400">

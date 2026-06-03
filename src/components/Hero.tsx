@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCalendar, FiMapPin, FiShield } from "react-icons/fi";
+import { FiArrowRight, FiCalendar, FiMapPin, FiStar } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 
 export default function Hero() {
@@ -69,7 +69,7 @@ export default function Hero() {
 
             <div className="mt-8 grid max-w-xl grid-cols-1 gap-3 min-[390px]:mt-9 sm:grid-cols-3 md:mt-14 md:max-w-2xl">
               <div className="flex min-w-0 items-center gap-3 border-l border-blue-400/45 pl-4">
-                <FiShield
+                <FiStar
                   aria-hidden="true"
                   className="shrink-0 text-2xl text-blue-400"
                 />
@@ -97,7 +97,7 @@ export default function Hero() {
                 />
                 <p className="text-xs uppercase leading-relaxed tracking-widest text-zinc-300">
                   <span className="block font-bold text-white">Secteur</span>
-                  Chablais / Genève
+                  <span className="whitespace-nowrap">Chablais / Genève</span>
                 </p>
               </div>
             </div>

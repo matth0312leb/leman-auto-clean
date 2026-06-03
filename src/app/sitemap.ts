@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/contact",
+    "/contact-professionnel",
     "/abonnements",
     "/professionnels",
     "/mentions-legales",
@@ -21,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency:
       route === "" ||
       route === "/contact" ||
+      route === "/contact-professionnel" ||
       route === "/abonnements" ||
       route === "/professionnels"
         ? "weekly"
@@ -29,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       route === ""
         ? 1
         : route === "/contact" ||
+            route === "/contact-professionnel" ||
             route === "/abonnements" ||
             route === "/professionnels"
           ? 0.9

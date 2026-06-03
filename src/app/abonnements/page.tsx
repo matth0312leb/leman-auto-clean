@@ -186,7 +186,7 @@ export default function AbonnementsPage() {
               return (
                 <article
                   key={condition.title}
-                  className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-sm transition hover:border-blue-400/40 sm:p-6 md:backdrop-blur-xl"
+                  className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-sm sm:p-6 md:backdrop-blur-xl"
                 >
                   <div className="mb-5 grid h-12 w-12 place-items-center rounded-full bg-blue-500/15 text-2xl text-blue-400">
                     <Icon aria-hidden="true" />

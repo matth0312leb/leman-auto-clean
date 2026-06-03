@@ -58,7 +58,7 @@ export default function WhyUs() {
                 delay: isDesktop ? index * 0.1 : 0,
               }}
               viewport={{ once: true, amount: 0.25 }}
-              className="flex min-w-0 gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-blue-400/40 sm:p-5 md:backdrop-blur-xl"
+              className="flex min-w-0 gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm sm:p-5 md:backdrop-blur-xl"
             >
 
               <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-400 shadow-[0_0_25px_rgba(34,211,238,1)]" />

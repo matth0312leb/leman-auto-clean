@@ -85,7 +85,7 @@ export default function ProfessionnelsPage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/contact"
+                href="/contact-professionnel"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-500 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400"
               >
                 Demander un devis pro
@@ -141,7 +141,7 @@ export default function ProfessionnelsPage() {
             {services.map((service) => (
               <article
                 key={service.title}
-                className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-sm transition hover:border-blue-400/40 sm:p-6 md:backdrop-blur-xl"
+                className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-sm sm:p-6 md:backdrop-blur-xl"
               >
                 <h3 className="mb-4 text-xl font-black uppercase">
                   {service.title}
@@ -196,7 +196,7 @@ export default function ProfessionnelsPage() {
           </p>
 
           <Link
-            href="/contact"
+            href="/contact-professionnel"
             className="mt-7 inline-flex rounded-full bg-blue-500 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400"
           >
             Contacter Léman Auto Clean
