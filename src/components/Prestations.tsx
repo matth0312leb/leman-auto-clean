@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FiCheck, FiMinus, FiPlus } from "react-icons/fi";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const prestations = [
   {
@@ -86,6 +87,7 @@ const options = [
 export default function Prestations() {
   const [active, setActive] = useState<number | null>(null);
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const isDesktop = useIsDesktop();
 
   return (
     <section
@@ -121,12 +123,15 @@ export default function Prestations() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 36 }}
+                initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{
+                  duration: isDesktop ? 0.5 : 0.25,
+                  delay: isDesktop ? index * 0.1 : 0,
+                }}
                 viewport={{ once: true, amount: 0.25 }}
-                whileHover={{ y: -6 }}
-                className={`group relative flex min-w-0 flex-col overflow-visible rounded-3xl p-4 backdrop-blur-xl transition duration-500 sm:p-7 lg:p-8 ${
+                whileHover={isDesktop ? { y: -6 } : undefined}
+                className={`group relative flex min-w-0 flex-col overflow-visible rounded-3xl p-4 backdrop-blur-sm transition duration-500 sm:p-7 md:backdrop-blur-xl lg:p-8 ${
                   isHighlighted
                     ? "border border-blue-400/70 bg-blue-500/[0.12] shadow-2xl shadow-blue-500/20 ring-1 ring-blue-400/30"
                     : "border border-white/10 bg-white/[0.06] hover:border-blue-500/40"
@@ -271,11 +276,11 @@ export default function Prestations() {
 
         {/* Options */}
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
+          initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: isDesktop ? 0.55 : 0.25 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:mt-16 sm:p-7 lg:mt-20 lg:p-8"
+          className="mt-14 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm sm:mt-16 sm:p-7 md:backdrop-blur-xl lg:mt-20 lg:p-8"
         >
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div className="min-w-0">

@@ -2,14 +2,17 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 function GalleryImage({
   image,
+  priority = false,
 }: {
   image: { src: string; alt: string };
+  priority?: boolean;
 }) {
   return (
     <div className="group min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-zinc-950">
@@ -18,9 +21,10 @@ function GalleryImage({
           src={image.src}
           alt={image.alt}
           fill
-          quality={95}
+          priority={priority}
+          quality={84}
           sizes="(min-width: 1280px) 420px, (min-width: 1024px) 33vw, 100vw"
-          className="object-cover object-center transition duration-700 group-hover:scale-105 lg:group-hover:scale-110"
+          className="object-cover object-center transition duration-700 md:group-hover:scale-105 lg:group-hover:scale-110"
         />
       </div>
     </div>
@@ -30,6 +34,14 @@ function GalleryImage({
 export default function Gallery() {
   const images = siteImages.gallery;
   const [activeIndex, setActiveIndex] = useState(0);
+  const isDesktop = useIsDesktop();
+
+  useEffect(() => {
+    images.forEach((image) => {
+      const preloadImage = new window.Image();
+      preloadImage.src = image.src;
+    });
+  }, [images]);
 
   const previousImage = () => {
     setActiveIndex((current) =>
@@ -69,20 +81,20 @@ export default function Gallery() {
 
         {/* Mobile carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: isDesktop ? 40 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: isDesktop ? 0.55 : 0.25 }}
           viewport={{ once: true, amount: 0.25 }}
           className="lg:hidden"
         >
           <div className="relative">
-            <GalleryImage image={images[activeIndex]} />
+            <GalleryImage image={images[activeIndex]} priority />
 
             <button
               type="button"
               onClick={previousImage}
               aria-label="Image précédente"
-              className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+              className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-sm transition hover:border-blue-400 hover:text-blue-400 md:backdrop-blur-xl"
             >
               <FiChevronLeft aria-hidden="true" />
             </button>
@@ -91,7 +103,7 @@ export default function Gallery() {
               type="button"
               onClick={nextImage}
               aria-label="Image suivante"
-              className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+              className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/70 text-xl text-white backdrop-blur-sm transition hover:border-blue-400 hover:text-blue-400 md:backdrop-blur-xl"
             >
               <FiChevronRight aria-hidden="true" />
             </button>
@@ -120,9 +132,12 @@ export default function Gallery() {
           {images.map((image, index) => (
             <motion.div
               key={image.src}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: isDesktop ? 40 : 0 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: index * 0.12 }}
+              transition={{
+                duration: isDesktop ? 0.55 : 0.25,
+                delay: isDesktop ? index * 0.12 : 0,
+              }}
               viewport={{ once: true, amount: 0.25 }}
             >
               <GalleryImage image={image} />

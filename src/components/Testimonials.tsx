@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJNdFQjRvsSIwR-15U4siiNfo";
@@ -28,17 +29,22 @@ const reviews = [
 function ReviewCard({
   review,
   index,
+  isDesktop,
 }: {
   review: (typeof reviews)[number];
   index: number;
+  isDesktop: boolean;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay: index * 0.1 }}
+      transition={{
+        duration: isDesktop ? 0.55 : 0.25,
+        delay: isDesktop ? index * 0.1 : 0,
+      }}
       viewport={{ once: true, amount: 0.25 }}
-      className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl sm:p-7 lg:p-8"
+      className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:p-7 md:backdrop-blur-xl lg:p-8"
     >
 
       <div className="mb-5 flex gap-1 text-blue-400 sm:mb-6">
@@ -63,6 +69,7 @@ function ReviewCard({
 
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const isDesktop = useIsDesktop();
 
   const previousReview = () => {
     setActiveIndex((current) =>
@@ -105,13 +112,17 @@ export default function Testimonials() {
         {/* Mobile carousel */}
         <div className="lg:hidden">
           <div className="relative">
-            <ReviewCard review={reviews[activeIndex]} index={activeIndex} />
+            <ReviewCard
+              review={reviews[activeIndex]}
+              index={activeIndex}
+              isDesktop={isDesktop}
+            />
 
             <button
               type="button"
               onClick={previousReview}
               aria-label="Avis précédent"
-              className="absolute -left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+              className="absolute -left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-sm transition hover:border-blue-400 hover:text-blue-400 md:backdrop-blur-xl"
             >
               <FiChevronLeft aria-hidden="true" />
             </button>
@@ -120,7 +131,7 @@ export default function Testimonials() {
               type="button"
               onClick={nextReview}
               aria-label="Avis suivant"
-              className="absolute -right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400"
+              className="absolute -right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-black/80 text-xl text-white shadow-lg backdrop-blur-sm transition hover:border-blue-400 hover:text-blue-400 md:backdrop-blur-xl"
             >
               <FiChevronRight aria-hidden="true" />
             </button>
@@ -147,7 +158,12 @@ export default function Testimonials() {
         <div className="hidden gap-5 sm:gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
 
           {reviews.map((review, index) => (
-            <ReviewCard key={review.name} review={review} index={index} />
+            <ReviewCard
+              key={review.name}
+              review={review}
+              index={index}
+              isDesktop={isDesktop}
+            />
           ))}
 
         </div>

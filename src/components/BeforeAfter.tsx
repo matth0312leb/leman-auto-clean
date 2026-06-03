@@ -2,14 +2,25 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 export default function BeforeAfter() {
   const beforeAfterItems = siteImages.beforeAfter;
   const [activeIndex, setActiveIndex] = useState(0);
+  const isDesktop = useIsDesktop();
   const activeItem = beforeAfterItems[activeIndex];
+
+  useEffect(() => {
+    beforeAfterItems.forEach((item) => {
+      if (!item.src) return;
+
+      const preloadImage = new window.Image();
+      preloadImage.src = item.src;
+    });
+  }, [beforeAfterItems]);
 
   const previousItem = () => {
     setActiveIndex((current) =>
@@ -31,9 +42,9 @@ export default function BeforeAfter() {
       <div className="mx-auto max-w-6xl">
 
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
+          initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: isDesktop ? 0.7 : 0.25 }}
           viewport={{ once: true, amount: 0.3 }}
           className="mb-10 text-center md:mb-12 lg:mb-14"
         >
@@ -47,9 +58,9 @@ export default function BeforeAfter() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: isDesktop ? 0.96 : 1 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: isDesktop ? 0.7 : 0.25 }}
           viewport={{ once: true, amount: 0.25 }}
           className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl lg:max-w-4xl xl:max-w-[860px]"
         >
@@ -59,9 +70,10 @@ export default function BeforeAfter() {
                 src={activeItem.src}
                 alt={activeItem.alt ?? ""}
                 fill
-                quality={95}
+                priority
+                quality={86}
                 sizes="(min-width: 1024px) 960px, 100vw"
-                className="object-cover object-center transition duration-700 group-hover:scale-[1.015]"
+                className="object-cover object-center transition duration-700 md:group-hover:scale-[1.015]"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.18),rgba(0,0,0,0.95)_62%)] px-6 text-center">

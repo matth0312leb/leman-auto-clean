@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiMessageCircle } from "react-icons/fi";
 import { useState } from "react";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const faqs = [
   {
@@ -45,6 +46,7 @@ const faqs = [
 
 export default function FAQAssistant() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const isDesktop = useIsDesktop();
 
   return (
     <section
@@ -55,11 +57,11 @@ export default function FAQAssistant() {
 
       <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-12">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: isDesktop ? 28 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: isDesktop ? 0.55 : 0.25 }}
           viewport={{ once: true, amount: 0.25 }}
-          className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8 lg:sticky lg:top-28"
+          className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8 md:backdrop-blur-xl lg:sticky lg:top-28"
         >
           <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-2xl text-white shadow-lg shadow-blue-500/25">
             <FiMessageCircle aria-hidden="true" />
@@ -94,11 +96,14 @@ export default function FAQAssistant() {
             return (
               <motion.div
                 key={item.question}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: isDesktop ? 24 : 0 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: index * 0.05 }}
+                transition={{
+                  duration: isDesktop ? 0.45 : 0.22,
+                  delay: isDesktop ? index * 0.05 : 0,
+                }}
                 viewport={{ once: true, amount: 0.25 }}
-                className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl"
+                className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm md:backdrop-blur-xl"
               >
                 <button
                   type="button"

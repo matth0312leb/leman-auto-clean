@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const stats = [
   {
@@ -22,6 +23,8 @@ const stats = [
 ];
 
 export default function Stats() {
+  const isDesktop = useIsDesktop();
+
   return (
     <section className="relative overflow-x-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-24">
 
@@ -33,11 +36,14 @@ export default function Stats() {
         {stats.map((stat, index) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: isDesktop ? 32 : 0 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: index * 0.08 }}
+            transition={{
+              duration: isDesktop ? 0.45 : 0.25,
+              delay: isDesktop ? index * 0.08 : 0,
+            }}
             viewport={{ once: true, amount: 0.25 }}
-            className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-xl sm:p-6 lg:p-10"
+            className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm sm:p-6 md:backdrop-blur-xl lg:p-10"
           >
 
             <h2 className="mb-2 break-words text-2xl font-black text-blue-400 sm:text-3xl lg:mb-4 lg:text-5xl">

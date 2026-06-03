@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const items = [
   {
@@ -22,6 +23,8 @@ const items = [
 ];
 
 export default function WhyUs() {
+  const isDesktop = useIsDesktop();
+
   return (
     <section className="relative overflow-x-hidden bg-black px-5 py-14 text-white sm:px-6 sm:py-16 md:py-20 lg:py-24">
 
@@ -48,11 +51,14 @@ export default function WhyUs() {
           {items.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{
+                duration: isDesktop ? 0.5 : 0.25,
+                delay: isDesktop ? index * 0.1 : 0,
+              }}
               viewport={{ once: true, amount: 0.25 }}
-              className="flex min-w-0 gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl transition hover:border-blue-400/40 sm:p-5"
+              className="flex min-w-0 gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-blue-400/40 sm:p-5 md:backdrop-blur-xl"
             >
 
               <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-400 shadow-[0_0_25px_rgba(34,211,238,1)]" />
@@ -73,9 +79,12 @@ export default function WhyUs() {
         </div>
 
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: isDesktop ? 24 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{
+            duration: isDesktop ? 0.5 : 0.25,
+            delay: isDesktop ? 0.2 : 0,
+          }}
           viewport={{ once: true, amount: 0.25 }}
           className="mx-auto mt-5 max-w-5xl rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-center text-sm leading-relaxed text-zinc-300 sm:text-base"
         >

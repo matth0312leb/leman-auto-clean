@@ -106,7 +106,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   key={contact.label}
                   href={contact.href}
                   target={contact.href.startsWith("http") ? "_blank" : undefined}
-                  className={`group relative flex min-w-0 items-center gap-4 rounded-3xl border p-5 backdrop-blur-xl transition ${
+                  className={`group relative flex min-w-0 items-center gap-4 rounded-3xl border p-5 backdrop-blur-sm transition md:backdrop-blur-xl ${
                     isHighlighted
                       ? "border-green-400/45 bg-green-500/[0.08] shadow-lg shadow-green-500/10 hover:border-green-400/70"
                       : "border-white/10 bg-white/[0.06] hover:border-blue-400/50"
@@ -139,7 +139,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <form
             action="https://formsubmit.co/lemanautoclean@gmail.com"
             method="POST"
-            className="mt-10 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl sm:p-7 md:p-8"
+            className="mt-10 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-7 md:p-8 md:backdrop-blur-xl"
           >
             <input type="hidden" name="_subject" value="Nouvelle demande Léman Auto Clean" />
             <input type="hidden" name="_captcha" value="false" />

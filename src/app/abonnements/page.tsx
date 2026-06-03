@@ -111,8 +111,8 @@ export default function AbonnementsPage() {
               key={plan.name}
               className={`relative overflow-visible rounded-3xl border p-5 sm:p-7 ${
                 plan.featured
-                  ? "border-blue-400/45 bg-blue-500/[0.1] shadow-2xl shadow-blue-500/15 backdrop-blur-xl"
-                  : "border-white/10 bg-zinc-950/85 shadow-2xl shadow-blue-500/5 backdrop-blur-xl"
+                  ? "border-blue-400/45 bg-blue-500/[0.1] shadow-2xl shadow-blue-500/15 backdrop-blur-sm md:backdrop-blur-xl"
+                  : "border-white/10 bg-zinc-950/85 shadow-2xl shadow-blue-500/5 backdrop-blur-sm md:backdrop-blur-xl"
               }`}
             >
               {plan.featured && (
@@ -186,7 +186,7 @@ export default function AbonnementsPage() {
               return (
                 <article
                   key={condition.title}
-                  className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-xl transition hover:border-blue-400/40 sm:p-6"
+                  className="rounded-3xl border border-white/10 bg-zinc-950/85 p-5 shadow-2xl shadow-blue-500/5 backdrop-blur-sm transition hover:border-blue-400/40 sm:p-6 md:backdrop-blur-xl"
                 >
                   <div className="mb-5 grid h-12 w-12 place-items-center rounded-full bg-blue-500/15 text-2xl text-blue-400">
                     <Icon aria-hidden="true" />
@@ -204,7 +204,7 @@ export default function AbonnementsPage() {
             })}
           </div>
 
-          <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl sm:p-7">
+          <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-7 md:backdrop-blur-xl">
             <div className="grid gap-4 md:grid-cols-2">
               {notes.map((note) => (
                 <div key={note} className="flex gap-3 text-sm leading-relaxed text-zinc-300 sm:text-base">
