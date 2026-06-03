@@ -59,10 +59,6 @@ function ReviewCard({
         {review.name}
       </h3>
 
-      <p className="mt-2 text-sm text-zinc-500">
-        {review.date}
-      </p>
-
     </motion.div>
   );
 }
