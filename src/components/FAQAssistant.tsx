@@ -8,9 +8,9 @@ import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const faqs = [
   {
-    question: "Faites-vous du nettoyage à domicile ?",
+    question: "Avez-vous besoin d'eau et d'électricité chez le client ?",
     answer:
-      "Oui. Nous intervenons directement chez vous ou sur votre lieu de travail, uniquement sur rendez-vous, selon les conditions d'accès au véhicule.",
+      "Oui. Pour intervenir dans de bonnes conditions, il faut idéalement une prise électrique à moins de 20 mètres du véhicule. En cas de lavage extérieur, un robinet d'eau accessible est également nécessaire.",
   },
   {
     question: "Intervenez-vous à Thonon-les-Bains ?",
