@@ -22,9 +22,9 @@ export default function Footer() {
           <Image
             src="/logo.png"
             alt="Léman Auto Clean"
-            width={260}
-            height={130}
-            className="mb-6 h-auto w-[220px] max-w-full object-contain sm:w-[260px]"
+            width={320}
+            height={120}
+            className="mb-6 h-auto w-[240px] max-w-full object-contain sm:w-[300px]"
           />
 
           <div className="max-w-sm space-y-4 text-sm leading-relaxed text-zinc-400 sm:text-base">

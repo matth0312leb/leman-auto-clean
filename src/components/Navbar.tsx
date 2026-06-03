@@ -35,9 +35,9 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Léman Auto Clean"
-            width={160}
-            height={80}
-            className="h-11 w-auto object-contain sm:h-14 md:h-16"
+            width={266}
+            height={100}
+            className="h-10 w-auto object-contain sm:h-12 md:h-14"
             priority
           />
         </Link>
