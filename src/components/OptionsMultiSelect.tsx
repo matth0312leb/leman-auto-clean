@@ -5,9 +5,13 @@ import { FiChevronDown } from "react-icons/fi";
 
 type OptionsMultiSelectProps = {
   options: string[];
+  onChange?: (selectedOptions: string[]) => void;
 };
 
-export default function OptionsMultiSelect({ options }: OptionsMultiSelectProps) {
+export default function OptionsMultiSelect({
+  options,
+  onChange,
+}: OptionsMultiSelectProps) {
   const [open, setOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
@@ -24,11 +28,14 @@ export default function OptionsMultiSelect({ options }: OptionsMultiSelectProps)
   }, [selectedOptions]);
 
   const toggleOption = (option: string) => {
-    setSelectedOptions((current) =>
-      current.includes(option)
+    setSelectedOptions((current) => {
+      const next = current.includes(option)
         ? current.filter((item) => item !== option)
-        : [...current, option],
-    );
+        : [...current, option];
+
+      onChange?.(next);
+      return next;
+    });
   };
 
   return (

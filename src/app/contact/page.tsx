@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import OptionsMultiSelect from "@/components/OptionsMultiSelect";
+import ContactForm from "@/components/ContactForm";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FiMail, FiPhone } from "react-icons/fi";
 
@@ -52,15 +52,6 @@ const contacts = [
     href: "https://instagram.com/LemanAutoClean",
     icon: FaInstagram,
   },
-];
-
-const options = [
-  "Poils d'animaux",
-  "Shampoing des sièges, 5 places",
-  "Nourrissage des cuirs",
-  "Nettoyage approfondi du coffre",
-  "Décontamination carrosserie",
-  "Cire hydrophobe / protectrice",
 ];
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
@@ -136,161 +127,10 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             })}
           </div>
 
-          <form
-            action="https://formsubmit.co/lemanautoclean@gmail.com"
-            method="POST"
-            className="mt-10 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-7 md:p-8 md:backdrop-blur-xl"
-          >
-            <input type="hidden" name="_subject" value="Nouvelle demande Léman Auto Clean" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-
-            <div className="mb-8">
-              <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
-                FORMULAIRE
-              </p>
-
-              <h2 className="text-2xl font-black uppercase sm:text-3xl md:text-4xl">
-                Demande de contact
-              </h2>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="flex flex-col">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Nom *
-                </span>
-                <input
-                  required
-                  name="Nom"
-                  type="text"
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                  placeholder="Votre nom"
-                />
-              </label>
-
-              <label className="flex flex-col">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Prénom
-                </span>
-                <input
-                  name="Prénom"
-                  type="text"
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                  placeholder="Votre prénom"
-                />
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  E-mail *
-                </span>
-                <input
-                  required
-                  name="E-mail"
-                  type="email"
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                  placeholder="votre@email.com"
-                />
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Numéro de téléphone
-                </span>
-                <input
-                  name="Numéro de téléphone"
-                  type="tel"
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                  placeholder="+33 6 ..."
-                />
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Type de véhicule *
-                </span>
-                <select
-                  required
-                  name="Type de véhicule"
-                  className="h-[50px] w-full rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none transition focus:border-blue-400"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    À choisir
-                  </option>
-                  <option value="Citadine">Citadine</option>
-                  <option value="Berline">Berline</option>
-                  <option value="SUV / Break">SUV / Break</option>
-                  <option value="Monospace">Monospace</option>
-                </select>
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Nombre de véhicules
-                </span>
-                <input
-                  name="Nombre de véhicules"
-                  type="number"
-                  min="1"
-                  defaultValue="1"
-                  className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                />
-              </label>
-
-              <label className="flex flex-col">
-                <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                  Prestation souhaitée *
-                </span>
-                <select
-                  required
-                  name="Prestation souhaitée"
-                  defaultValue={selectedFormula}
-                  className="h-[50px] w-full rounded-2xl border border-white/10 bg-black/40 px-4 text-white outline-none transition focus:border-blue-400"
-                >
-                  <option value="" disabled>
-                    À choisir
-                  </option>
-                  <option value="Essentiel">Essentiel</option>
-                  <option value="Équilibre">Équilibre</option>
-                  <option value="Élégance">Élégance</option>
-                  <option value="Abonnement intérieur">Abonnement intérieur</option>
-                  <option value="Abonnement intérieur + extérieur">
-                    Abonnement intérieur + extérieur
-                  </option>
-                </select>
-              </label>
-
-              <OptionsMultiSelect options={options} />
-            </div>
-
-            <label className="mt-5 block">
-              <span className="mb-2 block text-sm font-semibold text-zinc-300">
-                Commentaire
-              </span>
-              <textarea
-                name="Commentaire"
-                rows={5}
-                className="w-full resize-none rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
-                placeholder="Décrivez votre véhicule, son état actuel, les options souhaitées... Si vous avez plusieurs véhicules, précisez les modèles et prestations souhaitées pour chacun."
-              />
-            </label>
-
-            <button
-              type="submit"
-              className="mt-6 w-full rounded-full bg-blue-500 px-8 py-4 font-semibold text-white transition hover:bg-blue-400 sm:w-auto"
-            >
-              Envoyer ma demande
-            </button>
-
-            <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-              * Champs obligatoires. Vos données ne sont jamais revendues.
-              Réponse sous 24h.
-            </p>
-          </form>
+          <ContactForm selectedFormula={selectedFormula} />
         </div>
       </section>
+
       <Footer />
     </main>
   );

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
@@ -34,6 +34,7 @@ function GalleryImage({
 export default function Gallery() {
   const images = siteImages.gallery;
   const [activeIndex, setActiveIndex] = useState(0);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
   const isDesktop = useIsDesktop();
 
   useEffect(() => {
@@ -43,16 +44,30 @@ export default function Gallery() {
     });
   }, [images]);
 
+  const goToImage = (index: number) => {
+    setActiveIndex(index);
+    mobileTrackRef.current?.scrollTo({
+      left: mobileTrackRef.current.clientWidth * index,
+      behavior: "smooth",
+    });
+  };
+
   const previousImage = () => {
-    setActiveIndex((current) =>
-      current === 0 ? images.length - 1 : current - 1,
-    );
+    const nextIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1;
+    goToImage(nextIndex);
   };
 
   const nextImage = () => {
-    setActiveIndex((current) =>
-      current === images.length - 1 ? 0 : current + 1,
-    );
+    const nextIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
+    goToImage(nextIndex);
+  };
+
+  const syncMobileIndex = () => {
+    const track = mobileTrackRef.current;
+    if (!track) return;
+
+    const nextIndex = Math.round(track.scrollLeft / track.clientWidth);
+    setActiveIndex(nextIndex);
   };
 
   return (
@@ -60,26 +75,19 @@ export default function Gallery() {
       id="realisations"
       className="relative overflow-x-hidden bg-black px-5 py-18 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
-
-      {/* Glow */}
       <div className="absolute right-[-120px] top-1/2 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:right-0 md:h-[400px] md:w-[400px]" />
 
       <div className="relative mx-auto max-w-7xl">
-
-        {/* Header */}
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16 lg:mb-20">
-
           <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
-            GALERIE
+            Galerie
           </p>
 
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Aperçu de nos réalisations
           </h2>
-
         </div>
 
-        {/* Mobile carousel */}
         <motion.div
           initial={{ opacity: 0, y: isDesktop ? 40 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +96,20 @@ export default function Gallery() {
           className="lg:hidden"
         >
           <div className="relative">
-            <GalleryImage image={images[activeIndex]} priority />
+            <div
+              ref={mobileTrackRef}
+              onScroll={syncMobileIndex}
+              className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {images.map((image, index) => (
+                <div
+                  key={image.src}
+                  className="min-w-full snap-center px-0.5"
+                >
+                  <GalleryImage image={image} priority={index === 0} />
+                </div>
+              ))}
+            </div>
 
             <button
               type="button"
@@ -114,7 +135,7 @@ export default function Gallery() {
               <button
                 key={image.src}
                 type="button"
-                onClick={() => setActiveIndex(index)}
+                onClick={() => goToImage(index)}
                 aria-label={`Afficher l'image ${index + 1}`}
                 className={`h-2.5 rounded-full transition ${
                   activeIndex === index
@@ -126,9 +147,7 @@ export default function Gallery() {
           </div>
         </motion.div>
 
-        {/* Desktop grid */}
         <div className="hidden gap-5 sm:gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
-
           {images.map((image, index) => (
             <motion.div
               key={image.src}
@@ -143,7 +162,6 @@ export default function Gallery() {
               <GalleryImage image={image} />
             </motion.div>
           ))}
-
         </div>
       </div>
     </section>

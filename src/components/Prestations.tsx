@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiArrowRight, FiCheck, FiMinus, FiPlus } from "react-icons/fi";
+import { FiArrowRight, FiCheck, FiInfo, FiMinus, FiPlus } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const prestations = [
@@ -71,38 +71,73 @@ const prestations = [
 ];
 
 const options = [
-  { category: "Intérieur", label: "Poils d'animaux", price: "10 à 20€" },
+  {
+    category: "Intérieur",
+    label: "Poils d'animaux",
+    price: "10 à 20€",
+    detail:
+      "Aspiration renforcée avec brosses adaptées pour retirer les poils incrustés dans les tissus, tapis et moquettes.",
+  },
   {
     category: "Intérieur",
     label: "Shampoing des sièges, 5 places",
     note: "Siège à l'unité : 20€",
     price: "60€",
+    detail:
+      "Nettoyage ciblé des taches avec produits respectueux des matières, puis extraction et séchage soigné.",
   },
-  { category: "Intérieur", label: "Nourrissage des cuirs", price: "20€" },
-  { category: "Intérieur", label: "Nettoyage approfondi du coffre", price: "10€" },
-  { category: "Extérieur", label: "Décontamination carrosserie", price: "20€" },
-  { category: "Protection", label: "Cire hydrophobe / protectrice", price: "20€" },
+  {
+    category: "Intérieur",
+    label: "Nourrissage des cuirs",
+    price: "20€",
+    detail:
+      "Soin nourrissant appliqué sur les cuirs pour raviver l'aspect, limiter le dessèchement et conserver un toucher propre.",
+  },
+  {
+    category: "Intérieur",
+    label: "Nettoyage approfondi du coffre",
+    price: "10€",
+    detail:
+      "Aspiration et nettoyage plus poussé du coffre, idéal après courses, transport d'objets, animaux ou activités extérieures.",
+  },
+  {
+    category: "Extérieur",
+    label: "Décontamination carrosserie",
+    price: "20€",
+    detail:
+      "Retrait des contaminants collés à la peinture pour retrouver une carrosserie plus lisse avant la finition.",
+  },
+  {
+    category: "Protection",
+    label: "Cire hydrophobe / protectrice",
+    price: "20€",
+    detail:
+      "Protection rapide qui aide l'eau à perler, facilite l'entretien et apporte une finition plus brillante.",
+  },
 ];
 
 export default function Prestations() {
   const [active, setActive] = useState<number | null>(null);
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const [activeOption, setActiveOption] = useState<number | null>(null);
   const isDesktop = useIsDesktop();
+
+  const toggleOptions = () => {
+    setOptionsOpen((current) => {
+      if (current) setActiveOption(null);
+      return !current;
+    });
+  };
 
   return (
     <section
       id="prestations"
       className="relative overflow-x-hidden bg-black px-5 py-16 text-white sm:px-6 sm:py-20 md:py-28 lg:py-32"
     >
-
-      {/* Glow */}
       <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl md:h-[500px] md:w-[500px]" />
 
       <div className="relative mx-auto max-w-7xl">
-
-        {/* Header */}
         <div className="mx-auto mb-9 max-w-3xl text-center md:mb-16 lg:mb-20">
-
           <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             PRESTATIONS PREMIUM
           </p>
@@ -110,12 +145,9 @@ export default function Prestations() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Nos Services
           </h2>
-
         </div>
 
-        {/* Cards */}
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">
-
           {prestations.map((item, index) => {
             const isActive = active === index;
             const isHighlighted = "highlighted" in item && item.highlighted;
@@ -153,7 +185,6 @@ export default function Prestations() {
                   </div>
                 )}
 
-                {/* Hover glow */}
                 <div
                   className={`pointer-events-none absolute inset-0 transition duration-500 ${
                     isHighlighted ? "opacity-100" : "opacity-0 group-hover:opacity-100"
@@ -163,7 +194,6 @@ export default function Prestations() {
                 </div>
 
                 <div className="relative flex min-h-full min-w-0 flex-col">
-                  {/* Badge */}
                   <div
                     className={`mb-4 inline-block max-w-fit rounded-full border px-3 py-2 text-[10px] font-semibold tracking-[0.22em] sm:mb-5 sm:px-4 sm:text-[11px] md:mb-7 md:text-xs md:tracking-[0.3em] ${
                       isHighlighted
@@ -174,19 +204,15 @@ export default function Prestations() {
                     {item.badge}
                   </div>
 
-                  {/* Title */}
                   <h3 className="mb-3 break-words text-2xl font-black uppercase sm:mb-4 sm:text-3xl md:text-[2rem]">
                     {item.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="mb-6 min-h-0 text-sm leading-relaxed text-zinc-400 sm:mb-7 sm:text-base lg:mb-10 lg:min-h-[84px]">
                     {item.description}
                   </p>
 
-                  {/* Bottom */}
                   <div className="mt-auto flex flex-col items-start gap-4 min-[380px]:flex-row min-[380px]:items-end min-[380px]:justify-between sm:gap-5">
-
                     <div className="min-w-0">
                       <p className="text-xs uppercase tracking-widest text-zinc-500 sm:text-sm">
                         À partir de
@@ -210,7 +236,6 @@ export default function Prestations() {
                       <span>Réserver</span>
                       <FiArrowRight aria-hidden="true" />
                     </Link>
-
                   </div>
 
                   <AnimatePresence initial={false}>
@@ -223,7 +248,6 @@ export default function Prestations() {
                         className="overflow-hidden"
                       >
                         <div className="mt-6 border-t border-white/10 pt-5 text-sm text-zinc-300 sm:text-base">
-
                           <div className="mb-5">
                             <p className="mb-3 text-xs uppercase tracking-[0.22em] text-zinc-500">
                               Tarifs selon véhicule
@@ -263,11 +287,9 @@ export default function Prestations() {
                     )}
                   </AnimatePresence>
                 </div>
-
               </motion.div>
             );
           })}
-
         </div>
 
         <motion.div
@@ -297,7 +319,6 @@ export default function Prestations() {
           </div>
         </motion.div>
 
-        {/* Options */}
         <motion.div
           initial={{ opacity: 0, y: isDesktop ? 36 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -306,11 +327,11 @@ export default function Prestations() {
           role="button"
           tabIndex={0}
           aria-expanded={optionsOpen}
-          onClick={() => setOptionsOpen((current) => !current)}
+          onClick={toggleOptions}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
-              setOptionsOpen((current) => !current);
+              toggleOptions();
             }
           }}
           className="mt-14 cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:mt-16 sm:p-7 md:backdrop-blur-xl lg:mt-20 lg:p-8"
@@ -325,7 +346,6 @@ export default function Prestations() {
                 À ajouter selon vos besoins
               </h3>
             </div>
-
           </div>
 
           <div className="mt-6 flex justify-start md:justify-end">
@@ -349,32 +369,80 @@ export default function Prestations() {
                 className="overflow-hidden"
               >
                 <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-                  {options.map((option) => (
-                    <div
-                      key={`${option.category}-${option.label}`}
-                      className="min-w-0 rounded-2xl border border-white/10 bg-black/30 p-4"
-                    >
-                      <div className="mb-4 flex items-start justify-between gap-3">
-                        <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-400">
-                          {option.category}
-                        </span>
+                  {options.map((option, index) => {
+                    const isOptionActive = activeOption === index;
 
-                        <span className="shrink-0 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white">
-                          {option.price}
-                        </span>
-                      </div>
+                    return (
+                      <div
+                        key={`${option.category}-${option.label}`}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={isOptionActive}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setActiveOption(isOptionActive ? null : index);
+                        }}
+                        onKeyDown={(event) => {
+                          event.stopPropagation();
+                          if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            setActiveOption(isOptionActive ? null : index);
+                          }
+                        }}
+                        onMouseEnter={() => {
+                          if (isDesktop) setActiveOption(index);
+                        }}
+                        onMouseLeave={() => {
+                          if (isDesktop) setActiveOption(null);
+                        }}
+                        className={`min-w-0 cursor-pointer rounded-2xl border bg-black/30 p-4 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${
+                          isOptionActive
+                            ? "border-blue-400/50 bg-blue-500/[0.08]"
+                            : "border-white/10 hover:border-white/20"
+                        }`}
+                      >
+                        <div className="mb-4 flex items-start justify-between gap-3">
+                          <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-400">
+                            {option.category}
+                          </span>
 
-                      <p className="text-sm leading-relaxed text-zinc-300 sm:text-base">
-                        {option.label}
-                      </p>
+                          <span className="shrink-0 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white">
+                            {option.price}
+                          </span>
+                        </div>
 
-                      {"note" in option && (
-                        <p className="mt-2 text-xs leading-relaxed text-zinc-500">
-                          {option.note}
+                        <p className="text-sm leading-relaxed text-zinc-300 sm:text-base">
+                          {option.label}
                         </p>
-                      )}
-                    </div>
-                  ))}
+
+                        {"note" in option && (
+                          <p className="mt-2 text-xs leading-relaxed text-zinc-500">
+                            {option.note}
+                          </p>
+                        )}
+
+                        <AnimatePresence initial={false}>
+                          {isOptionActive && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -4, height: 0 }}
+                              animate={{ opacity: 1, y: 0, height: "auto" }}
+                              exit={{ opacity: 0, y: -4, height: 0 }}
+                              transition={{ duration: 0.2, ease: "easeOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="mt-4 rounded-2xl border border-white/10 bg-black/35 p-3 text-xs leading-relaxed text-zinc-300 shadow-lg shadow-blue-500/5">
+                                <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-300">
+                                  <FiInfo aria-hidden="true" />
+                                  <span>Détail</span>
+                                </div>
+                                {option.detail}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <p className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-zinc-400">
