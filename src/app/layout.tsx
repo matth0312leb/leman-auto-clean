@@ -166,10 +166,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Faites-vous du nettoyage auto à domicile ?",
+      name: "Avez-vous besoin d'eau et d'électricité chez le client ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Oui. Léman Auto Clean réalise du nettoyage auto à domicile sur rendez-vous, directement chez vous ou sur votre lieu de travail.",
+        text: "Oui. Pour intervenir dans de bonnes conditions, il faut idéalement une prise électrique à moins de 20 mètres du véhicule. En cas de lavage extérieur, un robinet d'eau accessible est également nécessaire.",
       },
     },
     {
