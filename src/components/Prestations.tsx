@@ -129,6 +129,8 @@ export default function Prestations() {
     });
   };
 
+  const selectedOption = activeOption !== null ? options[activeOption] : null;
+
   return (
     <section
       id="prestations"
@@ -421,28 +423,45 @@ export default function Prestations() {
                           </p>
                         )}
 
-                        <AnimatePresence initial={false}>
-                          {isOptionActive && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -4, height: 0 }}
-                              animate={{ opacity: 1, y: 0, height: "auto" }}
-                              exit={{ opacity: 0, y: -4, height: 0 }}
-                              transition={{ duration: 0.2, ease: "easeOut" }}
-                              className="overflow-hidden"
-                            >
-                              <div className="mt-4 rounded-2xl border border-white/10 bg-black/35 p-3 text-xs leading-relaxed text-zinc-300 shadow-lg shadow-blue-500/5">
-                                <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-300">
-                                  <FiInfo aria-hidden="true" />
-                                  <span>Détail</span>
-                                </div>
-                                {option.detail}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
                       </div>
                     );
                   })}
+                </div>
+
+                <div
+                  className="mt-4 min-h-[104px]"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <AnimatePresence mode="wait">
+                    {selectedOption ? (
+                      <motion.div
+                        key={selectedOption.label}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="rounded-2xl border border-blue-400/20 bg-black/35 p-4 text-sm leading-relaxed text-zinc-300 shadow-lg shadow-blue-500/5"
+                      >
+                        <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-300">
+                          <FiInfo aria-hidden="true" />
+                          <span>{selectedOption.label}</span>
+                        </div>
+                        {selectedOption.detail}
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="options-help"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm leading-relaxed text-zinc-500"
+                      >
+                        Chaque option est proposée en complément selon l'état du
+                        véhicule, la matière à traiter et le niveau de finition souhaité.
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 <p className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-zinc-400">
