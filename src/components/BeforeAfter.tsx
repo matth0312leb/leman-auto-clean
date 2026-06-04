@@ -10,7 +10,8 @@ import { useIsDesktop } from "@/hooks/useIsDesktop";
 export default function BeforeAfter() {
   const beforeAfterItems = siteImages.beforeAfter;
   const [activeIndex, setActiveIndex] = useState(0);
-  const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
   const isDesktop = useIsDesktop();
   const activeItem = beforeAfterItems[activeIndex];
 
@@ -25,10 +26,6 @@ export default function BeforeAfter() {
 
   const goToItem = (index: number) => {
     setActiveIndex(index);
-    mobileTrackRef.current?.scrollTo({
-      left: mobileTrackRef.current.clientWidth * index,
-      behavior: "smooth",
-    });
   };
 
   const previousItem = () => {
@@ -45,12 +42,25 @@ export default function BeforeAfter() {
     goToItem(nextIndex);
   };
 
-  const syncMobileIndex = () => {
-    const track = mobileTrackRef.current;
-    if (!track) return;
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
 
-    const nextIndex = Math.round(track.scrollLeft / track.clientWidth);
-    setActiveIndex(nextIndex);
+    touchStartXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartXRef.current;
+    const deltaY = touch.clientY - touchStartYRef.current;
+
+    if (Math.abs(deltaY) > Math.abs(deltaX) || Math.abs(deltaX) < 45) return;
+
+    if (deltaX < 0) {
+      nextItem();
+    } else {
+      previousItem();
+    }
   };
 
   return (
@@ -82,15 +92,17 @@ export default function BeforeAfter() {
           viewport={{ once: true, amount: 0.25 }}
           className="relative mx-auto overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl md:hidden"
         >
-          <div
-            ref={mobileTrackRef}
-            onScroll={syncMobileIndex}
-            className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
+          <div className="overflow-hidden">
+            <div
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              className="flex touch-pan-y transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+            >
             {beforeAfterItems.map((item, index) => (
               <div
                 key={item.title}
-                className="relative aspect-[1331/1181] min-w-full snap-center overflow-hidden bg-black"
+                className="relative aspect-[1331/1181] min-w-full overflow-hidden bg-black"
               >
                 {item.src ? (
                   <Image
@@ -116,6 +128,7 @@ export default function BeforeAfter() {
                 )}
               </div>
             ))}
+            </div>
           </div>
 
           <button
