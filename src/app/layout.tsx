@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   creator: "Léman Auto Clean",
   publisher: "Léman Auto Clean",
   category: "Automotive",
+  verification: {
+    google: "bLSYr0bDxe2ADWqGfF3iu7K-HYQZwTOGZvrdDqjEgr4",
+  },
   alternates: {
     canonical: "/",
   },
