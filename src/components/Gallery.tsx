@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type TouchEvent } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
@@ -34,7 +34,8 @@ function GalleryImage({
 export default function Gallery() {
   const images = siteImages.gallery;
   const [activeIndex, setActiveIndex] = useState(0);
-  const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
   const isDesktop = useIsDesktop();
 
   useEffect(() => {
@@ -46,10 +47,6 @@ export default function Gallery() {
 
   const goToImage = (index: number) => {
     setActiveIndex(index);
-    mobileTrackRef.current?.scrollTo({
-      left: mobileTrackRef.current.clientWidth * index,
-      behavior: "smooth",
-    });
   };
 
   const previousImage = () => {
@@ -62,12 +59,25 @@ export default function Gallery() {
     goToImage(nextIndex);
   };
 
-  const syncMobileIndex = () => {
-    const track = mobileTrackRef.current;
-    if (!track) return;
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
 
-    const nextIndex = Math.round(track.scrollLeft / track.clientWidth);
-    setActiveIndex(nextIndex);
+    touchStartXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartXRef.current;
+    const deltaY = touch.clientY - touchStartYRef.current;
+
+    if (Math.abs(deltaY) > Math.abs(deltaX) || Math.abs(deltaX) < 45) return;
+
+    if (deltaX < 0) {
+      nextImage();
+    } else {
+      previousImage();
+    }
   };
 
   return (
@@ -96,19 +106,19 @@ export default function Gallery() {
           className="lg:hidden"
         >
           <div className="relative">
-            <div
-              ref={mobileTrackRef}
-              onScroll={syncMobileIndex}
-              className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {images.map((image, index) => (
-                <div
-                  key={image.src}
-                  className="min-w-full snap-center px-0.5"
-                >
-                  <GalleryImage image={image} priority={index === 0} />
-                </div>
-              ))}
+            <div className="overflow-hidden">
+              <div
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                className="flex touch-pan-y transition-transform duration-300 ease-out"
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+              >
+                {images.map((image, index) => (
+                  <div key={image.src} className="min-w-full px-0.5">
+                    <GalleryImage image={image} priority={index === 0} />
+                  </div>
+                ))}
+              </div>
             </div>
 
             <button
