@@ -30,6 +30,7 @@ export default async function EnvoyerPage({ searchParams }: Props) {
   const currency = params.devise === "CHF" ? "CHF" : "EUR";
   const amount = Math.max(0, Math.round(Number(params.montant) || 0));
   const code = (params.code ?? "").replace(/[^A-Z0-9-]/gi, "").slice(0, 20);
+  const ref = (params.ref ?? "").replace(/[^A-Z0-9-]/gi, "").slice(0, 20);
   const email = (params.email ?? "").slice(0, 120);
   const phone = whatsappNumber(params.tel ?? "");
   const buyer = (params.de ?? "").slice(0, 60);
@@ -77,7 +78,7 @@ export default async function EnvoyerPage({ searchParams }: Props) {
 
         <p className="mt-5 rounded-2xl border border-amber-400/30 bg-amber-500/10 p-4 text-sm leading-relaxed text-amber-100">
           Vérifie d&apos;abord sur Revolut que le paiement de <strong>{amountText}</strong> est
-          bien arrivé (avec le code <strong>{code}</strong> en note si possible).
+          bien arrivé, avec la référence <strong>{ref}</strong> en note si possible.
         </p>
 
         <div className="mt-6 flex flex-col gap-3">

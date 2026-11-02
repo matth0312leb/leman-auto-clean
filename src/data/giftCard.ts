@@ -20,6 +20,13 @@ export function generateGiftCode(): string {
   return `LAC-${chars.slice(0, 4).join("")}-${chars.slice(4).join("")}`;
 }
 
+/** Référence de commande (affichée au client pour la note du paiement) : CMD-XXXXX. */
+export function generateOrderRef(): string {
+  const values = new Uint32Array(5);
+  crypto.getRandomValues(values);
+  return `CMD-${Array.from(values, (value) => CODE_ALPHABET[value % CODE_ALPHABET.length]).join("")}`;
+}
+
 export function addMonths(date: Date, months: number): Date {
   const result = new Date(date);
   result.setMonth(result.getMonth() + months);

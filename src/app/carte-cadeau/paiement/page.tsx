@@ -17,8 +17,8 @@ const texts = {
     eyebrow: "Commande enregistrée",
     title: "Votre carte cadeau",
     amount: "Montant à payer",
-    code: "Votre code",
-    how: "Sur la page Revolut, saisissez le montant ci-dessus et indiquez votre code en note du paiement.",
+    code: "Référence de commande",
+    how: "Sur la page Revolut, saisissez le montant ci-dessus et indiquez votre référence de commande en note du paiement.",
     button: "Payer avec Revolut",
     valid: "Dès réception de votre paiement, votre carte cadeau vous est envoyée en PDF par e-mail (généralement sous 24 h).",
     alt: "Pas de compte Revolut ? Vous pouvez payer par carte bancaire, Apple Pay ou Google Pay directement sur la page Revolut.",
@@ -27,8 +27,8 @@ const texts = {
     eyebrow: "Order received",
     title: "Your gift card",
     amount: "Amount to pay",
-    code: "Your code",
-    how: "On the Revolut page, enter the amount above and add your code as the payment note.",
+    code: "Order reference",
+    how: "On the Revolut page, enter the amount above and add your order reference as the payment note.",
     button: "Pay with Revolut",
     valid: "As soon as your payment is received, your gift card is emailed to you as a PDF (usually within 24 hours).",
     alt: "No Revolut account? You can pay by card, Apple Pay or Google Pay directly on the Revolut page.",
@@ -41,7 +41,7 @@ export default async function PaiementPage({ searchParams }: Props) {
   const t = texts[lang];
   const currency = params.devise === "CHF" ? "CHF" : "EUR";
   const amount = Math.max(0, Math.round(Number(params.montant) || 0));
-  const code = (params.code ?? "").replace(/[^A-Z0-9-]/gi, "").slice(0, 20);
+  const ref = (params.ref ?? "").replace(/[^A-Z0-9-]/gi, "").slice(0, 20);
 
 
   return (
@@ -62,7 +62,7 @@ export default async function PaiementPage({ searchParams }: Props) {
               <p className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.22em] text-zinc-400">
                 <FiCopy aria-hidden="true" /> {t.code}
               </p>
-              <p className="mt-2 select-all font-mono text-xl font-bold tracking-[0.12em] text-white">{code}</p>
+              <p className="mt-2 select-all font-mono text-xl font-bold tracking-[0.12em] text-white">{ref}</p>
             </div>
           </div>
 

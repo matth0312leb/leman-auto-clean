@@ -7,6 +7,7 @@ import {
   addMonths,
   formatGiftAmount,
   generateGiftCode,
+  generateOrderRef,
   giftCard,
 } from "@/data/giftCard";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -66,6 +67,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
   const [buyer, setBuyer] = useState("");
   const [message, setMessage] = useState("");
   const [code, setCode] = useState("");
+  const [orderRef, setOrderRef] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [sending, setSending] = useState(false);
@@ -73,6 +75,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
   // Code créé dans le navigateur (évite tout décalage avec le rendu serveur).
   useEffect(() => {
     setCode(generateGiftCode());
+    setOrderRef(generateOrderRef());
   }, []);
 
   const amount = selected === "other" ? Math.round(Number(custom) || 0) : selected;
@@ -93,18 +96,25 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     });
 
     const cardLink = `${base}/carte-cadeau/carte?${cardParams.toString()}`;
+    const payParams = new URLSearchParams({
+      ref: orderRef,
+      montant: String(amount),
+      devise: currency,
+      lang,
+    });
     const sendParams = new URLSearchParams(cardParams);
+    sendParams.set("ref", orderRef);
     sendParams.set("email", email);
     sendParams.set("tel", phone);
 
     return {
       validUntil,
-      next: `${base}/carte-cadeau/paiement?${cardParams.toString()}`,
-      nextPath: `/carte-cadeau/paiement?${cardParams.toString()}`,
+      // La page de paiement ne reçoit que la référence : le code de la carte reste secret.
+      nextPath: `/carte-cadeau/paiement?${payParams.toString()}`,
       cardLink,
       sendLink: `${base}/carte-cadeau/envoyer?${sendParams.toString()}`,
     };
-  }, [amount, buyer, code, currency, email, lang, message, phone, recipient]);
+  }, [amount, buyer, code, currency, email, lang, message, orderRef, phone, recipient]);
 
   // Envoi en arrière-plan puis ouverture de la page de paiement par le site lui-même
   // (ne dépend plus de la redirection du service de formulaire).
@@ -116,7 +126,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     // Envoi « simple » (format formulaire) : compatible avec keepalive sur tous les navigateurs.
     const data = new URLSearchParams();
     new FormData(event.currentTarget).forEach((value, key) => {
-      if (key !== "_next" && typeof value === "string") data.append(key, value);
+      if (typeof value === "string") data.append(key, value);
     });
 
     // « keepalive » : l'envoi continue même après le changement de page,
@@ -139,12 +149,13 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
       onSubmit={handleSubmit}
       className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-blue-500/10 backdrop-blur-xl sm:p-7 md:p-8"
     >
-      <input type="hidden" name="_subject" value={`${t.subject} ${code} – ${formatGiftAmount(amount, currency)}`} />
+      <input type="hidden" name="_subject" value={`${t.subject} ${orderRef} – ${formatGiftAmount(amount, currency)}`} />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_next" value={order.next} />
+
       <input type="hidden" name="Type de demande" value="Carte cadeau" />
-      <input type="hidden" name="Code carte cadeau" value={code} />
+      <input type="hidden" name="Référence de commande (note Revolut)" value={orderRef} />
+      <input type="hidden" name="Code carte cadeau (secret)" value={code} />
       <input type="hidden" name="Montant" value={formatGiftAmount(amount, currency)} />
       <input type="hidden" name="Valable jusqu'au" value={order.validUntil} />
       <input type="hidden" name="Langue" value={lang === "en" ? "Anglais" : "Français"} />
@@ -290,7 +301,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
 
       <button
         type="submit"
-        disabled={!validAmount || !code || sending}
+        disabled={!validAmount || !code || !orderRef || sending}
         className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {sending ? t.sending : t.submit}
