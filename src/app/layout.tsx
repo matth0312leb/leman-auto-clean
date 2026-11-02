@@ -5,8 +5,7 @@ import Navbar from "@/components/Navbar";
 import CookieConsent from "@/components/CookieConsent";
 import { CurrencyProvider } from "@/components/CurrencyProvider";
 import { getVisitorCurrency } from "@/lib/visitorCurrency";
-import { cookies } from "next/headers";
-import { getActivePromo, PROMO_COOKIE } from "@/data/promos";
+import { getActivePromo } from "@/data/promos";
 import "./globals.css";
 
 const siteUrl = "https://www.leman-autoclean.com";
@@ -203,9 +202,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const currency = await getVisitorCurrency();
-  const activePromo = getActivePromo();
-  const closedPromo = (await cookies()).get(PROMO_COOKIE)?.value;
-  const promo = activePromo && activePromo.id !== closedPromo ? activePromo : null;
+  const promo = getActivePromo();
 
   return (
     <html lang="fr" className="h-full antialiased">

@@ -1,23 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-import { FiArrowRight, FiGift, FiX } from "react-icons/fi";
-import { PROMO_COOKIE, type Promo } from "@/data/promos";
+import { FiArrowRight, FiGift } from "react-icons/fi";
+import type { Promo } from "@/data/promos";
 
 export default function PromoBanner({ promo, lang }: { promo: Promo; lang: "fr" | "en" }) {
-  const [open, setOpen] = useState(true);
   const t = promo[lang];
-
-  const close = () => {
-    // Fermé pour ce bandeau uniquement (un nouveau bandeau réapparaîtra).
-    document.cookie = `${PROMO_COOKIE}=${promo.id}; path=/; max-age=2592000; samesite=lax`;
-    setOpen(false);
-  };
 
   return (
     <AnimatePresence initial={false}>
-      {open && (
+      {(
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
@@ -33,7 +25,7 @@ export default function PromoBanner({ promo, lang }: { promo: Promo; lang: "fr" 
             <a
               href={t.lien}
               aria-label={`${t.texte} – ${t.bouton}`}
-              className="promo-marquee-wrap relative block overflow-hidden py-2 pr-10 sm:py-2.5"
+              className="promo-marquee-wrap relative block overflow-hidden py-2 sm:py-2.5"
             >
               {/* Deux copies identiques : le défilement boucle sans coupure */}
               <div className="promo-marquee flex w-max" aria-hidden="true">
@@ -59,18 +51,8 @@ export default function PromoBanner({ promo, lang }: { promo: Promo; lang: "fr" 
             </a>
 
             <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-blue-950 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-blue-950 via-blue-950/90 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-blue-950 to-transparent" />
 
-            <div className="absolute inset-y-0 right-0 flex w-12 items-center justify-center sm:w-14">
-              <button
-                type="button"
-                onClick={close}
-                aria-label={lang === "en" ? "Close" : "Fermer"}
-                className="grid h-7 w-7 place-items-center rounded-full text-blue-100/80 transition hover:bg-white/10 hover:text-white"
-              >
-                <FiX aria-hidden="true" />
-              </button>
-            </div>
           </div>
         </motion.div>
       )}
