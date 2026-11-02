@@ -5,10 +5,10 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useLang } from "@/hooks/useLang";
 import LanguageSwitch from "@/components/LanguageSwitch";
 
-const links = [
+const linksFr = [
   { href: "/#prestations", label: "Prestations" },
   { href: "/abonnements", label: "Abonnements" },
   { href: "/#realisations", label: "Nos réalisations" },
@@ -17,9 +17,17 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
+const linksEn = [
+  { href: "/en#services", label: "Services" },
+  { href: "/en#how-it-works", label: "How it works" },
+  { href: "/en#faq", label: "FAQ" },
+  { href: "/en#quote", label: "Free quote" },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const isEnglish = usePathname()?.startsWith("/en") ?? false;
+  const isEnglish = useLang() === "en";
+  const links = isEnglish ? linksEn : linksFr;
   const bookHref = isEnglish ? "/en#quote" : "/contact";
   const bookLabel = isEnglish ? "Book" : "Réserver";
 
@@ -36,7 +44,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:h-[84px] sm:px-6 md:h-[96px]">
 
         {/* Logo */}
-        <Link href="/" aria-label="Accueil Léman Auto Clean" onClick={() => setOpen(false)}>
+        <Link href={isEnglish ? "/en" : "/"} aria-label={isEnglish ? "Léman Auto Clean home" : "Accueil Léman Auto Clean"} onClick={() => setOpen(false)}>
           <Image
             src="/logo.png"
             alt="Léman Auto Clean"
@@ -88,7 +96,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((current) => !current)}
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-label={isEnglish ? (open ? "Close menu" : "Open menu") : open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
             className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-xl backdrop-blur-xl transition hover:border-blue-400 hover:text-blue-400 sm:h-11 sm:w-11 sm:text-2xl"

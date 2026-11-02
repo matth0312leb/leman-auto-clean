@@ -2,13 +2,15 @@
 
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useLang } from "@/hooks/useLang";
 
 export default function WhatsappButton() {
+  const en = useLang() === "en";
   return (
     <motion.a
       href="https://wa.me/33604475205"
       target="_blank"
-      aria-label="Contacter Léman Auto Clean sur WhatsApp"
+      aria-label={en ? "Contact Léman Auto Clean on WhatsApp" : "Contacter Léman Auto Clean sur WhatsApp"}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1.5 }}
@@ -21,7 +23,7 @@ export default function WhatsappButton() {
 
       <div className="hidden sm:block">
         <p className="text-xs uppercase tracking-widest text-zinc-400">
-          Contact rapide
+          {en ? "Quick contact" : "Contact rapide"}
         </p>
 
         <p className="font-semibold">

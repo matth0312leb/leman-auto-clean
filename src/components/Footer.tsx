@@ -6,8 +6,39 @@ import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { openCookieConsent } from "@/components/CookieConsent";
 import { villes } from "@/data/villes";
+import { useLang } from "@/hooks/useLang";
+
+const aboutFr = [
+  "Depuis toujours je suis passionné d'automobile et soucieux du détail, entrepreneur dans l'âme.",
+  "J'ai créé Léman Auto Clean pour offrir un service de nettoyage automobile premium à domicile, directement chez vous.",
+  "Mon objectif ? Redonner à votre véhicule l'éclat qu'il mérite, avec soin et professionnalisme, de Douvaine à Thonon-les-Bains, dans le Chablais, Genève et la Haute-Savoie.",
+];
+
+const aboutEn = [
+  "I have always been passionate about cars and obsessed with detail, an entrepreneur at heart.",
+  "I created Léman Auto Clean to offer a premium car cleaning service at your home, wherever you are.",
+  "My goal? To give your vehicle back the shine it deserves, with care and professionalism, from Geneva to Thonon-les-Bains, across the Chablais and Haute-Savoie.",
+];
+
+const navFr = [
+  { href: "/#prestations", label: "Prestations" },
+  { href: "/abonnements", label: "Abonnements" },
+  { href: "/#realisations", label: "Nos réalisations" },
+  { href: "/professionnels", label: "Professionnels" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
+
+const navEn = [
+  { href: "/en#services", label: "Services" },
+  { href: "/en#how-it-works", label: "How it works" },
+  { href: "/en#faq", label: "FAQ" },
+  { href: "/en#quote", label: "Free quote" },
+];
 
 export default function Footer() {
+  const en = useLang() === "en";
+
   return (
     <footer
       id="contact"
@@ -30,21 +61,9 @@ export default function Footer() {
           />
 
           <div className="max-w-sm space-y-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
-            <p>
-              Depuis toujours je suis passionné d&apos;automobile et soucieux du
-              détail, entrepreneur dans l&apos;âme.
-            </p>
-
-            <p>
-              J&apos;ai créé Léman Auto Clean pour offrir un service de nettoyage
-              automobile premium à domicile, directement chez vous.
-            </p>
-
-            <p>
-              Mon objectif ? Redonner à votre véhicule l&apos;éclat qu&apos;il mérite,
-              avec soin et professionnalisme, de Douvaine à Thonon-les-Bains,
-              dans le Chablais, Genève et la Haute-Savoie.
-            </p>
+            {(en ? aboutEn : aboutFr).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
 
             <p className="pt-2 text-right font-semibold text-white">
               Matthieu L.
@@ -61,55 +80,36 @@ export default function Footer() {
 
           <div className="flex flex-col gap-4 text-sm text-zinc-300 sm:text-base">
 
-            <Link href="/#prestations" className="transition hover:text-blue-400">
-              Prestations
-            </Link>
-
-            <Link href="/abonnements" className="transition hover:text-blue-400">
-              Abonnements
-            </Link>
-
-            <Link href="/#realisations" className="transition hover:text-blue-400">
-              Nos réalisations
-            </Link>
-
-            <Link href="/professionnels" className="transition hover:text-blue-400">
-              Professionnels
-            </Link>
-
-            <Link href="/#faq" className="transition hover:text-blue-400">
-              FAQ
-            </Link>
-
-            <Link href="/contact" className="transition hover:text-blue-400">
-              Contact
-            </Link>
-
+            {(en ? navEn : navFr).map((link) => (
+              <Link key={link.label} href={link.href} className="transition hover:text-blue-400">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
 
         {/* Legal */}
         <div className="min-w-0">
           <h3 className="mb-5 text-xs uppercase tracking-[0.3em] text-blue-400 sm:text-sm">
-            Légal
+            {en ? "Legal (in French)" : "Légal"}
           </h3>
 
           <div className="flex flex-col gap-4 text-sm text-zinc-300 sm:text-base">
 
             <Link href="/mentions-legales" className="transition hover:text-blue-400">
-              Mentions légales
+              {en ? "Legal notice" : "Mentions légales"}
             </Link>
 
             <Link href="/politique-confidentialite" className="transition hover:text-blue-400">
-              Politique de confidentialité
+              {en ? "Privacy policy" : "Politique de confidentialité"}
             </Link>
 
             <Link href="/cgv" className="transition hover:text-blue-400">
-              CGV
+              {en ? "Terms and conditions" : "CGV"}
             </Link>
 
             <Link href="/conditions-prestations-detailing" className="transition hover:text-blue-400">
-              Conditions prestations detailing
+              {en ? "Detailing service conditions" : "Conditions prestations detailing"}
             </Link>
 
             <Link href="/cookies" className="transition hover:text-blue-400">
@@ -121,7 +121,7 @@ export default function Footer() {
               onClick={openCookieConsent}
               className="w-fit text-left transition hover:text-blue-400"
             >
-              Gérer les cookies
+              {en ? "Cookie settings" : "Gérer les cookies"}
             </button>
 
           </div>
@@ -189,14 +189,16 @@ export default function Footer() {
 
             <p className="flex items-start gap-3 leading-relaxed">
               <FiMapPin className="mt-0.5 shrink-0 text-2xl text-blue-400" />
-              Déplacement dans le Chablais, Genève et Haute-Savoie
+              {en
+                ? "Travel across Geneva, the Chablais and Haute-Savoie"
+                : "Déplacement dans le Chablais, Genève et Haute-Savoie"}
             </p>
 
             <Link
-              href="/contact"
+              href={en ? "/en#quote" : "/contact"}
               className="mt-2 inline-flex w-fit rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 sm:text-base"
             >
-              Réserver
+              {en ? "Book" : "Réserver"}
             </Link>
 
           </div>
@@ -207,7 +209,7 @@ export default function Footer() {
       {/* Zones d'intervention */}
       <div className="relative mx-auto mt-12 max-w-7xl md:mt-16">
         <p className="mb-3 text-xs uppercase tracking-[0.3em] text-blue-400 sm:text-sm">
-          Nettoyage voiture à domicile
+          {en ? "Mobile car cleaning (pages in French)" : "Nettoyage voiture à domicile"}
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400">
           {villes.map((ville) => (
@@ -219,15 +221,19 @@ export default function Footer() {
               {ville.name}
             </Link>
           ))}
-          <Link href="/en" hrefLang="en" className="text-blue-300 transition hover:text-blue-200">
-            English version
+          <Link
+            href={en ? "/" : "/en"}
+            hrefLang={en ? "fr" : "en"}
+            className="text-blue-300 transition hover:text-blue-200"
+          >
+            {en ? "Version française" : "English version"}
           </Link>
         </div>
       </div>
 
       {/* Bottom */}
       <div className="relative mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500 sm:text-sm md:mt-12 md:pt-8">
-        © 2026 Léman Auto Clean — Tous droits réservés.
+        © 2026 Léman Auto Clean — {en ? "All rights reserved." : "Tous droits réservés."}
       </div>
     </footer>
   );

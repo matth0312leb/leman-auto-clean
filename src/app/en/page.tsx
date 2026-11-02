@@ -136,7 +136,7 @@ export default function EnglishPage() {
       </section>
 
       {/* Packages */}
-      <section className="relative px-5 py-14 sm:px-6 md:py-20">
+      <section id="services" className="relative scroll-mt-24 px-5 py-14 sm:px-6 md:py-20">
         <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-5xl">
@@ -243,7 +243,7 @@ export default function EnglishPage() {
       </section>
 
       {/* How it works */}
-      <section className="px-5 py-14 sm:px-6 md:py-20">
+      <section id="how-it-works" className="scroll-mt-24 px-5 py-14 sm:px-6 md:py-20">
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             How it works
@@ -275,7 +275,7 @@ export default function EnglishPage() {
       {/* FAQ + quote form */}
       <section id="quote" className="scroll-mt-28 px-5 pb-16 sm:px-6 md:pb-24">
         <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-7">
+          <div id="faq" className="scroll-mt-24 rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-7">
             <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400">FAQ</p>
             <div className="space-y-5">
               {faqEn.map((item) => (

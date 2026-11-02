@@ -5,6 +5,7 @@ import Script from "next/script";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { startClickTracking } from "@/lib/trackClicks";
+import { useLang } from "@/hooks/useLang";
 
 const STORAGE_KEY = "lac-cookie-consent";
 const OPEN_EVENT = "lac:open-cookie-consent";
@@ -36,6 +37,7 @@ export function openCookieConsent() {
 export default function CookieConsent({ gaId }: { gaId: string }) {
   const [consent, setConsent] = useState<Consent | null>(null);
   const [visible, setVisible] = useState(false);
+  const en = useLang() === "en";
 
   useEffect(() => {
     const stored = readConsent();
@@ -89,7 +91,7 @@ export default function CookieConsent({ gaId }: { gaId: string }) {
           <motion.div
             role="dialog"
             aria-live="polite"
-            aria-label="Choix des cookies"
+            aria-label={en ? "Cookie choice" : "Choix des cookies"}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
@@ -105,13 +107,14 @@ export default function CookieConsent({ gaId }: { gaId: string }) {
                 </p>
 
                 <p className="text-sm leading-relaxed text-zinc-300">
-                  Nous utilisons Google Analytics pour mesurer la fréquentation du
-                  site, uniquement avec votre accord. Aucun cookie publicitaire.{" "}
+                  {en
+                    ? "We use Google Analytics to measure website traffic, only with your consent. No advertising cookies."
+                    : "Nous utilisons Google Analytics pour mesurer la fréquentation du site, uniquement avec votre accord. Aucun cookie publicitaire."}{" "}
                   <Link
                     href="/cookies"
                     className="text-blue-300 underline-offset-4 transition hover:text-blue-200 hover:underline"
                   >
-                    En savoir plus
+                    {en ? "Learn more" : "En savoir plus"}
                   </Link>
                 </p>
 
@@ -121,7 +124,7 @@ export default function CookieConsent({ gaId }: { gaId: string }) {
                     onClick={() => choose("denied")}
                     className="inline-flex h-11 flex-1 items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-zinc-200 transition hover:border-blue-400 hover:text-blue-300"
                   >
-                    Refuser
+                    {en ? "Decline" : "Refuser"}
                   </button>
 
                   <button
@@ -129,7 +132,7 @@ export default function CookieConsent({ gaId }: { gaId: string }) {
                     onClick={() => choose("granted")}
                     className="inline-flex h-11 flex-1 items-center justify-center rounded-full bg-blue-500 px-5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400"
                   >
-                    Accepter
+                    {en ? "Accept" : "Accepter"}
                   </button>
                 </div>
               </div>
