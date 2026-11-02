@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiArrowRight, FiCheck, FiInfo, FiMinus, FiPlus } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiCheck,
+  FiInfo,
+  FiMapPin,
+  FiMinus,
+  FiNavigation,
+  FiPlus,
+} from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 const prestations = [
@@ -299,7 +307,37 @@ export default function Prestations() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: isDesktop ? 0.45 : 0.2 }}
           viewport={{ once: true, amount: 0.4 }}
-          className="mt-8 rounded-2xl border border-blue-400/20 bg-blue-500/[0.06] px-4 py-4 shadow-lg shadow-blue-500/5 sm:mt-10 sm:px-5"
+          className="mt-8 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 sm:mt-10 sm:px-5"
+        >
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-blue-400">
+            Frais de déplacement
+          </p>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="flex min-w-0 items-center gap-3 rounded-xl border border-blue-400/25 bg-blue-500/[0.08] px-4 py-3">
+              <FiMapPin aria-hidden="true" className="shrink-0 text-xl text-blue-400" />
+              <p className="text-sm leading-snug text-zinc-300 sm:text-base">
+                <span className="block font-semibold text-white">Jusqu&apos;à 30 km</span>
+                Déplacement inclus
+              </p>
+            </div>
+
+            <div className="flex min-w-0 items-center gap-3 rounded-xl border border-white/10 bg-black/30 px-4 py-3">
+              <FiNavigation aria-hidden="true" className="shrink-0 text-xl text-blue-400" />
+              <p className="text-sm leading-snug text-zinc-300 sm:text-base">
+                <span className="block font-semibold text-white">Au-delà de 30 km</span>
+                Facturation de 0,50&nbsp;€/km
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: isDesktop ? 18 : 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: isDesktop ? 0.45 : 0.2 }}
+          viewport={{ once: true, amount: 0.4 }}
+          className="mt-4 rounded-2xl border border-blue-400/20 bg-blue-500/[0.06] px-4 py-4 shadow-lg shadow-blue-500/5 sm:px-5"
         >
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <p className="max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base">
@@ -465,9 +503,8 @@ export default function Prestations() {
                 </div>
 
                 <p className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-zinc-400">
-                  Déplacement dans le Chablais, Genève et Haute-Savoie. Selon
-                  la distance, un supplément de 0,50€ par km peut être
-                  appliqué.
+                  Déplacement dans le Chablais, Genève et Haute-Savoie : inclus
+                  jusqu&apos;à 30 km, puis facturé 0,50€ par km au-delà.
                   <br />
                   Pour les véhicules très sales, un supplément de 30 à 60€ peut
                   être ajouté selon l&apos;état du véhicule.

@@ -62,7 +62,7 @@ const conditions = [
   {
     icon: FiMapPin,
     title: "Déplacement",
-    text: "Déplacement inclus dans le secteur d'intervention habituel. Un supplément peut être appliqué au-delà selon la distance.",
+    text: "Déplacement inclus jusqu'à 30 km. Au-delà de 30 km : facturation de 0,50 €/km.",
   },
 ];
 
