@@ -73,3 +73,26 @@ footer[id] {
     scroll-behavior: auto;
   }
 }
+
+/* Bandeau promo : reflet lumineux qui balaie le bandeau + cadeau qui s'anime */
+@keyframes promo-shine {
+  0% { transform: translateX(-120%); }
+  60%, 100% { transform: translateX(320%); }
+}
+@keyframes promo-gift {
+  0%, 70%, 100% { transform: rotate(0deg) scale(1); }
+  75% { transform: rotate(-12deg) scale(1.12); }
+  80% { transform: rotate(10deg) scale(1.12); }
+  85% { transform: rotate(-6deg) scale(1.06); }
+  90% { transform: rotate(0deg) scale(1); }
+}
+@keyframes promo-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.promo-shine { animation: promo-shine 4.5s ease-in-out infinite; }
+.promo-gift { animation: promo-gift 4.5s ease-in-out infinite; transform-origin: 50% 70%; }
+.promo-glow { animation: promo-glow 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .promo-shine, .promo-gift, .promo-glow { animation: none; }
+}

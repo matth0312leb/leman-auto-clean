@@ -5,6 +5,9 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import PromoBanner from "@/components/PromoBanner";
+import type { Promo } from "@/data/promos";
 import { useLang } from "@/hooks/useLang";
 import LanguageSwitch from "@/components/LanguageSwitch";
 
@@ -26,9 +29,10 @@ const linksEn = [
   { href: "/en#quote", label: "Free quote" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ promo = null }: { promo?: Promo | null }) {
   const [open, setOpen] = useState(false);
   const isEnglish = useLang() === "en";
+  const pathname = usePathname() ?? "/";
   const links = isEnglish ? linksEn : linksFr;
   const bookHref = isEnglish ? "/en#quote" : "/contact";
   const bookLabel = isEnglish ? "Book" : "Réserver";
@@ -107,6 +111,10 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {promo && !pathname.startsWith("/carte-cadeau") && !pathname.startsWith("/en/gift-card") && (
+        <PromoBanner promo={promo} lang={isEnglish ? "en" : "fr"} />
+      )}
 
       {/* Mobile menu */}
       <AnimatePresence>
