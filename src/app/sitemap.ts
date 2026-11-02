@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cgv",
     "/conditions-prestations-detailing",
     "/cookies",
+    "/en",
   ];
 
   const villeRoutes = villes.map((ville) => ({

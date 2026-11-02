@@ -219,6 +219,9 @@ export default function Footer() {
               {ville.name}
             </Link>
           ))}
+          <Link href="/en" hrefLang="en" className="text-blue-300 transition hover:text-blue-200">
+            English version
+          </Link>
         </div>
       </div>
 

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "Léman Auto Clean propose le nettoyage auto à domicile, le lavage voiture à domicile et le detailing à domicile dans le Chablais, Douvaine, Thonon-les-Bains, Genève et Haute-Savoie.",
   alternates: {
     canonical: "/",
+    languages: { fr: "/", en: "/en" },
   },
 };
 

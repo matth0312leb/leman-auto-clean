@@ -14,6 +14,17 @@ const nextConfig: NextConfig = {
     ],
   },
   reactCompiler: true,
+  async redirects() {
+    return [
+      {
+        // Adresse courte du QR code : mène directement au formulaire d'avis Google.
+        source: "/laisser-un-avis",
+        destination:
+          "https://search.google.com/local/writereview?placeid=ChIJNdFQjRvsSIwR-15U4siiNfo",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

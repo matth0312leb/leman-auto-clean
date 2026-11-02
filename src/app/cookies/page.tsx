@@ -26,7 +26,7 @@ export default function CookiesPage() {
         {
           title: "Mesure d'audience",
           paragraphs: [
-            "Avec votre accord uniquement, le site utilise Google Analytics (Google Ireland Limited) pour mesurer sa fréquentation : pages consultées, durée de visite, type d'appareil. Ces cookies sont conservés au maximum 13 mois.",
+            "Avec votre accord uniquement, le site utilise Google Analytics (Google Ireland Limited) pour mesurer sa fréquentation : pages consultées, durée de visite, type d'appareil, ainsi que les clics sur les boutons de contact (WhatsApp, téléphone, réservation) et l'envoi des formulaires. Ces cookies sont conservés au maximum 13 mois.",
             "Si vous refusez, Google Analytics n'est pas chargé et aucun cookie de mesure d'audience n'est déposé.",
             "Le site utilise également Vercel Analytics et Speed Insights, des outils de mesure anonymes qui ne déposent pas de cookie.",
           ],

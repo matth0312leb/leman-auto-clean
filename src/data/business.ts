@@ -9,6 +9,10 @@ export const business = {
   whatsappHref: "https://wa.me/33604475205",
   email: "lemanautoclean@gmail.com",
 
+  /** Lien direct vers le formulaire d'avis de la fiche Google. */
+  googleReviewWriteUrl:
+    "https://search.google.com/local/writereview?placeid=ChIJNdFQjRvsSIwR-15U4siiNfo",
+
   /** Délai de réponse annoncé après une demande. */
   responseTime: "sous 24 h",
 

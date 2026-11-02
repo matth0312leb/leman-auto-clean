@@ -4,6 +4,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { startClickTracking } from "@/lib/trackClicks";
 
 const STORAGE_KEY = "lac-cookie-consent";
 const OPEN_EVENT = "lac:open-cookie-consent";
@@ -45,6 +46,11 @@ export default function CookieConsent({ gaId }: { gaId: string }) {
     window.addEventListener(OPEN_EVENT, open);
     return () => window.removeEventListener(OPEN_EVENT, open);
   }, []);
+
+  useEffect(() => {
+    if (consent !== "granted") return;
+    return startClickTracking();
+  }, [consent]);
 
   const choose = (value: Consent) => {
     saveConsent(value);

@@ -197,6 +197,17 @@ export default async function VillePage({ params }: VillePageProps) {
             </div>
           </div>
 
+          {ville.slug === "geneve" && (
+            <Link
+              href="/en"
+              hrefLang="en"
+              className="mr-6 mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 transition hover:text-blue-200"
+            >
+              English version
+              <FiArrowRight aria-hidden="true" />
+            </Link>
+          )}
+
           <Link
             href="/#prestations"
             className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 transition hover:text-blue-200"
