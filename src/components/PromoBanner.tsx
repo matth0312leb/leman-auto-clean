@@ -36,7 +36,7 @@ export default function PromoBanner({ promo, lang }: { promo: Promo; lang: "fr" 
                 className="group flex min-w-0 items-center gap-2.5 text-xs font-semibold text-white sm:text-sm"
               >
                 <FiGift aria-hidden="true" className="promo-gift shrink-0 text-base text-blue-100 sm:text-lg" />
-                <span className="truncate">{t.texte}</span>
+                <span className="leading-snug">{t.texte}</span>
                 <span className="hidden shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-[11px] font-bold text-blue-700 shadow-lg shadow-blue-900/40 transition group-hover:bg-blue-50 min-[420px]:inline-flex sm:text-xs">
                   {t.bouton}
                   <FiArrowRight aria-hidden="true" className="transition group-hover:translate-x-0.5" />
