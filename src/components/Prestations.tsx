@@ -105,7 +105,7 @@ export default function Prestations() {
                 }}
                 className={`group relative flex min-w-0 cursor-pointer flex-col overflow-visible rounded-3xl p-4 backdrop-blur-sm transition duration-500 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:p-7 md:backdrop-blur-xl lg:p-8 ${
                   isHighlighted
-                    ? "border border-blue-400/70 bg-blue-500/[0.12] shadow-2xl shadow-blue-500/20 ring-1 ring-blue-400/30"
+                    ? "glow-border border border-blue-400/70 bg-blue-500/[0.12] shadow-2xl shadow-blue-500/20 ring-1 ring-blue-400/30"
                     : "border border-white/10 bg-white/[0.06] hover:border-blue-500/40"
                 }`}
               >

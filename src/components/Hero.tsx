@@ -17,7 +17,7 @@ export default function Hero() {
       <div
         role="img"
         aria-label={siteImages.hero.alt}
-        className="absolute inset-0 scale-105 bg-cover bg-[66%_center] min-[390px]:bg-[62%_center] min-[430px]:bg-[58%_center] md:bg-center"
+        className="hero-zoom absolute inset-0 bg-cover bg-[66%_center] min-[390px]:bg-[62%_center] min-[430px]:bg-[58%_center] md:bg-center"
         style={{
           backgroundImage: `url('${siteImages.hero.src}')`,
         }}
@@ -46,7 +46,7 @@ export default function Hero() {
             <h1 className="mb-4 max-w-full text-[clamp(2.55rem,11.5vw,4.75rem)] font-black uppercase leading-[0.9] min-[390px]:mb-5 md:mb-6 lg:text-8xl">
               LÉMAN
               <br />
-              <span className="bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-transparent">
+              <span className="text-shimmer bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-transparent">
                 AUTO CLEAN
               </span>
             </h1>
@@ -59,7 +59,7 @@ export default function Hero() {
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-6 py-3.5 text-center text-sm font-semibold shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 hover:shadow-blue-400/35 sm:w-fit sm:px-8 sm:py-4 sm:text-base"
+                className="btn-shine group inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-6 py-3.5 text-center text-sm font-semibold shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 hover:shadow-blue-400/35 sm:w-fit sm:px-8 sm:py-4 sm:text-base"
               >
                 Nous contacter
                 <FiArrowRight

@@ -52,8 +52,19 @@ function ReviewCard({
       className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:p-7 md:backdrop-blur-xl lg:p-8"
     >
 
-      <div className="mb-5 flex gap-1 text-blue-400 sm:mb-6">
-        ★★★★★
+      <div className="mb-5 flex gap-1 text-blue-400 sm:mb-6" aria-label="5 étoiles sur 5">
+        {Array.from({ length: 5 }).map((_, star) => (
+          <motion.span
+            key={star}
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.4 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ delay: 0.15 + star * 0.08, type: "spring", stiffness: 380, damping: 16 }}
+          >
+            ★
+          </motion.span>
+        ))}
       </div>
 
       <p className="mb-7 text-sm leading-relaxed text-zinc-300 sm:text-base lg:mb-8">

@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
 import CookieConsent from "@/components/CookieConsent";
+import ScrollProgress from "@/components/ScrollProgress";
 import { CurrencyProvider } from "@/components/CurrencyProvider";
 import { getVisitorCurrency } from "@/lib/visitorCurrency";
 import { getActivePromo } from "@/data/promos";
@@ -207,6 +208,7 @@ export default async function RootLayout({
   return (
     <html lang="fr" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
+        <ScrollProgress />
         <CurrencyProvider currency={currency}>
           <Navbar promo={promo} />
           {children}

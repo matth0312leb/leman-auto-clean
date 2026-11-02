@@ -77,7 +77,7 @@ export default function Navbar({ promo = null }: { promo?: Promo | null }) {
 
           <Link
             href={bookHref}
-            className="rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 xl:px-5"
+            className="btn-shine rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-400 xl:px-5"
           >
             {bookLabel}
           </Link>
