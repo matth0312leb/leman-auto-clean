@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import LanguageSwitch from "@/components/LanguageSwitch";
 
 const links = [
   { href: "/#prestations", label: "Prestations" },
@@ -58,13 +59,7 @@ export default function Navbar() {
             </a>
           ))}
 
-          <Link
-            href={isEnglish ? "/" : "/en"}
-            hrefLang={isEnglish ? "fr" : "en"}
-            className="rounded-full border border-white/15 px-3 py-2 text-xs font-semibold tracking-[0.12em] text-zinc-300 transition hover:border-blue-400 hover:text-blue-300"
-          >
-            {isEnglish ? "FR" : "EN"}
-          </Link>
+          <LanguageSwitch current={isEnglish ? "en" : "fr"} />
 
           <Link
             href={bookHref}
@@ -74,7 +69,13 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-2 min-[380px]:gap-3 lg:hidden">
+          <LanguageSwitch
+            current={isEnglish ? "en" : "fr"}
+            onSelect={() => setOpen(false)}
+            className="hidden min-[360px]:inline-flex"
+          />
+
           <Link
             href={bookHref}
             onClick={() => setOpen(false)}
@@ -140,14 +141,12 @@ export default function Navbar() {
                   {bookLabel}
                 </Link>
 
-                <Link
-                  href={isEnglish ? "/" : "/en"}
-                  hrefLang={isEnglish ? "fr" : "en"}
-                  onClick={() => setOpen(false)}
-                  className="mt-4 text-center text-sm font-semibold text-zinc-400 transition hover:text-blue-300"
-                >
-                  {isEnglish ? "Version française" : "English version"}
-                </Link>
+                <div className="mt-6 flex justify-center">
+                  <LanguageSwitch
+                    current={isEnglish ? "en" : "fr"}
+                    onSelect={() => setOpen(false)}
+                  />
+                </div>
               </nav>
             </motion.div>
           </>
