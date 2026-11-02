@@ -27,6 +27,14 @@ export function generateOrderRef(): string {
   return `CMD-${Array.from(values, (value) => CODE_ALPHABET[value % CODE_ALPHABET.length]).join("")}`;
 }
 
+/** Lien Revolut avec montant et devise déjà remplis (montant en centimes). */
+export function revolutPayLink(amount: number, currency: "EUR" | "CHF"): string {
+  const url = new URL(giftCard.revolutUrl);
+  url.searchParams.set("currency", currency);
+  url.searchParams.set("amount", String(Math.round(amount * 100)));
+  return url.toString();
+}
+
 export function addMonths(date: Date, months: number): Date {
   const result = new Date(date);
   result.setMonth(result.getMonth() + months);

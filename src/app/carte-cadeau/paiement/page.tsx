@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { FiArrowRight, FiCopy } from "react-icons/fi";
 import Footer from "@/components/Footer";
-import { formatGiftAmount, giftCard } from "@/data/giftCard";
+import { formatGiftAmount, revolutPayLink } from "@/data/giftCard";
 
 export const metadata: Metadata = {
   title: "Paiement de la carte cadeau",
@@ -18,7 +18,7 @@ const texts = {
     title: "Votre carte cadeau",
     amount: "Montant à payer",
     code: "Référence de commande",
-    how: "Sur la page Revolut, saisissez le montant ci-dessus et indiquez votre référence de commande en note du paiement.",
+    how: "Le montant est déjà indiqué sur la page Revolut : vérifiez-le, puis ajoutez votre référence de commande en note du paiement.",
     button: "Payer avec Revolut",
     valid: "Dès réception de votre paiement, votre carte cadeau vous est envoyée en PDF par e-mail (généralement sous 24 h).",
     alt: "Pas de compte Revolut ? Vous pouvez payer par carte bancaire, Apple Pay ou Google Pay directement sur la page Revolut.",
@@ -28,7 +28,7 @@ const texts = {
     title: "Your gift card",
     amount: "Amount to pay",
     code: "Order reference",
-    how: "On the Revolut page, enter the amount above and add your order reference as the payment note.",
+    how: "The amount is already filled in on the Revolut page: check it, then add your order reference as the payment note.",
     button: "Pay with Revolut",
     valid: "As soon as your payment is received, your gift card is emailed to you as a PDF (usually within 24 hours).",
     alt: "No Revolut account? You can pay by card, Apple Pay or Google Pay directly on the Revolut page.",
@@ -70,7 +70,7 @@ export default async function PaiementPage({ searchParams }: Props) {
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <a
-              href={giftCard.revolutUrl}
+              href={revolutPayLink(amount, currency)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-blue-500 px-7 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400"
