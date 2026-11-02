@@ -6,6 +6,7 @@ import { useState } from "react";
 import {
   FiArrowRight,
   FiCheck,
+  FiGift,
   FiInfo,
   FiMapPin,
   FiMinus,
@@ -14,6 +15,7 @@ import {
 } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { options, prestations } from "@/data/prestations";
+import { formatGiftAmount, giftCard } from "@/data/giftCard";
 import Prix from "@/components/Prix";
 import { useCurrency } from "@/hooks/useCurrency";
 import { type Currency, formatAmount, toChf } from "@/lib/currency";
@@ -238,12 +240,47 @@ export default function Prestations() {
           })}
         </div>
 
+        {/* Carte cadeau, mise en avant avec les formules */}
+        <motion.a
+          href="/carte-cadeau"
+          initial={{ opacity: 0, y: isDesktop ? 24 : 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: isDesktop ? 0.5 : 0.25 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="group relative mt-8 block overflow-hidden rounded-3xl border border-blue-400/50 bg-gradient-to-r from-blue-950/80 via-blue-600/25 to-blue-950/80 p-5 shadow-2xl shadow-blue-500/15 transition hover:border-blue-300 sm:mt-10 sm:p-7"
+        >
+          <div className="promo-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-blue-500 text-2xl text-white shadow-lg shadow-blue-500/40">
+                <FiGift aria-hidden="true" className="promo-gift" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-300 sm:text-xs">
+                  Idée cadeau
+                </p>
+                <h3 className="text-xl font-black uppercase sm:text-2xl">Carte cadeau</h3>
+                <p className="mt-1 text-sm leading-relaxed text-zinc-300">
+                  Offrez une voiture comme neuve, dès {formatGiftAmount(giftCard.amounts[0], currency)}.
+                  Valable {giftCard.validityMonths} mois sur toutes les prestations.
+                </p>
+              </div>
+            </div>
+
+            <span className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-blue-700 shadow-lg shadow-blue-900/40 transition group-hover:bg-blue-50">
+              Offrir une carte cadeau
+              <FiArrowRight aria-hidden="true" className="transition group-hover:translate-x-1" />
+            </span>
+          </div>
+        </motion.a>
+
         <motion.div
           initial={{ opacity: 0, y: isDesktop ? 18 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: isDesktop ? 0.45 : 0.2 }}
           viewport={{ once: true, amount: 0.4 }}
-          className="mt-8 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 sm:mt-10 sm:px-5"
+          className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 sm:px-5"
         >
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-blue-400">
             Frais de déplacement

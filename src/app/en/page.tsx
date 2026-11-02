@@ -5,6 +5,7 @@ import {
   FiArrowRight,
   FiCalendar,
   FiCheck,
+  FiGift,
   FiMapPin,
   FiNavigation,
   FiPhone,
@@ -201,6 +202,31 @@ export default function EnglishPage() {
               );
             })}
           </div>
+
+          <Link
+            href="/en/gift-card"
+            className="group relative mt-6 block overflow-hidden rounded-3xl border border-blue-400/50 bg-gradient-to-r from-blue-950/80 via-blue-600/25 to-blue-950/80 p-5 shadow-2xl shadow-blue-500/15 transition hover:border-blue-300 sm:p-7"
+          >
+            <div className="promo-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-blue-500 text-2xl text-white shadow-lg shadow-blue-500/40">
+                  <FiGift aria-hidden="true" className="promo-gift" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-300 sm:text-xs">Gift idea</p>
+                  <h3 className="text-xl font-black uppercase sm:text-2xl">Gift card</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-zinc-300">
+                    Give a car that looks brand new. Valid for 12 months on all services.
+                  </p>
+                </div>
+              </div>
+              <span className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-blue-700 shadow-lg shadow-blue-900/40 transition group-hover:bg-blue-50">
+                Give a gift card
+                <FiArrowRight aria-hidden="true" className="transition group-hover:translate-x-1" />
+              </span>
+            </div>
+          </Link>
 
           {/* Options + travel */}
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
