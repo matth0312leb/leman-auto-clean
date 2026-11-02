@@ -43,6 +43,8 @@ export const prestations = [
   {
     title: "Élégance",
     price: "150€",
+    /** Formules incluses : sert à afficher l'économie réalisée. */
+    bundleOf: ["Essentiel", "Équilibre"],
     badge: "COMPLET",
     highlighted: true,
     description:

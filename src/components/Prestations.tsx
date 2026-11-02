@@ -15,12 +15,37 @@ import {
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { options, prestations } from "@/data/prestations";
 import Prix, { CurrencyToggle } from "@/components/Prix";
+import { useCurrency } from "@/hooks/useCurrency";
+import { type Currency, formatAmount, toChf } from "@/lib/currency";
+
+function euros(price: string) {
+  return Number(price.replace("€", "").replace(",", ".").trim());
+}
+
+function formatMoney(value: number, currency: Currency) {
+  return currency === "CHF" ? `${formatAmount(value)}\u00a0CHF` : `${formatAmount(value)}€`;
+}
+
+/** Économie de la formule complète par rapport aux formules réservées séparément. */
+function getBundleSaving(item: (typeof prestations)[number], currency: Currency) {
+  if (!("bundleOf" in item) || !item.bundleOf) return null;
+
+  const convert = (eur: number) => (currency === "CHF" ? toChf(eur) : eur);
+  const separate = item.bundleOf.reduce((total, title) => {
+    const part = prestations.find((formule) => formule.title === title);
+    return part ? total + convert(euros(part.price)) : total;
+  }, 0);
+  const saving = separate - convert(euros(item.price));
+
+  return saving > 0 ? { separate, saving } : null;
+}
 
 export default function Prestations() {
   const [active, setActive] = useState<number | null>(null);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState<number | null>(null);
   const isDesktop = useIsDesktop();
+  const currency = useCurrency();
 
   const toggleOptions = () => {
     setOptionsOpen((current) => {
@@ -60,6 +85,7 @@ export default function Prestations() {
           {prestations.map((item, index) => {
             const isActive = active === index;
             const isHighlighted = "highlighted" in item && item.highlighted;
+            const bundle = getBundleSaving(item, currency);
 
             return (
               <motion.div
@@ -123,12 +149,30 @@ export default function Prestations() {
 
                   <div className="mt-auto flex flex-col items-start gap-4 min-[380px]:flex-row min-[380px]:items-end min-[380px]:justify-between sm:gap-5">
                     <div className="min-w-0">
-                      <p className="text-xs uppercase tracking-widest text-zinc-500 sm:text-sm">
-                        À partir de
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs uppercase tracking-widest text-zinc-500 sm:text-sm">
+                          À partir de
+                        </p>
 
-                      <h4 className="text-3xl font-black text-blue-400 sm:text-4xl">
+                        {bundle && (
+                          <span className="rounded-full border border-blue-300/40 bg-blue-400/15 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-blue-100 sm:text-[11px]">
+                            −{formatMoney(bundle.saving, currency)}
+                          </span>
+                        )}
+                      </div>
+
+                      <h4 className="flex items-baseline gap-2.5 text-3xl font-black text-blue-400 sm:text-4xl">
                         <Prix>{item.price}</Prix>
+
+                        {bundle && (
+                          <span
+                            className="text-base font-semibold text-zinc-500 line-through decoration-zinc-500/80 sm:text-lg"
+                            title="Prix de l'Essentiel + l'Équilibre réservés séparément"
+                          >
+                            <span className="sr-only">au lieu de </span>
+                            {formatMoney(bundle.separate, currency)}
+                          </span>
+                        )}
                       </h4>
                     </div>
 
