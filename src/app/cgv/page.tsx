@@ -57,7 +57,7 @@ export default function CGVPage() {
             "Léman Auto Clean s'engage à utiliser des produits professionnels, adaptés aux surfaces traitées et respectueux de l'environnement.",
             "Toutefois, la responsabilité de Léman Auto Clean ne saurait être engagée en cas de dégâts antérieurs ou défauts non signalés, comme un vernis abîmé, des jantes corrodées, un intérieur fragile ou tout autre défaut préexistant.",
             "Léman Auto Clean est couvert par un contrat de Responsabilité Civile Professionnelle souscrit auprès de Assurup / Hiscox, couvrant l'activité de nettoyage de véhicules dans la limite d'un plafond de 50 000€ par sinistre.",
-            "Contrat n° RCP250627173209 - valable du 27/06/2025 au 26/06/2026.",
+            "Contrat n° RCP250627173209 - valable du 27/06/2026 au 26/06/2027 (renouvellement automatique).",
           ],
         },
         {
