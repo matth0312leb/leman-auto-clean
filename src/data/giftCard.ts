@@ -5,7 +5,7 @@ export const giftCard = {
   /** Montants proposés (dans la devise du visiteur : € ou CHF). */
   amounts: [50, 100, 150, 200],
   /** Montant minimum pour « Autre montant ». */
-  minAmount: 30,
+  minAmount: 50,
   /** Durée de validité en mois. */
   validityMonths: 12,
 };
@@ -18,6 +18,21 @@ export function generateGiftCode(): string {
   crypto.getRandomValues(values);
   const chars = Array.from(values, (value) => CODE_ALPHABET[value % CODE_ALPHABET.length]);
   return `LAC-${chars.slice(0, 4).join("")}-${chars.slice(4).join("")}`;
+}
+
+/** Référence de commande (affichée au client pour la note du paiement) : CMD-XXXXX. */
+export function generateOrderRef(): string {
+  const values = new Uint32Array(5);
+  crypto.getRandomValues(values);
+  return `CMD-${Array.from(values, (value) => CODE_ALPHABET[value % CODE_ALPHABET.length]).join("")}`;
+}
+
+/** Lien Revolut avec montant et devise déjà remplis (montant en centimes). */
+export function revolutPayLink(amount: number, currency: "EUR" | "CHF"): string {
+  const url = new URL(giftCard.revolutUrl);
+  url.searchParams.set("currency", currency);
+  url.searchParams.set("amount", String(Math.round(amount * 100)));
+  return url.toString();
 }
 
 export function addMonths(date: Date, months: number): Date {
