@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { FiArrowRight, FiCopy, FiDownload } from "react-icons/fi";
+import { FiArrowRight, FiCopy } from "react-icons/fi";
 import Footer from "@/components/Footer";
 import { formatGiftAmount, giftCard } from "@/data/giftCard";
 
@@ -20,9 +19,8 @@ const texts = {
     amount: "Montant à payer",
     code: "Votre code",
     how: "Sur la page Revolut, saisissez le montant ci-dessus et indiquez votre code en note du paiement.",
-    button: "1. Payer avec Revolut",
-    card: "2. Télécharger ma carte (PDF)",
-    valid: "La carte est valable une fois le paiement reçu. Vous avez aussi reçu ce lien par e-mail.",
+    button: "Payer avec Revolut",
+    valid: "Dès réception de votre paiement, votre carte cadeau vous est envoyée en PDF par e-mail (généralement sous 24 h).",
     alt: "Pas de compte Revolut ? Vous pouvez payer par carte bancaire, Apple Pay ou Google Pay directement sur la page Revolut.",
   },
   en: {
@@ -31,9 +29,8 @@ const texts = {
     amount: "Amount to pay",
     code: "Your code",
     how: "On the Revolut page, enter the amount above and add your code as the payment note.",
-    button: "1. Pay with Revolut",
-    card: "2. Download my card (PDF)",
-    valid: "The card is valid once payment has been received. You have also received this link by email.",
+    button: "Pay with Revolut",
+    valid: "As soon as your payment is received, your gift card is emailed to you as a PDF (usually within 24 hours).",
     alt: "No Revolut account? You can pay by card, Apple Pay or Google Pay directly on the Revolut page.",
   },
 };
@@ -46,11 +43,6 @@ export default async function PaiementPage({ searchParams }: Props) {
   const amount = Math.max(0, Math.round(Number(params.montant) || 0));
   const code = (params.code ?? "").replace(/[^A-Z0-9-]/gi, "").slice(0, 20);
 
-  const cardQuery = new URLSearchParams();
-  for (const key of ["code", "montant", "devise", "pour", "de", "message", "validite", "lang"]) {
-    const value = params[key];
-    if (value) cardQuery.set(key, value.slice(0, 200));
-  }
 
   return (
     <main lang={lang} className="min-h-screen overflow-x-hidden bg-black text-white">
@@ -87,16 +79,9 @@ export default async function PaiementPage({ searchParams }: Props) {
               <FiArrowRight aria-hidden="true" />
             </a>
 
-            <Link
-              href={`/carte-cadeau/carte?${cardQuery.toString()}`}
-              className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-white/15 bg-black/40 px-7 text-base font-semibold text-white transition hover:border-blue-400 hover:text-blue-300"
-            >
-              <FiDownload aria-hidden="true" />
-              {t.card}
-            </Link>
           </div>
 
-          <p className="mx-auto mt-5 max-w-md text-xs leading-relaxed text-zinc-400">{t.valid}</p>
+          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-zinc-300">{t.valid}</p>
           <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-zinc-500">{t.alt}</p>
         </div>
       </section>

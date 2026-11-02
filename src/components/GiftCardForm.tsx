@@ -29,7 +29,7 @@ const texts = {
     submit: "Commander et payer avec Revolut",
     sending: "Envoi de la commande…",
     note:
-      "Après validation, vous réglez avec Revolut et téléchargez immédiatement votre carte cadeau en PDF. Vous la recevez aussi par e-mail. La carte est valable une fois le paiement reçu.",
+      "Après validation, vous réglez avec Revolut. Votre carte cadeau vous est envoyée en PDF par e-mail dès réception du paiement.",
     subject: "Nouvelle carte cadeau",
   },
   en: {
@@ -49,7 +49,7 @@ const texts = {
     submit: "Order and pay with Revolut",
     sending: "Sending your order…",
     note:
-      "After confirming, you pay with Revolut and download your gift card as a PDF straight away. You also receive it by email. The card is valid once payment has been received.",
+      "After confirming, you pay with Revolut. Your gift card is emailed to you as a PDF as soon as payment is received.",
     subject: "New gift card (English)",
   },
 };
@@ -66,6 +66,8 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
   const [buyer, setBuyer] = useState("");
   const [message, setMessage] = useState("");
   const [code, setCode] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [sending, setSending] = useState(false);
 
   // Code créé dans le navigateur (évite tout décalage avec le rendu serveur).
@@ -91,18 +93,18 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     });
 
     const cardLink = `${base}/carte-cadeau/carte?${cardParams.toString()}`;
+    const sendParams = new URLSearchParams(cardParams);
+    sendParams.set("email", email);
+    sendParams.set("tel", phone);
 
     return {
       validUntil,
       next: `${base}/carte-cadeau/paiement?${cardParams.toString()}`,
       nextPath: `/carte-cadeau/paiement?${cardParams.toString()}`,
       cardLink,
-      autoresponse:
-        lang === "en"
-          ? `Thank you for your order! Your gift card code is ${code} (${formatGiftAmount(amount, currency)}). To complete it, pay with Revolut: ${giftCard.revolutUrl} (add your code as the payment note). Download your gift card as a PDF here: ${cardLink} — The card is valid once payment has been received. Léman Auto Clean`
-          : `Merci pour votre commande ! Le code de votre carte cadeau est ${code} (${formatGiftAmount(amount, currency)}). Pour la finaliser, réglez-la avec Revolut : ${giftCard.revolutUrl} (indiquez votre code en note du paiement). Téléchargez votre carte cadeau en PDF ici : ${cardLink} — La carte est valable une fois le paiement reçu. Léman Auto Clean`,
+      sendLink: `${base}/carte-cadeau/envoyer?${sendParams.toString()}`,
     };
-  }, [amount, buyer, code, currency, lang, message, recipient]);
+  }, [amount, buyer, code, currency, email, lang, message, phone, recipient]);
 
   // Envoi en arrière-plan puis ouverture de la page de paiement par le site lui-même
   // (ne dépend plus de la redirection du service de formulaire).
@@ -111,18 +113,21 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     if (sending) return;
     setSending(true);
 
-    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
-    delete data._next;
+    // Envoi « simple » (format formulaire) : compatible avec keepalive sur tous les navigateurs.
+    const data = new URLSearchParams();
+    new FormData(event.currentTarget).forEach((value, key) => {
+      if (key !== "_next" && typeof value === "string") data.append(key, value);
+    });
 
-    try {
-      await fetch("https://formsubmit.co/ajax/lemanautoclean@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
-      });
-    } catch {
-      // Même si l'envoi échoue, le client accède au paiement et à sa carte.
-    }
+    // « keepalive » : l'envoi continue même après le changement de page,
+    // on n'attend donc que quelques secondes au maximum.
+    const request = fetch("https://formsubmit.co/ajax/lemanautoclean@gmail.com", {
+      method: "POST",
+      keepalive: true,
+      headers: { Accept: "application/json" },
+      body: data,
+    }).catch(() => undefined);
+    await Promise.race([request, new Promise((resolve) => setTimeout(resolve, 3000))]);
 
     window.location.href = order.nextPath;
   };
@@ -144,7 +149,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
       <input type="hidden" name="Valable jusqu'au" value={order.validUntil} />
       <input type="hidden" name="Langue" value={lang === "en" ? "Anglais" : "Français"} />
       <input type="hidden" name="Lien de la carte (PDF)" value={order.cardLink} />
-      <input type="hidden" name="_autoresponse" value={order.autoresponse} />
+      <input type="hidden" name="➜ Envoyer la carte au client (après paiement)" value={order.sendLink} />
       <input
         type="text"
         name="_honey"
@@ -235,11 +240,27 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
         </label>
         <label className="flex flex-col">
           <span className="mb-2 text-sm font-semibold text-zinc-300">{t.email}</span>
-          <input required name="email" type="email" autoComplete="email" className={inputClass} />
+          <input
+            required
+            name="email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className={inputClass}
+          />
         </label>
         <label className="flex flex-col">
           <span className="mb-2 text-sm font-semibold text-zinc-300">{t.phone}</span>
-          <input required name="Numéro de téléphone" type="tel" autoComplete="tel" className={inputClass} />
+          <input
+            required
+            name="Numéro de téléphone"
+            type="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            className={inputClass}
+          />
         </label>
         <label className="flex flex-col sm:col-span-2">
           <span className="mb-2 text-sm font-semibold text-zinc-300">{t.message}</span>
