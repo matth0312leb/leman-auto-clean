@@ -198,7 +198,7 @@ const faqSchema = {
       name: "Peut-on réserver un detailing à domicile ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Oui. Vous pouvez réserver une prestation de detailing à domicile ou une formule complète intérieur + extérieur via la page de réservation.",
+        text: "Oui. Vous pouvez réserver une prestation de detailing à domicile ou une formule complète intérieur + extérieur via la page Contact, par téléphone ou sur WhatsApp.",
       },
     },
   ],
