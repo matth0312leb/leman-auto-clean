@@ -63,9 +63,8 @@ export default function CGVPage() {
         {
           title: "6. Paiement",
           paragraphs: [
-            "Le paiement s'effectue à la fin de la prestation.",
             "Les espèces sont acceptées en euros (€) ou en francs suisses (CHF).",
-            "Le paiement peut également être effectué par virement bancaire SEPA, PayPal, Revolut ou équivalents.",
+            "Le paiement peut également être effectué par virement bancaire SEPA, PayPal ou Revolut.",
             "Les tarifs sont affichés dans la devise correspondant à la localisation du client : en euros (€) en France, en francs suisses (CHF) en Suisse. Le tarif applicable est celui confirmé lors du devis.",
           ],
         },
