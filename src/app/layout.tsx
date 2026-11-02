@@ -3,6 +3,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
 import CookieConsent from "@/components/CookieConsent";
+import { CurrencyProvider } from "@/components/CurrencyProvider";
+import { getVisitorCurrency } from "@/lib/visitorCurrency";
 import "./globals.css";
 
 const siteUrl = "https://www.leman-autoclean.com";
@@ -193,16 +195,20 @@ const faqSchema = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currency = await getVisitorCurrency();
+
   return (
     <html lang="fr" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
-        <Navbar />
-        {children}
+        <CurrencyProvider currency={currency}>
+          <Navbar />
+          {children}
+        </CurrencyProvider>
         <Analytics />
         <SpeedInsights />
         <CookieConsent gaId={googleAnalyticsId} />

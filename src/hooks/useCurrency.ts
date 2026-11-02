@@ -1,33 +1,9 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useCurrencyContext } from "@/components/CurrencyProvider";
 import type { Currency } from "@/lib/currency";
 
-const listeners = new Set<() => void>();
-let current: Currency | null = null;
-
-/** Visiteur en Suisse (fuseau horaire de l'appareil) → CHF, sinon €. */
-function detect(): Currency {
-  try {
-    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (zone === "Europe/Zurich") return "CHF";
-  } catch {
-    // Intl indisponible
-  }
-
-  return "EUR";
-}
-
-function getSnapshot(): Currency {
-  if (current === null) current = detect();
-  return current;
-}
-
-function subscribe(listener: () => void) {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
-
+/** Devise du visiteur : CHF en Suisse, € ailleurs (décidée par le serveur). */
 export function useCurrency(): Currency {
-  return useSyncExternalStore(subscribe, getSnapshot, () => "EUR");
+  return useCurrencyContext();
 }
