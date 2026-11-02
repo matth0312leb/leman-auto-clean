@@ -317,7 +317,7 @@ export default function Prestations() {
             <div className="flex min-w-0 items-center gap-3 rounded-xl border border-blue-400/25 bg-blue-500/[0.08] px-4 py-3">
               <FiMapPin aria-hidden="true" className="shrink-0 text-xl text-blue-400" />
               <p className="text-sm leading-snug text-zinc-300 sm:text-base">
-                <span className="block font-semibold text-white">Jusqu&apos;à 30 km</span>
+                <span className="block font-semibold text-white">Jusqu&apos;à 30 km de Sciez</span>
                 Déplacement inclus
               </p>
             </div>
@@ -504,7 +504,7 @@ export default function Prestations() {
 
                 <p className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-zinc-400">
                   Déplacement dans le Chablais, Genève et Haute-Savoie : inclus
-                  jusqu&apos;à 30 km, puis facturé 0,50€ par km au-delà.
+                  jusqu&apos;à 30 km de Sciez, puis facturé 0,50€ par km au-delà.
                   <br />
                   Pour les véhicules très sales, un supplément de 30 à 60€ peut
                   être ajouté selon l&apos;état du véhicule.
