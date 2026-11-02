@@ -92,10 +92,10 @@ export default async function VillePage({ params }: VillePageProps) {
           </div>
 
           <h1 className="text-[clamp(2.1rem,8.5vw,4.25rem)] font-black uppercase leading-[0.95]">
-            Nettoyage voiture
+            Nettoyage voiture à
             <br />
-            <span className="bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-transparent">
-              à {ville.name}
+            <span className="inline-block whitespace-nowrap bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-[clamp(1.6rem,7.2vw,4.25rem)] text-transparent">
+              {ville.name}
             </span>
           </h1>
 
