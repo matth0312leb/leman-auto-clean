@@ -5,7 +5,7 @@ export const giftCard = {
   /** Montants proposés (dans la devise du visiteur : € ou CHF). */
   amounts: [50, 100, 150, 200],
   /** Montant minimum pour « Autre montant ». */
-  minAmount: 30,
+  minAmount: 50,
   /** Durée de validité en mois. */
   validityMonths: 12,
 };
