@@ -1,6 +1,6 @@
 /**
- * Prix en francs suisses : prix en euros + 10 %, arrondi au franc supérieur
- * (au 5 centimes supérieur pour les petits montants, ex. 0,50 € → 0,55 CHF).
+ * Prix en francs suisses : prix en euros + 10 %, arrondi aux 5 francs supérieurs
+ * (aux 5 centimes supérieurs pour les petits montants, ex. 0,50 € → 0,55 CHF).
  */
 export type Currency = "EUR" | "CHF";
 
@@ -11,7 +11,7 @@ export function toChf(eur: number): number {
   // (0,50 × 1,1 donne 0,55000000000000004 en JavaScript).
   const raw = Math.round(eur * CHF_MARKUP * 100) / 100;
   if (raw < 10) return Math.ceil(raw * 20 - 1e-9) / 20;
-  return Math.ceil(raw - 1e-9);
+  return Math.ceil(raw / 5 - 1e-9) * 5;
 }
 
 export function formatAmount(value: number): string {
