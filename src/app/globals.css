@@ -96,3 +96,14 @@ footer[id] {
 @media (prefers-reduced-motion: reduce) {
   .promo-shine, .promo-gift, .promo-glow { animation: none; }
 }
+
+/* Bandeau promo défilant en boucle infinie */
+@keyframes promo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.promo-marquee { animation: promo-marquee 32s linear infinite; }
+.promo-marquee-wrap:hover .promo-marquee { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .promo-marquee { animation: none; }
+}
