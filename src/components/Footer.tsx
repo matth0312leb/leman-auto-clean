@@ -25,6 +25,7 @@ const navFr = [
   { href: "/abonnements", label: "Abonnements" },
   { href: "/#realisations", label: "Nos réalisations" },
   { href: "/professionnels", label: "Professionnels" },
+  { href: "/carte-cadeau", label: "Carte cadeau" },
   { href: "/#faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -32,6 +33,7 @@ const navFr = [
 const navEn = [
   { href: "/en#services", label: "Services" },
   { href: "/en#how-it-works", label: "How it works" },
+  { href: "/en/gift-card", label: "Gift card" },
   { href: "/en#faq", label: "FAQ" },
   { href: "/en#quote", label: "Free quote" },
 ];

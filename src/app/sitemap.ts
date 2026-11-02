@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/conditions-prestations-detailing",
     "/cookies",
     "/en",
+    "/carte-cadeau",
+    "/en/gift-card",
   ];
 
   const villeRoutes = villes.map((ville) => ({

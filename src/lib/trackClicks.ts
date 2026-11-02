@@ -8,6 +8,7 @@
  * - clic_reserver : clic vers la page Contact (boutons Réserver, Nous contacter…)
  * - envoi_formulaire : envoi d'un formulaire de demande
  * - clic_avis     : clic vers le formulaire d'avis Google
+ * - clic_paiement_revolut : clic vers le paiement Revolut (carte cadeau)
  * La page d'origine est jointe automatiquement par Google Analytics.
  */
 
@@ -22,6 +23,7 @@ function classify(href: string): string | null {
   if (href.includes("wa.me") || href.includes("whatsapp")) return "clic_whatsapp";
   if (href.startsWith("tel:")) return "clic_appel";
   if (href.startsWith("mailto:")) return "clic_email";
+  if (href.includes("revolut.me")) return "clic_paiement_revolut";
   if (href.includes("writereview") || href.includes("/laisser-un-avis")) return "clic_avis";
 
   try {

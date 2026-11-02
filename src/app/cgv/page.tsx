@@ -69,7 +69,15 @@ export default function CGVPage() {
           ],
         },
         {
-          title: "7. Données personnelles",
+          title: "7. Cartes cadeaux",
+          paragraphs: [
+            "Les cartes cadeaux Léman Auto Clean sont valables 12 mois à compter de leur date d'achat, sur l'ensemble des prestations, à domicile et sur rendez-vous.",
+            "Chaque carte comporte un code unique, utilisable une seule fois. La carte est envoyée en PDF après réception du paiement.",
+            "La carte n'est ni remboursable, ni échangeable contre des espèces. Si le montant de la prestation est supérieur à la valeur de la carte, la différence est réglée par le client. Une carte non utilisée avant sa date de validité ne peut plus être utilisée.",
+          ],
+        },
+        {
+          title: "8. Données personnelles",
           paragraphs: [
             "Les informations collectées, comme le nom, le téléphone, l'adresse et les informations liées au véhicule, sont utilisées uniquement dans le cadre de la gestion des rendez-vous.",
             "Ces données ne sont jamais transmises à des tiers.",
