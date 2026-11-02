@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCalendar, FiMapPin, FiStar } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
+import { FiArrowRight, FiCalendar, FiMapPin, FiPhone, FiStar } from "react-icons/fi";
+import { business } from "@/data/business";
 import { preload } from "react-dom";
 import { siteImages } from "@/data/siteImages";
 
@@ -54,7 +56,7 @@ export default function Hero() {
               à domicile. Déplacement dans le Chablais, Genève et Haute-Savoie.
             </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/contact"
                 className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-6 py-3.5 text-center text-sm font-semibold shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 hover:shadow-blue-400/35 sm:w-fit sm:px-8 sm:py-4 sm:text-base"
@@ -66,10 +68,32 @@ export default function Hero() {
                 />
               </Link>
 
-              <p className="text-center text-xs uppercase tracking-[0.22em] text-zinc-400 sm:text-left">
-                Devis gratuit et personnalisé
-              </p>
+              <div className="grid grid-cols-2 gap-3 sm:flex">
+                <a
+                  href={business.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Écrire sur WhatsApp"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-black/40 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:border-green-400/70 hover:text-green-300 sm:py-4"
+                >
+                  <FaWhatsapp aria-hidden="true" className="text-lg text-green-400" />
+                  WhatsApp
+                </a>
+
+                <a
+                  href={business.phoneHref}
+                  aria-label={`Appeler le ${business.phoneDisplay}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-black/40 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:border-blue-400/70 hover:text-blue-300 sm:py-4"
+                >
+                  <FiPhone aria-hidden="true" className="text-base text-blue-400" />
+                  Appeler
+                </a>
+              </div>
             </div>
+
+            <p className="mt-4 text-center text-xs uppercase tracking-[0.22em] text-zinc-400 sm:text-left">
+              Devis gratuit et personnalisé
+            </p>
 
             <div className="mt-8 grid max-w-xl grid-cols-1 gap-3 min-[390px]:mt-9 sm:grid-cols-3 md:mt-14 md:max-w-2xl">
               <div className="flex min-w-0 items-center gap-3 border-l border-blue-400/45 pl-4">
@@ -77,10 +101,19 @@ export default function Hero() {
                   aria-hidden="true"
                   className="shrink-0 text-2xl text-blue-400"
                 />
-                <p className="text-xs uppercase leading-relaxed tracking-widest text-zinc-300">
-                  <span className="block font-bold text-white">100%</span>
-                  Satisfaction
-                </p>
+                {business.googleRating ? (
+                  <p className="text-xs uppercase leading-relaxed tracking-widest text-zinc-300">
+                    <span className="block font-bold text-white">
+                      {business.googleRating.rating}/5 ★
+                    </span>
+                    {business.googleRating.count} avis Google
+                  </p>
+                ) : (
+                  <p className="text-xs uppercase leading-relaxed tracking-widest text-zinc-300">
+                    <span className="block font-bold text-white">100%</span>
+                    Satisfaction
+                  </p>
+                )}
               </div>
 
               <div className="flex min-w-0 items-center gap-3 border-l border-blue-400/45 pl-4">

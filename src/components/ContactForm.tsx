@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import OptionsMultiSelect from "@/components/OptionsMultiSelect";
+import { FiMapPin } from "react-icons/fi";
+import { business } from "@/data/business";
 
 type ContactFormProps = {
   selectedFormula: string;
@@ -132,6 +134,15 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
       <input type="hidden" name="_subject" value="Nouvelle demande Léman Auto Clean" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_next" value={`${business.siteUrl}/merci`} />
+      <input
+        type="text"
+        name="_honey"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <input type="hidden" name="Estimation tarifaire" value={estimate.hiddenValue} />
 
       <div className="mb-8">
@@ -261,6 +272,19 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
 
       <label className="mt-5 block">
         <span className="mb-2 block text-sm font-semibold text-zinc-300">
+          Ville d&apos;intervention
+        </span>
+        <input
+          name="Ville d'intervention"
+          type="text"
+          autoComplete="address-level2"
+          className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-blue-400"
+          placeholder="Ex. : Thonon-les-Bains"
+        />
+      </label>
+
+      <label className="mt-5 block">
+        <span className="mb-2 block text-sm font-semibold text-zinc-300">
           Commentaire
         </span>
         <textarea
@@ -287,7 +311,15 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
           </p>
         </div>
 
-        <p className="mt-4 text-xs leading-relaxed text-zinc-500">
+        <p className="mt-4 flex items-start gap-2 text-sm leading-relaxed text-zinc-300">
+          <FiMapPin aria-hidden="true" className="mt-0.5 shrink-0 text-blue-400" />
+          <span>
+            Déplacement inclus jusqu&apos;à 30 km de Sciez. Au-delà de 30 km :
+            facturation de 0,50&nbsp;€/km.
+          </span>
+        </p>
+
+        <p className="mt-3 text-xs leading-relaxed text-zinc-500">
           Tarif indicatif calculé selon les informations sélectionnées. Le devis
           final peut être ajusté selon l'état réel du véhicule, les options, la
           distance ou les demandes particulières.
@@ -302,8 +334,8 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
       </button>
 
       <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-        * Champs obligatoires. Vos données ne sont jamais revendues. Réponse sous
-        24h.
+        * Champs obligatoires. Vos données ne sont jamais revendues. Réponse{" "}
+        {business.responseTime}.
       </p>
     </form>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { business } from "@/data/business";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -20,6 +21,8 @@ export default function MentionsLegalesPage() {
           title: "Éditeur du site",
           paragraphs: [
             "Nom commercial : Léman Auto Clean.",
+            ...(business.legalStatus ? [`Statut : ${business.legalStatus}.`] : []),
+            ...(business.siret ? [`SIRET : ${business.siret}.`] : []),
             "Responsable de publication : Matthieu L.",
             "Adresse : Rue du Foron, 74140 Sciez, France.",
             "Téléphone : +33 6 04 47 52 05.",
@@ -36,8 +39,7 @@ export default function MentionsLegalesPage() {
         {
           title: "Hébergement",
           paragraphs: [
-            "Le site est destiné à être hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.",
-            "Ces informations pourront être ajustées selon la solution d'hébergement retenue lors de la mise en ligne définitive.",
+            "Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.",
           ],
         },
         {

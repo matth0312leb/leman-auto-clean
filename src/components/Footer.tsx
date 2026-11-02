@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { openCookieConsent } from "@/components/CookieConsent";
+import { villes } from "@/data/villes";
 
 export default function Footer() {
   return (
@@ -114,6 +116,14 @@ export default function Footer() {
               Cookies
             </Link>
 
+            <button
+              type="button"
+              onClick={openCookieConsent}
+              className="w-fit text-left transition hover:text-blue-400"
+            >
+              Gérer les cookies
+            </button>
+
           </div>
         </div>
 
@@ -194,8 +204,26 @@ export default function Footer() {
 
       </div>
 
+      {/* Zones d'intervention */}
+      <div className="relative mx-auto mt-12 max-w-7xl md:mt-16">
+        <p className="mb-3 text-xs uppercase tracking-[0.3em] text-blue-400 sm:text-sm">
+          Nettoyage voiture à domicile
+        </p>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400">
+          {villes.map((ville) => (
+            <Link
+              key={ville.slug}
+              href={`/nettoyage-voiture-domicile/${ville.slug}`}
+              className="transition hover:text-blue-400"
+            >
+              {ville.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Bottom */}
-      <div className="relative mt-12 border-t border-white/10 pt-6 text-center text-xs text-zinc-500 sm:text-sm md:mt-20 md:pt-8">
+      <div className="relative mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500 sm:text-sm md:mt-12 md:pt-8">
         © 2026 Léman Auto Clean — Tous droits réservés.
       </div>
     </footer>

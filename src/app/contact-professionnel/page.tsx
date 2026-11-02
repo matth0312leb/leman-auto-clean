@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiArrowRight, FiBriefcase, FiMail, FiPhone } from "react-icons/fi";
+import { business } from "@/data/business";
 
 export const metadata: Metadata = {
   title: "Devis professionnel nettoyage automobile",
@@ -117,6 +118,15 @@ export default function ContactProfessionnelPage() {
               />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value={`${business.siteUrl}/merci`} />
+              <input
+                type="text"
+                name="_honey"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <input type="hidden" name="Type de demande" value="Professionnel" />
 
               <div className="mb-8">

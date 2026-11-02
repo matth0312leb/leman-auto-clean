@@ -40,7 +40,7 @@ export default function PolitiqueConfidentialitePage() {
         {
           title: "Cookies et services tiers",
           paragraphs: [
-            "Ce site n'utilise pas de cookies tiers à but publicitaire.",
+            "Ce site n'utilise aucun cookie publicitaire. Google Analytics n'est activé qu'avec votre accord (voir la page Cookies).",
             "Certains services externes, comme FormSubmit pour l'envoi du formulaire ou les liens vers WhatsApp, Instagram, TikTok, Facebook et Google, peuvent appliquer leurs propres règles de confidentialité.",
           ],
         },

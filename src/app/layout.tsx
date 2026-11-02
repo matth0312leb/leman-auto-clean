@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const siteUrl = "https://www.leman-autoclean.com";
@@ -119,6 +119,8 @@ const localBusinessSchema = {
     "Chablais",
     "Douvaine",
     "Thonon-les-Bains",
+    "Évian-les-Bains",
+    "Annemasse",
     "Genève",
     "Haute-Savoie",
   ],
@@ -190,7 +192,7 @@ const faqSchema = {
       name: "Dans quelles villes vous déplacez-vous ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Déplacement dans le Chablais, Douvaine, Thonon-les-Bains, Genève et plus largement en Haute-Savoie.",
+        text: "Déplacement dans le Chablais (Thonon-les-Bains, Évian-les-Bains, Douvaine), à Annemasse, à Genève et plus largement en Haute-Savoie. Déplacement inclus jusqu'à 30 km de Sciez, puis 0,50 €/km au-delà.",
       },
     },
     {
@@ -216,18 +218,7 @@ export default function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${googleAnalyticsId}');
-          `}
-        </Script>
+        <CookieConsent gaId={googleAnalyticsId} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
