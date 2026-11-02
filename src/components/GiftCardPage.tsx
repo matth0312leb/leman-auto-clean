@@ -14,13 +14,13 @@ const texts = {
       "Le cadeau idéal pour un passionné d'automobile, un parent ou un conjoint : une prestation de nettoyage premium à domicile, à utiliser quand il le souhaite.",
     perks: [
       `Valable ${giftCard.validityMonths} mois sur toutes les prestations`,
-      "Code unique, envoyé en PDF prêt à offrir",
+      "Code unique, carte PDF à télécharger tout de suite",
       "Prestation à domicile, sur rendez-vous",
     ],
     steps: [
       { icon: FiGift, title: "Choisissez", text: "Le montant et le nom du bénéficiaire." },
       { icon: FiMail, title: "Payez", text: "Par Revolut, en quelques secondes." },
-      { icon: FiCalendar, title: "Offrez", text: "Recevez la carte en PDF avec son code unique." },
+      { icon: FiCalendar, title: "Offrez", text: "Téléchargez la carte en PDF, prête à offrir." },
     ],
     cardLabel: "CARTE CADEAU",
   },
@@ -32,13 +32,13 @@ const texts = {
       "The perfect gift for a car lover, a parent or a partner: a premium car cleaning service at home, to be used whenever they like.",
     perks: [
       `Valid for ${giftCard.validityMonths} months on all services`,
-      "Unique code, sent as a ready-to-give PDF",
+      "Unique code, PDF card to download straight away",
       "At-home service, by appointment",
     ],
     steps: [
       { icon: FiGift, title: "Choose", text: "The amount and the recipient's name." },
       { icon: FiMail, title: "Pay", text: "With Revolut, in a few seconds." },
-      { icon: FiCalendar, title: "Give", text: "Receive the PDF card with its unique code." },
+      { icon: FiCalendar, title: "Give", text: "Download the PDF card, ready to give." },
     ],
     cardLabel: "GIFT CARD",
   },

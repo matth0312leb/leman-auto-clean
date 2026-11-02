@@ -28,7 +28,7 @@ const texts = {
     total: "Montant de la carte",
     submit: "Commander et payer avec Revolut",
     note:
-      "Après validation, vous serez redirigé vers la page de paiement Revolut. La carte cadeau vous est envoyée en PDF dès réception du paiement.",
+      "Après validation, vous réglez avec Revolut et téléchargez immédiatement votre carte cadeau en PDF. Vous la recevez aussi par e-mail. La carte est valable une fois le paiement reçu.",
     subject: "Nouvelle carte cadeau",
   },
   en: {
@@ -47,7 +47,7 @@ const texts = {
     total: "Gift card amount",
     submit: "Order and pay with Revolut",
     note:
-      "After confirming, you will be taken to the Revolut payment page. The gift card is sent to you as a PDF as soon as payment is received.",
+      "After confirming, you pay with Revolut and download your gift card as a PDF straight away. You also receive it by email. The card is valid once payment has been received.",
     subject: "New gift card (English)",
   },
 };
@@ -76,12 +76,6 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
   const order = useMemo(() => {
     const validUntil = addMonths(new Date(), giftCard.validityMonths).toISOString().slice(0, 10);
     const base = business.siteUrl;
-    const params = new URLSearchParams({
-      code,
-      montant: String(amount),
-      devise: currency,
-      lang,
-    });
     const cardParams = new URLSearchParams({
       code,
       montant: String(amount),
@@ -93,10 +87,16 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
       lang,
     });
 
+    const cardLink = `${base}/carte-cadeau/carte?${cardParams.toString()}`;
+
     return {
       validUntil,
-      next: `${base}/carte-cadeau/paiement?${params.toString()}`,
-      cardLink: `${base}/carte-cadeau/carte?${cardParams.toString()}`,
+      next: `${base}/carte-cadeau/paiement?${cardParams.toString()}`,
+      cardLink,
+      autoresponse:
+        lang === "en"
+          ? `Thank you for your order! Your gift card code is ${code} (${formatGiftAmount(amount, currency)}). To complete it, pay with Revolut: ${giftCard.revolutUrl} (add your code as the payment note). Download your gift card as a PDF here: ${cardLink} — The card is valid once payment has been received. Léman Auto Clean`
+          : `Merci pour votre commande ! Le code de votre carte cadeau est ${code} (${formatGiftAmount(amount, currency)}). Pour la finaliser, réglez-la avec Revolut : ${giftCard.revolutUrl} (indiquez votre code en note du paiement). Téléchargez votre carte cadeau en PDF ici : ${cardLink} — La carte est valable une fois le paiement reçu. Léman Auto Clean`,
     };
   }, [amount, buyer, code, currency, lang, message, recipient]);
 
@@ -116,6 +116,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
       <input type="hidden" name="Valable jusqu'au" value={order.validUntil} />
       <input type="hidden" name="Langue" value={lang === "en" ? "Anglais" : "Français"} />
       <input type="hidden" name="Lien de la carte (PDF)" value={order.cardLink} />
+      <input type="hidden" name="_autoresponse" value={order.autoresponse} />
       <input
         type="text"
         name="_honey"
@@ -206,7 +207,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
         </label>
         <label className="flex flex-col">
           <span className="mb-2 text-sm font-semibold text-zinc-300">{t.email}</span>
-          <input required name="E-mail" type="email" autoComplete="email" className={inputClass} />
+          <input required name="email" type="email" autoComplete="email" className={inputClass} />
         </label>
         <label className="flex flex-col">
           <span className="mb-2 text-sm font-semibold text-zinc-300">{t.phone}</span>
