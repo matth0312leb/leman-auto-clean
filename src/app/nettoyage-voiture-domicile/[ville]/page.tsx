@@ -8,7 +8,7 @@ import WhatsappButton from "@/components/WhatsappButton";
 import { business } from "@/data/business";
 import { prestations } from "@/data/prestations";
 import { getVille, villes } from "@/data/villes";
-import Prix, { CurrencyToggle } from "@/components/Prix";
+import Prix from "@/components/Prix";
 
 type VillePageProps = {
   params: Promise<{ ville: string }>;
@@ -137,12 +137,9 @@ export default async function VillePage({ params }: VillePageProps) {
           <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             Formules
           </p>
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="text-3xl font-black uppercase sm:text-4xl">
-              Nos prestations à {ville.shortName}
-            </h2>
-            <CurrencyToggle className="w-fit" />
-          </div>
+          <h2 className="mb-8 text-3xl font-black uppercase sm:text-4xl">
+            Nos prestations à {ville.shortName}
+          </h2>
 
           <div className="grid gap-4 md:grid-cols-3">
             {prestations.map((item) => {

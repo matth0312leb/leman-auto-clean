@@ -14,7 +14,7 @@ import {
 } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { options, prestations } from "@/data/prestations";
-import Prix, { CurrencyToggle } from "@/components/Prix";
+import Prix from "@/components/Prix";
 import { useCurrency } from "@/hooks/useCurrency";
 import { type Currency, formatAmount, toChf } from "@/lib/currency";
 
@@ -72,13 +72,6 @@ export default function Prestations() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Nos Services
           </h2>
-
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <span className="text-xs uppercase tracking-[0.22em] text-zinc-500">
-              Tarifs en
-            </span>
-            <CurrencyToggle />
-          </div>
         </div>
 
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">

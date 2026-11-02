@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import OptionsMultiSelect from "@/components/OptionsMultiSelect";
 import { FiMapPin } from "react-icons/fi";
 import { business } from "@/data/business";
-import Prix, { CurrencyToggle } from "@/components/Prix";
+import Prix from "@/components/Prix";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertPriceText, type Currency } from "@/lib/currency";
 
@@ -302,12 +302,9 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
       <div className="mt-6 rounded-3xl border border-blue-400/25 bg-blue-500/[0.08] p-5 shadow-lg shadow-blue-500/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="flex items-center gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">
-                Estimation
-              </p>
-              <CurrencyToggle />
-            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">
+              Estimation
+            </p>
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">
               {estimate.detail}
             </p>
