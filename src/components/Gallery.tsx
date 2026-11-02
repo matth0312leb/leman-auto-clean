@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, type TouchEvent } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import { preloadOptimizedImages } from "@/lib/preloadOptimizedImages";
 
 function GalleryImage({
   image,
@@ -39,10 +40,13 @@ export default function Gallery() {
   const isDesktop = useIsDesktop();
 
   useEffect(() => {
-    images.forEach((image) => {
-      const preloadImage = new window.Image();
-      preloadImage.src = image.src;
-    });
+    preloadOptimizedImages(
+      images.map((image) => image.src),
+      {
+        quality: 84,
+        sizes: "(min-width: 1280px) 420px, (min-width: 1024px) 33vw, 100vw",
+      },
+    );
   }, [images]);
 
   const goToImage = (index: number) => {

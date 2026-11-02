@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiCalendar, FiMapPin, FiStar } from "react-icons/fi";
+import { preload } from "react-dom";
 import { siteImages } from "@/data/siteImages";
 
 export default function Hero() {
+  // Image d'accueil demandée dès le début du chargement (affichage plus rapide)
+  preload(siteImages.hero.src, { as: "image", fetchPriority: "high" });
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-black text-white md:h-screen md:min-h-[100svh]">
       <div

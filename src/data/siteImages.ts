@@ -1,6 +1,6 @@
 export const siteImages = {
   hero: {
-    src: "/hero.png?v=2",
+    src: "/hero.webp",
     alt: "Porsche noire devant Léman Auto Clean pour un nettoyage automobile premium à domicile",
   },
   beforeAfter: [

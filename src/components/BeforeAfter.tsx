@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import { preloadOptimizedImages } from "@/lib/preloadOptimizedImages";
 
 export default function BeforeAfter() {
   const beforeAfterItems = siteImages.beforeAfter;
@@ -16,12 +17,15 @@ export default function BeforeAfter() {
   const activeItem = beforeAfterItems[activeIndex];
 
   useEffect(() => {
-    beforeAfterItems.forEach((item) => {
-      if (!item.src) return;
-
-      const preloadImage = new window.Image();
-      preloadImage.src = item.src;
-    });
+    preloadOptimizedImages(
+      beforeAfterItems.map((item) => item.src ?? ""),
+      {
+        quality: 86,
+        sizes: window.matchMedia("(min-width: 768px)").matches
+          ? "(min-width: 1024px) 960px, 100vw"
+          : "(max-width: 767px) calc(100vw - 40px), 860px",
+      },
+    );
   }, [beforeAfterItems]);
 
   const goToItem = (index: number) => {
