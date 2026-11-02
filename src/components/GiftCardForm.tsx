@@ -27,6 +27,7 @@ const texts = {
     messagePlaceholder: "Joyeux Noël ! Ta voiture va adorer…",
     total: "Montant de la carte",
     submit: "Commander et payer avec Revolut",
+    sending: "Envoi de la commande…",
     note:
       "Après validation, vous réglez avec Revolut et téléchargez immédiatement votre carte cadeau en PDF. Vous la recevez aussi par e-mail. La carte est valable une fois le paiement reçu.",
     subject: "Nouvelle carte cadeau",
@@ -46,6 +47,7 @@ const texts = {
     messagePlaceholder: "Merry Christmas! Your car will love it…",
     total: "Gift card amount",
     submit: "Order and pay with Revolut",
+    sending: "Sending your order…",
     note:
       "After confirming, you pay with Revolut and download your gift card as a PDF straight away. You also receive it by email. The card is valid once payment has been received.",
     subject: "New gift card (English)",
@@ -64,6 +66,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
   const [buyer, setBuyer] = useState("");
   const [message, setMessage] = useState("");
   const [code, setCode] = useState("");
+  const [sending, setSending] = useState(false);
 
   // Code créé dans le navigateur (évite tout décalage avec le rendu serveur).
   useEffect(() => {
@@ -92,6 +95,7 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     return {
       validUntil,
       next: `${base}/carte-cadeau/paiement?${cardParams.toString()}`,
+      nextPath: `/carte-cadeau/paiement?${cardParams.toString()}`,
       cardLink,
       autoresponse:
         lang === "en"
@@ -100,10 +104,34 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
     };
   }, [amount, buyer, code, currency, lang, message, recipient]);
 
+  // Envoi en arrière-plan puis ouverture de la page de paiement par le site lui-même
+  // (ne dépend plus de la redirection du service de formulaire).
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (sending) return;
+    setSending(true);
+
+    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+    delete data._next;
+
+    try {
+      await fetch("https://formsubmit.co/ajax/lemanautoclean@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+    } catch {
+      // Même si l'envoi échoue, le client accède au paiement et à sa carte.
+    }
+
+    window.location.href = order.nextPath;
+  };
+
   return (
     <form
       action="https://formsubmit.co/lemanautoclean@gmail.com"
       method="POST"
+      onSubmit={handleSubmit}
       className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-blue-500/10 backdrop-blur-xl sm:p-7 md:p-8"
     >
       <input type="hidden" name="_subject" value={`${t.subject} ${code} – ${formatGiftAmount(amount, currency)}`} />
@@ -241,11 +269,11 @@ export default function GiftCardForm({ lang }: { lang: "fr" | "en" }) {
 
       <button
         type="submit"
-        disabled={!validAmount || !code}
+        disabled={!validAmount || !code || sending}
         className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {t.submit}
-        <FiArrowRight aria-hidden="true" />
+        {sending ? t.sending : t.submit}
+        {!sending && <FiArrowRight aria-hidden="true" />}
       </button>
 
       <p className="mt-4 text-xs leading-relaxed text-zinc-500">{t.note}</p>
