@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import TitleLine from "@/components/TitleLine";
 
 export default function FinalCTA() {
   const isDesktop = useIsDesktop();
@@ -28,6 +29,7 @@ export default function FinalCTA() {
         <h2 className="mx-auto mb-5 max-w-3xl text-3xl font-black uppercase leading-tight sm:text-4xl md:mb-6 md:text-5xl">
           Votre voiture mérite le meilleur
         </h2>
+        <TitleLine className="mb-5 md:mb-6" />
 
         <p className="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base md:mb-8">
           Contactez-nous pour un devis gratuit et personnalisé. Réponse rapide

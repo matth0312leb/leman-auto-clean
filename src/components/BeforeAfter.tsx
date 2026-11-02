@@ -7,6 +7,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { preloadOptimizedImages } from "@/lib/preloadOptimizedImages";
+import TitleLine from "@/components/TitleLine";
 
 export default function BeforeAfter() {
   const beforeAfterItems = siteImages.beforeAfter;
@@ -87,6 +88,7 @@ export default function BeforeAfter() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Avant / Après
           </h2>
+          <TitleLine />
         </motion.div>
 
         <motion.div

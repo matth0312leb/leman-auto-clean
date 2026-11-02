@@ -19,6 +19,7 @@ import { formatGiftAmount, giftCard } from "@/data/giftCard";
 import Prix from "@/components/Prix";
 import { useCurrency } from "@/hooks/useCurrency";
 import { type Currency, formatAmount, toChf } from "@/lib/currency";
+import TitleLine from "@/components/TitleLine";
 
 function euros(price: string) {
   return Number(price.replace("€", "").replace(",", ".").trim());
@@ -74,6 +75,7 @@ export default function Prestations() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Nos Services
           </h2>
+          <TitleLine />
         </div>
 
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">

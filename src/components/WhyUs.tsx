@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import TitleLine from "@/components/TitleLine";
 
 const items = [
   {
@@ -43,6 +44,7 @@ export default function WhyUs() {
           <h2 className="text-3xl font-black uppercase leading-tight sm:text-4xl md:text-5xl">
             Pourquoi nous choisir ?
           </h2>
+          <TitleLine />
 
         </div>
 

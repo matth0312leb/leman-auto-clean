@@ -7,6 +7,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { siteImages } from "@/data/siteImages";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { preloadOptimizedImages } from "@/lib/preloadOptimizedImages";
+import TitleLine from "@/components/TitleLine";
 
 function GalleryImage({
   image,
@@ -100,6 +101,7 @@ export default function Gallery() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Aperçu de nos réalisations
           </h2>
+          <TitleLine />
         </div>
 
         <motion.div

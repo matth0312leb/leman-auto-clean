@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiArrowLeft, FiCamera, FiCheck } from "react-icons/fi";
+import { FiArrowLeft, FiCamera } from "react-icons/fi";
 import Footer from "@/components/Footer";
 import { business } from "@/data/business";
+import AnimatedCheck from "@/components/AnimatedCheck";
 
 export const metadata: Metadata = {
   title: "Demande envoyée",
@@ -21,9 +22,7 @@ export default function MerciPage() {
         <div className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl" />
 
         <div className="relative w-full rounded-3xl border border-white/10 bg-white/[0.06] p-6 text-center shadow-2xl shadow-blue-500/10 backdrop-blur-xl sm:p-10">
-          <div className="mx-auto mb-6 grid h-16 w-16 place-items-center rounded-full bg-blue-500 text-3xl text-white shadow-lg shadow-blue-500/40">
-            <FiCheck aria-hidden="true" />
-          </div>
+          <AnimatedCheck />
 
           <p className="mb-4 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             Demande envoyée

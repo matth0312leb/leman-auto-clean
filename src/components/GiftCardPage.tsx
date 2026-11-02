@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { FiCalendar, FiCheck, FiGift, FiMail } from "react-icons/fi";
 import Footer from "@/components/Footer";
 import GiftCardForm from "@/components/GiftCardForm";
+import GiftCardPreview from "@/components/GiftCardPreview";
 import WhatsappButton from "@/components/WhatsappButton";
 import { giftCard } from "@/data/giftCard";
 
@@ -23,6 +23,19 @@ const texts = {
       { icon: FiCalendar, title: "Offrez", text: "Recevez la carte en PDF, prête à offrir." },
     ],
     cardLabel: "CARTE CADEAU",
+    seoEyebrow: "Idée cadeau locale",
+    seoTitle: "Une carte cadeau nettoyage auto, du Chablais à Genève",
+    seoText: [
+      "Vous cherchez une idée cadeau originale pour Noël, un anniversaire ou une fête des pères ? La carte cadeau Léman Auto Clean offre un nettoyage automobile premium réalisé directement au domicile ou sur le lieu de travail du bénéficiaire.",
+      "Elle est utilisable à Thonon-les-Bains, Évian-les-Bains, Douvaine, Sciez, Annemasse, Genève et dans tout le Chablais, jusqu'à Morzine et Abondance. Le bénéficiaire choisit librement sa prestation : nettoyage intérieur, lavage extérieur ou formule complète.",
+    ],
+    faqTitle: "Questions fréquentes",
+    faq: [
+      { q: "Comment offrir la carte cadeau ?", a: "Choisissez le montant, indiquez le nom du bénéficiaire et réglez avec Revolut (carte bancaire, Apple Pay ou Google Pay acceptés). La carte vous est envoyée en PDF par e-mail dès réception du paiement, prête à imprimer ou à transférer." },
+      { q: "Combien de temps est-elle valable ?", a: "La carte cadeau est valable 12 mois à compter de son achat, sur toutes les prestations Léman Auto Clean." },
+      { q: "Où peut-elle être utilisée ?", a: "À domicile ou sur le lieu de travail, dans le Chablais, à Thonon, Évian, Douvaine, Annemasse, Genève et en Haute-Savoie. Le déplacement est inclus jusqu'à 30 km de Sciez." },
+      { q: "Et si la prestation coûte plus cher que la carte ?", a: "La carte est déduite du prix de la prestation et le complément est réglé sur place. Elle s'utilise en une seule fois." },
+    ],
   },
   en: {
     eyebrow: "Gift card",
@@ -41,6 +54,19 @@ const texts = {
       { icon: FiCalendar, title: "Give", text: "Receive the PDF card, ready to give." },
     ],
     cardLabel: "GIFT CARD",
+    seoEyebrow: "Local gift idea",
+    seoTitle: "A car cleaning gift card, from Geneva to the Chablais",
+    seoText: [
+      "Looking for an original gift for Christmas, a birthday or Father's Day? The Léman Auto Clean gift card offers a premium car cleaning service carried out at the recipient's home or workplace.",
+      "It can be used in Geneva and its surroundings, as well as Thonon-les-Bains, Évian-les-Bains, Douvaine, Annemasse and the whole Chablais, up to Morzine and Abondance. The recipient freely chooses the service: interior, exterior or complete package.",
+    ],
+    faqTitle: "Frequently asked questions",
+    faq: [
+      { q: "How do I give the gift card?", a: "Choose the amount, enter the recipient's name and pay with Revolut (card, Apple Pay or Google Pay accepted). The card is emailed to you as a PDF as soon as payment is received, ready to print or forward." },
+      { q: "How long is it valid?", a: "The gift card is valid for 12 months from purchase, on all Léman Auto Clean services." },
+      { q: "Where can it be used?", a: "At home or at the workplace, in Geneva, Thonon, Évian, Douvaine, Annemasse, the Chablais and Haute-Savoie. Travel is included up to 30 km from Sciez." },
+      { q: "What if the service costs more than the card?", a: "The card is deducted from the price of the service and the difference is paid on site. It can be used once." },
+    ],
   },
 };
 
@@ -82,22 +108,7 @@ export default function GiftCardPage({ lang }: { lang: "fr" | "en" }) {
           </div>
 
           {/* Aperçu de la carte */}
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute inset-6 rounded-[2rem] bg-blue-500/30 blur-3xl" />
-            <div className="relative aspect-[1.6/1] overflow-hidden rounded-[1.75rem] border border-blue-400/40 bg-gradient-to-br from-zinc-900 via-black to-blue-950 p-6 shadow-2xl shadow-blue-500/25">
-              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blue-500/30 blur-3xl" />
-              <div className="relative flex h-full flex-col justify-between">
-                <div className="flex items-start justify-between">
-                  <Image src="/logo.png" alt="Léman Auto Clean" width={170} height={64} className="h-10 w-auto sm:h-12" />
-                  <FiGift aria-hidden="true" className="text-2xl text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-semibold tracking-[0.4em] text-blue-300">{t.cardLabel}</p>
-                  <p className="mt-1 font-mono text-sm tracking-[0.2em] text-zinc-400">LAC-XXXX-XXXX</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <GiftCardPreview label={t.cardLabel} />
         </div>
       </section>
 
@@ -127,6 +138,66 @@ export default function GiftCardPage({ lang }: { lang: "fr" | "en" }) {
           <GiftCardForm lang={lang} />
         </div>
       </section>
+
+      {/* Texte local + FAQ (référencement Google) */}
+      <section className="px-5 pb-16 sm:px-6 md:pb-24">
+        <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-7">
+            <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400">{t.seoEyebrow}</p>
+            <h2 className="text-2xl font-black uppercase leading-tight sm:text-3xl">{t.seoTitle}</h2>
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+              {t.seoText.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-7">
+            <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400">FAQ</p>
+            <h2 className="mb-5 text-2xl font-black uppercase sm:text-3xl">{t.faqTitle}</h2>
+            <div className="space-y-5">
+              {t.faq.map((item) => (
+                <div key={item.q}>
+                  <h3 className="font-semibold text-white">{item.q}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              inLanguage: lang,
+              mainEntity: t.faq.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              name: lang === "en" ? "Léman Auto Clean gift card" : "Carte cadeau Léman Auto Clean",
+              serviceType: lang === "en" ? "Car cleaning gift card" : "Carte cadeau nettoyage automobile",
+              provider: { "@id": "https://www.leman-autoclean.com/#localbusiness" },
+              areaServed: ["Genève", "Thonon-les-Bains", "Évian-les-Bains", "Douvaine", "Annemasse", "Chablais", "Haute-Savoie"],
+              offers: giftCard.amounts.map((value) => ({
+                "@type": "Offer",
+                price: value,
+                priceCurrency: "EUR",
+                url: `https://www.leman-autoclean.com${lang === "en" ? "/en/gift-card" : "/carte-cadeau"}`,
+              })),
+            },
+          ]),
+        }}
+      />
 
       <Footer />
       <WhatsappButton />

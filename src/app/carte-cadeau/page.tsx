@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import GiftCardPage from "@/components/GiftCardPage";
 
 export const metadata: Metadata = {
-  title: "Carte cadeau nettoyage auto à domicile",
+  title: { absolute: "Carte cadeau nettoyage auto | Thonon, Genève, Chablais" },
   description:
-    "Offrez une carte cadeau Léman Auto Clean : nettoyage automobile premium à domicile dans le Chablais, Genève et Haute-Savoie. Valable 12 mois, envoyée en PDF.",
+    "Idée cadeau originale : offrez une carte cadeau Léman Auto Clean, nettoyage automobile premium à domicile à Thonon, Évian, Douvaine, Annemasse, Genève et dans le Chablais. Dès 50 €, valable 12 mois.",
   alternates: { canonical: "/carte-cadeau", languages: { fr: "/carte-cadeau", en: "/en/gift-card" } },
 };
 

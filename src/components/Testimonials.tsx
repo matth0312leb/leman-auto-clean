@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import TitleLine from "@/components/TitleLine";
 
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJNdFQjRvsSIwR-15U4siiNfo";
@@ -109,6 +110,7 @@ export default function Testimonials() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Ils nous font confiance
           </h2>
+          <TitleLine />
 
           <a
             href={googleReviewsUrl}
