@@ -4,6 +4,9 @@ import { useMemo, useState } from "react";
 import OptionsMultiSelect from "@/components/OptionsMultiSelect";
 import { FiMapPin } from "react-icons/fi";
 import { business } from "@/data/business";
+import Prix, { CurrencyToggle } from "@/components/Prix";
+import { useCurrency } from "@/hooks/useCurrency";
+import { convertPriceText, type Currency } from "@/lib/currency";
 
 type ContactFormProps = {
   selectedFormula: string;
@@ -58,9 +61,9 @@ function isStandardPrestation(
   );
 }
 
-function formatEstimate(min: number, max: number) {
-  if (min === max) return `${min}€`;
-  return `${min} à ${max}€`;
+function formatEstimate(min: number, max: number, currency: Currency) {
+  const text = min === max ? `${min}€` : `${min} à ${max}€`;
+  return convertPriceText(text, currency);
 }
 
 export default function ContactForm({ selectedFormula }: ContactFormProps) {
@@ -68,6 +71,7 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
   const [prestation, setPrestation] = useState(selectedFormula);
   const [vehicleCount, setVehicleCount] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const currency = useCurrency();
 
   const estimate = useMemo(() => {
     if (!prestation || !vehicleType) {
@@ -116,14 +120,14 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
     const maxTotal = (basePrice + optionsTotal.max) * count;
 
     return {
-      label: formatEstimate(minTotal, maxTotal),
+      label: formatEstimate(minTotal, maxTotal, currency),
       detail:
         count > 1
           ? `Estimation pour ${count} véhicules, hors supplément éventuel.`
           : "Estimation pour 1 véhicule, hors supplément éventuel.",
-      hiddenValue: formatEstimate(minTotal, maxTotal),
+      hiddenValue: formatEstimate(minTotal, maxTotal, currency),
     };
-  }, [prestation, selectedOptions, vehicleCount, vehicleType]);
+  }, [currency, prestation, selectedOptions, vehicleCount, vehicleType]);
 
   return (
     <form
@@ -298,9 +302,12 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
       <div className="mt-6 rounded-3xl border border-blue-400/25 bg-blue-500/[0.08] p-5 shadow-lg shadow-blue-500/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">
-              Estimation
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">
+                Estimation
+              </p>
+              <CurrencyToggle />
+            </div>
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">
               {estimate.detail}
             </p>
@@ -314,8 +321,9 @@ export default function ContactForm({ selectedFormula }: ContactFormProps) {
         <p className="mt-4 flex items-start gap-2 text-sm leading-relaxed text-zinc-300">
           <FiMapPin aria-hidden="true" className="mt-0.5 shrink-0 text-blue-400" />
           <span>
-            Déplacement inclus jusqu&apos;à 30 km de Sciez. Au-delà de 30 km :
-            facturation de 0,50&nbsp;€/km.
+            <Prix>
+              {"Déplacement inclus jusqu'à 30 km de Sciez. Au-delà de 30 km : facturation de 0,50\u00a0€/km."}
+            </Prix>
           </span>
         </p>
 

@@ -14,6 +14,7 @@ import {
 } from "react-icons/fi";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { options, prestations } from "@/data/prestations";
+import Prix, { CurrencyToggle } from "@/components/Prix";
 
 export default function Prestations() {
   const [active, setActive] = useState<number | null>(null);
@@ -46,6 +47,13 @@ export default function Prestations() {
           <h2 className="text-3xl font-black uppercase sm:text-4xl md:text-5xl">
             Nos Services
           </h2>
+
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <span className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+              Tarifs en
+            </span>
+            <CurrencyToggle />
+          </div>
         </div>
 
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">
@@ -120,7 +128,7 @@ export default function Prestations() {
                       </p>
 
                       <h4 className="text-3xl font-black text-blue-400 sm:text-4xl">
-                        {item.price}
+                        <Prix>{item.price}</Prix>
                       </h4>
                     </div>
 
@@ -165,7 +173,7 @@ export default function Prestations() {
                                   </p>
 
                                   <p className="mt-1.5 text-sm font-black leading-none text-blue-400 min-[390px]:text-base sm:text-lg">
-                                    {vehicle.price}
+                                    <Prix>{vehicle.price}</Prix>
                                   </p>
                                 </div>
                               ))}
@@ -217,7 +225,7 @@ export default function Prestations() {
               <FiNavigation aria-hidden="true" className="shrink-0 text-xl text-blue-400" />
               <p className="text-sm leading-snug text-zinc-300 sm:text-base">
                 <span className="block font-semibold text-white">Au-delà de 30 km</span>
-                Facturation de 0,50&nbsp;€/km
+                <Prix>{"Facturation de 0,50\u00a0€/km"}</Prix>
               </p>
             </div>
           </div>
@@ -338,7 +346,7 @@ export default function Prestations() {
                           </span>
 
                           <span className="shrink-0 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white">
-                            {option.price}
+                            <Prix>{option.price}</Prix>
                           </span>
                         </div>
 
@@ -348,7 +356,7 @@ export default function Prestations() {
 
                         {"note" in option && (
                           <p className="mt-2 text-xs leading-relaxed text-zinc-500">
-                            {option.note}
+                            <Prix>{option.note}</Prix>
                           </p>
                         )}
 
@@ -394,11 +402,13 @@ export default function Prestations() {
                 </div>
 
                 <p className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-zinc-400">
-                  Déplacement dans le Chablais, Genève et Haute-Savoie : inclus
-                  jusqu&apos;à 30 km de Sciez, puis facturé 0,50€ par km au-delà.
+                  <Prix>
+                    {"Déplacement dans le Chablais, Genève et Haute-Savoie : inclus jusqu'à 30 km de Sciez, puis facturé 0,50€ par km au-delà."}
+                  </Prix>
                   <br />
-                  Pour les véhicules très sales, un supplément de 30 à 60€ peut
-                  être ajouté selon l&apos;état du véhicule.
+                  <Prix>
+                    {"Pour les véhicules très sales, un supplément de 30 à 60€ peut être ajouté selon l'état du véhicule."}
+                  </Prix>
                 </p>
               </motion.div>
             )}

@@ -10,6 +10,11 @@ const googleReviewsUrl =
 
 const reviews = [
   {
+    name: "Thomas C.",
+    text: "Franchement impressionnant ! L'intérieur de ma voiture était vraiment dans un état catastrophique et je pensais qu'il serait impossible de la récupérer aussi bien. Après le passage de Léman Auto Clean, elle est ressortie comme neuve. Tout est impeccable, propre dans les moindres détails, avec une vraie attention portée au travail bien fait. Équipe professionnelle, sympathique et efficace. Je recommande sans hésiter à tous ceux qui veulent redonner une seconde vie à leur véhicule. Merci encore pour ce travail exceptionnel !",
+    date: "Visité en juin 2026",
+  },
+  {
     name: "Elodie T.",
     text: "Merci beaucoup à Matthieu pour le nettoyage complet de notre voiture ! Nous avons l'impression d'avoir une voiture neuve qui sort tout juste du garage. Les finitions à l'intérieur et à l'extérieur font plaisir. Il est vraiment minutieux et c'est vraiment appréciable.",
     date: "Visité en septembre 2025",
@@ -153,7 +158,7 @@ export default function Testimonials() {
         {/* Desktop grid */}
         <div className="hidden gap-5 sm:gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
 
-          {reviews.map((review, index) => (
+          {reviews.slice(0, 3).map((review, index) => (
             <ReviewCard
               key={review.name}
               review={review}

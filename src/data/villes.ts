@@ -63,6 +63,26 @@ export const villes: Ville[] = [
       "Pour les particuliers comme pour les professionnels, la prestation est réalisée sur place, sur rendez-vous, avec le même niveau d'exigence qu'en Haute-Savoie.",
     communes: ["Cologny", "Collonge-Bellerive", "Vésenaz", "Thônex", "Chêne-Bourg", "Carouge"],
   },
+  {
+    slug: "morzine",
+    name: "Morzine",
+    shortName: "Morzine",
+    intro:
+      "Léman Auto Clean monte jusqu'à Morzine pour le nettoyage de votre véhicule à domicile ou au chalet : intérieur, extérieur ou formule complète, sur rendez-vous.",
+    context:
+      "Boue, sel de déneigement, sable et traces de skis : après la saison ou avant de redescendre, votre voiture retrouve un intérieur net et une carrosserie propre, sans passer par une station.",
+    communes: ["Les Gets", "Montriond", "Saint-Jean-d'Aulps", "Essert-Romand", "Le Biot", "Avoriaz"],
+  },
+  {
+    slug: "abondance",
+    name: "Abondance",
+    shortName: "Abondance",
+    intro:
+      "Nettoyage voiture à domicile dans la vallée d'Abondance : Léman Auto Clean se déplace chez vous pour l'intérieur, l'extérieur et le detailing, uniquement sur rendez-vous.",
+    context:
+      "Routes de montagne, hivers rigoureux, véhicules très sollicités : une prestation complète sur place redonne à votre voiture un aspect impeccable et la protège mieux.",
+    communes: ["La Chapelle-d'Abondance", "Châtel", "Bonnevaux", "Vacheresse", "Chevenoz", "Le Lyaud"],
+  },
 ];
 
 export function getVille(slug: string) {

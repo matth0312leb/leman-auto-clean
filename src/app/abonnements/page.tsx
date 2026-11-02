@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import { FiArrowRight, FiCheckCircle, FiClock, FiMapPin, FiRefreshCw } from "react-icons/fi";
+import Prix from "@/components/Prix";
 
 export const metadata: Metadata = {
   title: "Abonnements nettoyage auto mensuel",
@@ -197,7 +198,7 @@ export default function AbonnementsPage() {
                   </h3>
 
                   <p className="leading-relaxed text-zinc-400">
-                    {condition.text}
+                    <Prix>{condition.text}</Prix>
                   </p>
                 </article>
               );

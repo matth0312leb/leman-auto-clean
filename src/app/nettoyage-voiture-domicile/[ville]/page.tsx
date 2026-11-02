@@ -8,6 +8,7 @@ import WhatsappButton from "@/components/WhatsappButton";
 import { business } from "@/data/business";
 import { prestations } from "@/data/prestations";
 import { getVille, villes } from "@/data/villes";
+import Prix, { CurrencyToggle } from "@/components/Prix";
 
 type VillePageProps = {
   params: Promise<{ ville: string }>;
@@ -136,9 +137,12 @@ export default async function VillePage({ params }: VillePageProps) {
           <p className="mb-3 text-xs uppercase tracking-[0.32em] text-blue-400 md:text-sm md:tracking-[0.45em]">
             Formules
           </p>
-          <h2 className="mb-8 text-3xl font-black uppercase sm:text-4xl">
-            Nos prestations à {ville.shortName}
-          </h2>
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="text-3xl font-black uppercase sm:text-4xl">
+              Nos prestations à {ville.shortName}
+            </h2>
+            <CurrencyToggle className="w-fit" />
+          </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             {prestations.map((item) => {
@@ -170,7 +174,9 @@ export default async function VillePage({ params }: VillePageProps) {
 
                   <div className="mt-auto pt-6">
                     <p className="text-xs uppercase tracking-widest text-zinc-500">À partir de</p>
-                    <p className="text-3xl font-black text-blue-400">{item.price}</p>
+                    <p className="text-3xl font-black text-blue-400">
+                      <Prix>{item.price}</Prix>
+                    </p>
                   </div>
                 </div>
               );
@@ -189,7 +195,7 @@ export default async function VillePage({ params }: VillePageProps) {
               <FiNavigation aria-hidden="true" className="shrink-0 text-xl text-blue-400" />
               <p className="text-sm leading-snug text-zinc-300 sm:text-base">
                 <span className="block font-semibold text-white">Au-delà de 30 km</span>
-                Facturation de 0,50&nbsp;€/km
+                <Prix>{"Facturation de 0,50\u00a0€/km"}</Prix>
               </p>
             </div>
           </div>
@@ -230,7 +236,9 @@ export default async function VillePage({ params }: VillePageProps) {
               {faq.map((item) => (
                 <div key={item.question}>
                   <h3 className="font-semibold text-white">{item.question}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{item.answer}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">
+                    <Prix>{item.answer}</Prix>
+                  </p>
                 </div>
               ))}
             </div>

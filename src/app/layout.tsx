@@ -121,25 +121,12 @@ const localBusinessSchema = {
     "Thonon-les-Bains",
     "Évian-les-Bains",
     "Annemasse",
+    "Morzine",
+    "Abondance",
     "Genève",
     "Haute-Savoie",
   ],
   priceRange: "€€",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "08:00",
-      closes: "19:00",
-    },
-  ],
   sameAs: [
     "https://instagram.com/LemanAutoClean",
     "https://www.tiktok.com/@lemanautoclean1",
@@ -192,7 +179,7 @@ const faqSchema = {
       name: "Dans quelles villes vous déplacez-vous ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Déplacement dans le Chablais (Thonon-les-Bains, Évian-les-Bains, Douvaine), à Annemasse, à Genève et plus largement en Haute-Savoie. Déplacement inclus jusqu'à 30 km de Sciez, puis 0,50 €/km au-delà.",
+        text: "Déplacement dans le Chablais (Thonon-les-Bains, Évian-les-Bains, Douvaine), à Annemasse, à Genève, jusqu'à Morzine et Abondance, et plus largement en Haute-Savoie. Déplacement inclus jusqu'à 30 km de Sciez, puis 0,50 €/km au-delà.",
       },
     },
     {

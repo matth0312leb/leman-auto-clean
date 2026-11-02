@@ -13,9 +13,9 @@ export const business = {
   responseTime: "sous 24 h",
 
   /** Note Google affichée sur l'accueil (null = non affichée). */
-  googleRating: null as null | { rating: string; count: number },
+  googleRating: { rating: "5", count: 24 } as null | { rating: string; count: number },
 
   /** Mentions légales (null = ligne non affichée). */
-  siret: null as null | string,
-  legalStatus: null as null | string,
+  siret: "988 230 017 00010" as null | string,
+  legalStatus: "Micro-entreprise" as null | string,
 };

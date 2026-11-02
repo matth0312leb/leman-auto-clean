@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiMessageCircle } from "react-icons/fi";
 import { useState } from "react";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import Prix from "@/components/Prix";
 
 const faqs = [
   {
@@ -131,7 +132,7 @@ export default function FAQAssistant() {
                       transition={{ duration: 0.22 }}
                     >
                       <p className="border-t border-white/10 px-5 py-5 text-sm leading-relaxed text-zinc-400 sm:px-6 sm:text-base">
-                        {item.answer}
+                        <Prix>{item.answer}</Prix>
                       </p>
                     </motion.div>
                   )}

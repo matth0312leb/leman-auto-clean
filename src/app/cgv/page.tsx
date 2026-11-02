@@ -64,10 +64,9 @@ export default function CGVPage() {
           title: "6. Paiement",
           paragraphs: [
             "Le paiement s'effectue à la fin de la prestation.",
-            "Les espèces sont acceptées en euros (€) ou en francs suisses (CHF). En cas de paiement en CHF, une majoration de 10% est appliquée pour couvrir les frais de change et de traitement.",
+            "Les espèces sont acceptées en euros (€) ou en francs suisses (CHF). En cas de paiement en CHF, une majoration de 10% est appliquée pour couvrir les frais de change et de traitement : le tarif en CHF correspond au tarif en euros majoré de 10%, arrondi au franc supérieur (exemple : 100 € = 110 CHF).",
             "Le paiement peut également être effectué par virement bancaire SEPA, PayPal, Revolut ou équivalents.",
-            "Tous les tarifs sont indiqués en euros (€) sur le site et les supports.",
-            "La conversion CHF se base sur le taux en vigueur le jour de la prestation, selon le taux XE ou le taux fixé par l'entreprise.",
+            "Les tarifs sont indiqués en euros (€) sur le site. Pour les visiteurs situés en Suisse, ils sont affichés en francs suisses (CHF), majoration de 10% incluse. Un sélecteur permet de passer d'une devise à l'autre.",
           ],
         },
         {
